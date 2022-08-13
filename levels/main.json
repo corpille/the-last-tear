@@ -1,0 +1,48 @@
+{
+  "objects": [
+    {
+      "id": "deave",
+      "x": 800,
+      "y": 0,
+      "width": 110,
+      "height": 100,
+      "visible": true,
+      "hasAnimation": false,
+      "actions": [
+        {
+          "type": "msg",
+          "lines": [
+            {
+              "msg": "Bonjour jeune Bertrand que me vaux ta visite ?",
+              "p": "deave"
+            },
+            { "msg": "Pas envie de te parler, salut !", "p": "bertrand" }
+          ]
+        },
+        {
+          "type": "msg",
+          "lines": [
+            {
+              "msg": "T'as pas été sympa avec moi alors barre toi",
+              "p": "deave"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "gift",
+      "x": 1300,
+      "y": 0,
+      "width": 100,
+      "height": 100,
+      "visible": true,
+      "hasAnimation": false,
+      "actions": [
+        {
+          "type": "pickup"
+        }
+      ]
+    }
+  ]
+}
