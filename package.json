@@ -1,0 +1,19 @@
+{
+  "name": "puddle-the-seagull",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/corpille/bertrand-le-goeland.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "vite": "^3.0.7"
+  }
+}

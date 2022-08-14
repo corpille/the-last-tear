@@ -1,3 +1,5 @@
+import './style/style.css';
+
 const FPS = 60;
 const FrameDuration = 1000 / FPS;
 const STEP = 5;
@@ -86,7 +88,41 @@ async function loadLevel(name) {
   level.objects.forEach(createObject);
 }
 
+function bindCommands() {
+  document.addEventListener('keyup', function (event) {
+    const key = event.key;
+    if (key === 'ArrowLeft' || key === 'ArrowRight') {
+      xOffset = 0;
+      Bertrand.element.classList.remove(`key-${Bertrand.currentKeyFrame}`);
+      Bertrand.currentKeyFrame = 0;
+    }
+  });
+
+  document.addEventListener('keydown', function (event) {
+    const key = event.key;
+    if (!currentAction) {
+      if (key === 'ArrowLeft') {
+        bertrand.classList.add('left');
+        xOffset = -STEP;
+      } else if (key === 'ArrowRight') {
+        bertrand.classList.remove('left');
+        xOffset = STEP;
+      } else if (key === ' ' && jumpState === 0) {
+        jumpState = 1;
+      }
+    }
+    if (key === 'e') {
+      if (currentAvailableAction && !currentAction) {
+        toggleAction();
+      } else if (currentAction) {
+        displayNextActionMessage();
+      }
+    }
+  });
+}
+
 async function init() {
+  bindCommands();
   await loadLevel('main');
   createObject(ActionButton);
   createObject(Bertrand);
@@ -222,7 +258,6 @@ function handleMovement() {
     levelElement.style.bottom = `${levelElementPos.y}px`;
   }
 }
-
 async function startGame() {
   document.querySelector('#home-page').style.display = 'none';
   document.querySelector('#canvas').style.display = 'flex';
@@ -243,39 +278,7 @@ async function startGame() {
   }, FrameDuration);
 }
 
-(async function () {
-  const startBtn = document.querySelector('#start-btn');
+// const startBtn = document.querySelector('#start-btn');
 
-  document.addEventListener('keyup', function (event) {
-    const key = event.key;
-    if (key === 'ArrowLeft' || key === 'ArrowRight') {
-      xOffset = 0;
-      Bertrand.element.classList.remove(`key-${Bertrand.currentKeyFrame}`);
-      Bertrand.currentKeyFrame = 0;
-    }
-  });
-
-  document.addEventListener('keydown', function (event) {
-    const key = event.key;
-    if (!currentAction) {
-      if (key === 'ArrowLeft') {
-        bertrand.classList.add('left');
-        xOffset = -STEP;
-      } else if (key === 'ArrowRight') {
-        bertrand.classList.remove('left');
-        xOffset = STEP;
-      } else if (key === ' ' && jumpState === 0) {
-        jumpState = 1;
-      }
-    }
-    if (key === 'e') {
-      if (currentAvailableAction && !currentAction) {
-        toggleAction();
-      } else if (currentAction) {
-        displayNextActionMessage();
-      }
-    }
-  });
-
-  startBtn.addEventListener('click', startGame);
-})();
+// startBtn.addEventListener('click', startGame);
+startGame();
