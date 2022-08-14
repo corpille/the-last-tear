@@ -53,6 +53,7 @@ let xOffset = 0;
 let jumpState = 0;
 let currentAction;
 let inventory = [];
+let tick = 0;
 
 let currentAvailableAction;
 
@@ -106,9 +107,7 @@ function jump() {
 }
 
 function displayNextActionMessage() {
-  console.log('displayNextActionMessage');
   document.querySelector('#bubble')?.remove();
-  console.log(currentAction);
   if (currentAction.length) {
     const message = currentAction.shift();
     const object = sceneObjects[message.p];
@@ -127,7 +126,6 @@ function toggleAction() {
   if (object.currentAction >= object.actions.length - 1) {
     ActionButton.visible = false;
   }
-  console.log(object.actions[object.currentAction].type);
   currentAvailableAction = undefined;
   if (object.actions[object.currentAction].type === 'msg') {
     currentAction = object.actions[object.currentAction].lines;
@@ -139,7 +137,115 @@ function toggleAction() {
   }
 }
 
+function renderInventory() {
+  if (inventoryElement.children.length != inventory.length) {
+    inventory.innerHTML = '';
+    inventory.forEach((object) => {
+      const slot = document.createElement('div');
+      slot.classList.add('slot');
+      const item = document.createElement('div');
+      item.id = object.id;
+      slot.appendChild(item);
+      inventoryElement.appendChild(slot);
+    });
+  }
+}
+
+function renderScene() {
+  Object.values(sceneObjects).forEach((object) => {
+    if (
+      object.visible &&
+      object.actions &&
+      object.actions.length > 0 &&
+      object.currentAction < object.actions.length - 1
+    ) {
+      if (
+        Bertrand.x + Bertrand.width > object.x - HITBOX_RADIUS &&
+        Bertrand.x + Bertrand.width < object.x + object.width + HITBOX_RADIUS &&
+        !currentAction
+      ) {
+        currentAvailableAction = object.id;
+      } else if (currentAvailableAction === object.id) {
+        currentAvailableAction = undefined;
+      }
+    }
+
+    if (object.visible) {
+      object.element.style.display = 'block';
+      object.element.style.left = `${object.x}px`;
+      object.element.style.bottom = `${object.y}px`;
+    } else {
+      object.element.style.display = 'none';
+    }
+  });
+
+  if (currentAvailableAction) {
+    const object = sceneObjects[currentAvailableAction];
+    ActionButton.visible = true;
+    ActionButton.x = object.x - HITBOX_RADIUS / 2;
+    ActionButton.y = object.y + object.height + ActionButton.height;
+    currentAvailableAction = object.id;
+  } else {
+    ActionButton.visible = false;
+  }
+}
+
+function handleMovement() {
+  // Movement
+  if (xOffset) {
+    if (
+      Bertrand.x + xOffset > 0 &&
+      Bertrand.x + xOffset < canvas.offsetWidth + delta - Bertrand.width
+    ) {
+      Bertrand.x += xOffset;
+
+      // Animation
+      if (tick === TICK_PER_ANIMATION_KEYFRAME) {
+        Bertrand.element.classList.remove(`key-${Bertrand.currentKeyFrame}`);
+        Bertrand.currentKeyFrame++;
+        if (Bertrand.currentKeyFrame > Bertrand.nbKeyframes) {
+          Bertrand.currentKeyFrame = 0;
+        }
+        Bertrand.element.classList.add(`key-${Bertrand.currentKeyFrame}`);
+      }
+
+      if (
+        Bertrand.x >= canvas.offsetWidth / 2 + -Bertrand.width &&
+        Bertrand.x <= levelElement.offsetWidth - canvas.offsetWidth / 2 &&
+        levelElementPos.x - xOffset > -delta &&
+        levelElementPos.x - xOffset < 0
+      ) {
+        levelElementPos.x -= xOffset;
+      }
+    }
+    levelElement.style.left = `${levelElementPos.x}px`;
+    levelElement.style.bottom = `${levelElementPos.y}px`;
+  }
+}
+
+async function startGame() {
+  document.querySelector('#home-page').style.display = 'none';
+  document.querySelector('#canvas').style.display = 'flex';
+  await init();
+
+  // Game loop
+  setInterval(() => {
+    if (jumpState !== 0) {
+      jump();
+    }
+    handleMovement();
+
+    renderScene();
+
+    renderInventory();
+
+    tick = tick === TICK_PER_ANIMATION_KEYFRAME ? 0 : tick + 1;
+  }, FrameDuration);
+}
+
 (async function () {
+  const startBtn = document.querySelector('#start-btn');
+
   document.addEventListener('keyup', function (event) {
     const key = event.key;
     if (key === 'ArrowLeft' || key === 'ArrowRight') {
@@ -171,111 +277,5 @@ function toggleAction() {
     }
   });
 
-  function renderInventory() {
-    if (inventoryElement.children.length != inventory.length) {
-      inventory.innerHTML = '';
-      inventory.forEach((object) => {
-        const slot = document.createElement('div');
-        slot.classList.add('slot');
-        const item = document.createElement('div');
-        item.id = object.id;
-        slot.appendChild(item);
-        inventoryElement.appendChild(slot);
-      });
-    }
-  }
-
-  function renderScene() {
-    Object.values(sceneObjects).forEach((object) => {
-      if (
-        object.visible &&
-        object.actions &&
-        object.actions.length > 0 &&
-        object.currentAction < object.actions.length - 1
-      ) {
-        if (
-          Bertrand.x + Bertrand.width > object.x - HITBOX_RADIUS &&
-          Bertrand.x + Bertrand.width <
-            object.x + object.width + HITBOX_RADIUS &&
-          !currentAction
-        ) {
-          currentAvailableAction = object.id;
-        } else if (currentAvailableAction === object.id) {
-          currentAvailableAction = undefined;
-        }
-      }
-
-      if (object.visible) {
-        object.element.style.display = 'block';
-        object.element.style.left = `${object.x}px`;
-        object.element.style.bottom = `${object.y}px`;
-      } else {
-        object.element.style.display = 'none';
-      }
-    });
-
-    if (currentAvailableAction) {
-      const object = sceneObjects[currentAvailableAction];
-      ActionButton.visible = true;
-      ActionButton.x = object.x - HITBOX_RADIUS / 2;
-      ActionButton.y = object.y + object.height + ActionButton.height;
-      currentAvailableAction = object.id;
-    } else {
-      ActionButton.visible = false;
-    }
-  }
-
-  function handleMovement() {
-    // Movement
-    if (xOffset) {
-      if (
-        Bertrand.x + xOffset > 0 &&
-        Bertrand.x + xOffset < canvas.offsetWidth + delta - Bertrand.width
-      ) {
-        Bertrand.x += xOffset;
-
-        // Animation
-        if (tick === TICK_PER_ANIMATION_KEYFRAME) {
-          Bertrand.element.classList.remove(`key-${Bertrand.currentKeyFrame}`);
-          Bertrand.currentKeyFrame++;
-          if (Bertrand.currentKeyFrame > Bertrand.nbKeyframes) {
-            Bertrand.currentKeyFrame = 0;
-          }
-          Bertrand.element.classList.add(`key-${Bertrand.currentKeyFrame}`);
-        }
-        console.log(
-          Bertrand.x,
-          canvas.offsetWidth / 2 + -Bertrand.width,
-          levelElement.offsetWidth - canvas.offsetWidth / 2
-        );
-        if (
-          Bertrand.x >= canvas.offsetWidth / 2 + -Bertrand.width &&
-          Bertrand.x <= levelElement.offsetWidth - canvas.offsetWidth / 2 &&
-          levelElementPos.x - xOffset > -delta &&
-          levelElementPos.x - xOffset < 0
-        ) {
-          levelElementPos.x -= xOffset;
-        }
-      }
-      levelElement.style.left = `${levelElementPos.x}px`;
-      levelElement.style.bottom = `${levelElementPos.y}px`;
-    }
-  }
-
-  let tick = 0;
-  await init();
-
-  // Game loop
-  setInterval(() => {
-    if (jumpState !== 0) {
-      jump();
-    }
-    handleMovement();
-
-    renderScene();
-
-    renderInventory();
-
-    tick = tick === TICK_PER_ANIMATION_KEYFRAME ? 0 : tick + 1;
-  }, FrameDuration);
+  startBtn.addEventListener('click', startGame);
 })();

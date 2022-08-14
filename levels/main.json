@@ -13,17 +13,17 @@
           "type": "msg",
           "lines": [
             {
-              "msg": "Bonjour jeune Bertrand que me vaux ta visite ?",
+              "msg": "Hello young puddle, what can I help you with today ?",
               "p": "deave"
             },
-            { "msg": "Pas envie de te parler, salut !", "p": "bertrand" }
+            { "msg": "I don't want to talk, bye !", "p": "bertrand" }
           ]
         },
         {
           "type": "msg",
           "lines": [
             {
-              "msg": "T'as pas été sympa avec moi alors barre toi",
+              "msg": "Oh no, you've been rude, i won't talk to you",
               "p": "deave"
             }
           ]

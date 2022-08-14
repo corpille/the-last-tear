@@ -1,3 +1,20 @@
+@import url('./home-page.css');
+@import url('./bertrand.css');
+
+@font-face {
+  font-family: 'minecraft';
+  src: url('/font/minecraft.otf') format('opentype');
+  font-style: normal;
+}
+
+html {
+  --primary: #1d3557;
+  --secondary: #457b9d;
+  --light: #a8dadc;
+  --clear: #f1faee;
+  --action: #e63946;
+}
+
 html,
 body {
   height: 100%;
@@ -5,19 +22,25 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background: #333;
+  background: var(--primary);
+  color: var(--clear);
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  font-family: 'minecraft', Arial, Helvetica, sans-serif;
+  letter-spacing: 10px;
 }
 
 #canvas {
+  display: none;
   position: relative;
-  height: 600px;
-  width: 1200px;
-  background-color: #efefef;
+  max-height: 640px;
+  height: 100%;
+  width: 100%;
+  background-color: var(--clear);
   overflow: hidden;
+  color: var(--primary);
 }
 
 #inventory {
@@ -30,10 +53,10 @@ body {
 
 #inventory .slot {
   position: relative;
-  border: 5px solid #333;
+  border: 5px solid var(--primary);
   height: 50px;
   width: 50px;
-  background-color: white;
+  background-color: var(--clear);
   margin-right: 20px;
 }
 
@@ -52,7 +75,7 @@ body {
   left: 0;
   height: 100%;
   width: 2000px;
-  background-color: pink;
+  background-color: var(--clear);
 }
 
 #level * {
@@ -186,8 +209,8 @@ body {
   bottom: 140px;
   left: 100px;
   padding: 20px;
-  background: white;
-  border: 5px solid #000;
+  background: var(--clear);
+  border: 5px solid var(--primary);
   border-radius: 5px;
   width: 300px;
   min-height: 50px;
@@ -203,6 +226,6 @@ body {
   bottom: -15px;
   height: 0;
   width: 0;
-  border-top: 15px solid #000;
+  border-top: 15px solid var(--primary);
   border-right: 15px solid transparent;
 }
