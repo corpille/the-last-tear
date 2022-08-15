@@ -1,18 +1,7 @@
 import Game from './models/game.model';
-import Audio from './audio';
+import { displayMessage } from './utils';
 
-function displayMessage(gI, el, msg) {
-  const aI = Audio.getInstance();
-  aI.playTypingSound(gI);
-  if (msg.length) {
-    el.innerHTML += msg.shift();
-    setTimeout(() => {
-      displayMessage(gI, el, msg);
-    }, 30);
-  }
-}
-
-export function displayNextActionMessage() {
+export async function displayNextActionMessage() {
   const gI = Game.getInstance();
   document.querySelector('#bubble')?.remove();
   if (gI.currentLines.length) {
@@ -21,9 +10,20 @@ export function displayNextActionMessage() {
     const objectBubbleElement = document.createElement('div');
     objectBubbleElement.id = 'bubble';
     object.element.appendChild(objectBubbleElement);
-    displayMessage(gI, objectBubbleElement, message.msg.split(''));
+    gI.extraAction = message.action;
+    await displayMessage(gI, objectBubbleElement, message.msg.split(''));
+    objectBubbleElement.classList.add('continue');
   } else {
-    gI.currentLines = undefined;
+    delete gI.currentLines;
+    if (gI.extraAction) {
+      if (gI.extraAction.type == 'show') {
+        gI.sceneObjects[gI.extraAction.p].visible = true;
+        if (gI.extraAction.toggleAction) {
+          gI.currentAvailableAction = gI.extraAction.p;
+          toggleAction();
+        }
+      }
+    }
   }
 }
 

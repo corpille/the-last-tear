@@ -1,14 +1,23 @@
 import Game from './models/game.model';
-import { STEP, TICK_PER_ANIMATION_KEYFRAME } from './config';
+import { STEP } from './config';
+
+export function stopPlayer(gI) {
+  gI.xOffset = 0;
+  gI.player.element.classList.remove(
+    `key-${gI.player.movementAnimation.currentKeyFrame}`
+  );
+  gI.player.movementAnimation.currentKeyFrame = 0;
+}
 
 export function handleMovement() {
   const gI = Game.getInstance();
   // Movement
   if (gI.xOffset) {
     if (
-      gI.player.x + gI.xOffset > 0 &&
-      gI.player.x + gI.xOffset <
-        gI.canvasElement.offsetWidth + gI.delta - gI.player.width
+      gI.player.x + gI.xOffset < gI.autoMove ||
+      (gI.player.x + gI.xOffset > 0 &&
+        gI.player.x + gI.xOffset <
+          gI.canvasElement.offsetWidth + gI.delta - gI.player.width)
     ) {
       gI.player.x += gI.xOffset;
 
@@ -32,6 +41,10 @@ export function handleMovement() {
       ) {
         gI.levelElementPos -= gI.xOffset;
       }
+    }
+    if (gI.autoMove && gI.player.x > gI.autoMove) {
+      delete gI.autoMove;
+      stopPlayer(gI);
     }
     gI.levelElement.style.left = `${gI.levelElementPos}px`;
   }

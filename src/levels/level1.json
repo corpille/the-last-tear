@@ -1,0 +1,128 @@
+{
+  "width": 3000,
+  "objects": [
+    {
+      "id": "tombstone_deave",
+      "x": 670,
+      "y": 0,
+      "width": 110,
+      "height": 80,
+      "visible": true,
+      "actions": [
+        {
+          "type": "msg",
+          "lines": [
+            {
+              "msg": "Here rest Deave, he will be missed",
+              "p": "tombstone_deave"
+            },
+            {
+              "msg": "It's true ... I really miss you my friend ... I wish you were there ...",
+              "p": "puddle",
+              "action": {
+                "type": "show",
+                "p": "deave",
+                "toggleAction": true
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "deave",
+      "x": 800,
+      "y": 0,
+      "width": 90,
+      "height": 100,
+      "visible": false,
+      "animation": {
+        "nbKeyframes": 2,
+        "currentKeyFrame": 0,
+        "tickPerFrame": 50
+      },
+      "actions": [
+        {
+          "type": "msg",
+          "lines": [
+            {
+              "msg": "Oh shit ! This guy wasn't joking after all !",
+              "p": "deave"
+            },
+            {
+              "msg": "Puddle ? Is it you ? What are you doing here ?!",
+              "p": "deave"
+            },
+            {
+              "msg": "Dea ... Dea ... Deave ? Is this you ? Is this really you ?",
+              "p": "puddle"
+            },
+            {
+              "msg": "Yeah it's me buddy, I've met some weird dude in the Death World and he wasn't to please to meet me and here I am I guess !",
+              "p": "deave"
+            },
+            {
+              "msg": "*looks at himself*\nOooh !\nI can see why you didn't recognise me, must be a side effet of what he did to me",
+              "p": "deave"
+            },
+            {
+              "msg": "Are you ok bud ?",
+              "p": "deave"
+            },
+            {
+              "msg": "Ummh I don't know my dead best friend just came out of nowhere ! I've missed you friend.",
+              "p": "puddle"
+            },
+            {
+              "msg": "I've missed you too Puddle.\n* Hugs Puddle *\n*clear his throat*\n Well ...",
+              "p": "deave"
+            },
+            {
+              "msg": "I'm sorry to ask you this but would you mind helping me get back to the Death World ? I can't really stay here long, rules of the almighty and all.",
+              "p": "deave"
+            },
+            {
+              "msg": "But you've just arrived ! I finally got you back, a second chance !",
+              "p": "puddle"
+            },
+            {
+              "msg": "Yeah that's not really how it works, but I'll still be here for a while I need you to help me get my colors back before I can leave",
+              "p": "deave"
+            },
+            {
+              "msg": "They mus thave been scattered somewhere",
+              "p": "deave"
+            },
+            {
+              "msg": "Alright ... I'll look for them.",
+              "p": "puddle"
+            }
+          ]
+        },
+        {
+          "type": "msg",
+          "repeat": true,
+          "lines": [
+            {
+              "msg": "I need my colors to get back to the Death World, can you find them ?",
+              "p": "deave"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "gift",
+      "x": 1300,
+      "y": 0,
+      "width": 100,
+      "height": 50,
+      "visible": false,
+      "actions": [
+        {
+          "type": "pickup"
+        }
+      ]
+    }
+  ]
+}

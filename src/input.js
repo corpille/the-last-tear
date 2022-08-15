@@ -31,6 +31,7 @@ export function bindCommands() {
       if (gI.currentAvailableAction && !gI.currentLines) {
         toggleAction();
       } else if (gI.currentLines) {
+        clearTimeout(0);
         displayNextActionMessage();
       }
     }

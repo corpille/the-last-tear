@@ -72,17 +72,21 @@ export default (function () {
   };
 
   function playTypingSound(gI) {
-    const o = gI.audioCtx.createOscillator();
-    const g = gI.audioCtx.createGain();
-    g.gain.exponentialRampToValueAtTime(
+    const osc = gI.audioCtx.createOscillator();
+    osc.type = 'triangle';
+
+    const gain = gI.audioCtx.createGain();
+    gain.gain.exponentialRampToValueAtTime(
       0.00001,
-      gI.audioCtx.currentTime + 0.04
+      gI.audioCtx.currentTime + 0.08
     );
-    o.frequency.setValueAtTime(690, gI.audioCtx.currentTime);
-    o.connect(g);
-    g.connect(gI.audioCtx.destination);
-    o.start(0);
-    return g;
+    gain.gain.value = 0.5;
+
+    osc.frequency.setValueAtTime(notes.F5, gI.audioCtx.currentTime);
+    osc.start(0);
+    osc.connect(gain);
+    gain.connect(gI.audioCtx.destination);
+    return gain;
   }
 
   function playScale4(osc, gI, i) {
@@ -91,7 +95,8 @@ export default (function () {
     }
     const [note, time] = tetris[i];
     osc.frequency.setValueAtTime(note, gI.audioCtx.currentTime);
-    setTimeout(() => {
+    const wait = setTimeout(() => {
+      clearTimeout(wait);
       playScale4(osc, gI, i + 1);
     }, time * (60000 / BPM));
   }
@@ -101,6 +106,7 @@ export default (function () {
     osc.type = 'triangle';
     const g = gI.audioCtx.createGain();
     g.gain.value = 0.3;
+
     osc.frequency.setValueAtTime(261.63, gI.audioCtx.currentTime);
     osc.connect(g);
     g.connect(gI.audioCtx.destination);

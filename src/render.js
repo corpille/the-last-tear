@@ -33,7 +33,7 @@ export function renderScene() {
     }
 
     // Animation
-    if (object.animation) {
+    if (object.visible && object.animation) {
       const anim = object.animation;
       if (gI.tick % anim.tickPerFrame === 0) {
         object.element.classList.remove(`key-${anim.currentKeyFrame}`);
@@ -46,11 +46,11 @@ export function renderScene() {
     }
 
     if (object.visible) {
-      object.element.style.display = 'block';
+      object.element.style.opacity = '1';
       object.element.style.left = `${object.x}px`;
       object.element.style.bottom = `${object.y}px`;
     } else {
-      object.element.style.display = 'none';
+      object.element.style.opacity = '0';
     }
   });
 
