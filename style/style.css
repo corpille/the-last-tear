@@ -5,19 +5,20 @@
 @import url('./gift.css');
 @import url('./tombstone_deave.css');
 
-@font-face {
-  font-family: 'minecraft';
-  /* src: url('/font/minecraft.otf') format('opentype'); */
-  font-style: normal;
-}
-
 :root {
   --dark: #111;
   --primary: #1d3557;
-  --secondary: #caf0f8;
+  --secondary: #457b9d;
   --light: #a8dadc;
   --clear: #f1faee;
   --action: #e63946;
+}
+
+*,
+*:before,
+*:after {
+  font-family: 'Courier Sans', sans-serif;
+  box-sizing: border-box;
 }
 
 html,
@@ -26,14 +27,12 @@ body {
   width: 100%;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
   background: var(--dark);
   color: var(--clear);
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  font-family: 'minecraft', 'Courier Sans', sans-serif;
   letter-spacing: 10px;
 }
 

@@ -6,6 +6,7 @@
   height: 100%;
   width: 100%;
   padding: 5%;
+  background-color: var(--primary);
 }
 
 #home-page h1 {
@@ -24,7 +25,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'minecraft';
   background: none;
   border: 3px solid var(--clear);
   color: var(--clear);
@@ -85,6 +85,11 @@
   margin-right: 40px;
 }
 
+.arrows > label {
+  display: block;
+  width: 100%;
+}
+
 .key {
   justify-content: center;
   border: 3px solid var(--clear);
@@ -94,7 +99,7 @@
   text-align: center;
   letter-spacing: 0;
   font-size: 20px;
-  line-height: 54px;
+  line-height: 44px;
 }
 
 .arrow-right {
