@@ -16,7 +16,7 @@ export function bindCommands() {
   document.addEventListener('keydown', function (event) {
     const gI = Game.getInstance();
     const key = event.key;
-    if (!gI.currentAction) {
+    if (!gI.currentLines) {
       if (key === 'ArrowLeft') {
         gI.player.element.classList.add('left');
         gI.xOffset = -STEP;
@@ -28,9 +28,9 @@ export function bindCommands() {
       }
     }
     if (key === 'e') {
-      if (gI.currentAvailableAction && !gI.currentAction) {
+      if (gI.currentAvailableAction && !gI.currentLines) {
         toggleAction();
-      } else if (gI.currentAction) {
+      } else if (gI.currentLines) {
         displayNextActionMessage();
       }
     }

@@ -13,13 +13,14 @@ export function handleMovement() {
       gI.player.x += gI.xOffset;
 
       // Animation
-      if (gI.tick === TICK_PER_ANIMATION_KEYFRAME) {
-        gI.player.element.classList.remove(`key-${gI.player.currentKeyFrame}`);
-        gI.player.currentKeyFrame++;
-        if (gI.player.currentKeyFrame > gI.player.nbKeyframes) {
-          gI.player.currentKeyFrame = 0;
+      const anim = gI.player.movementAnimation;
+      if (gI.tick % anim.tickPerFrame === 0) {
+        gI.player.element.classList.remove(`key-${anim.currentKeyFrame}`);
+        anim.currentKeyFrame++;
+        if (anim.currentKeyFrame > anim.nbKeyframes) {
+          anim.currentKeyFrame = 0;
         }
-        gI.player.element.classList.add(`key-${gI.player.currentKeyFrame}`);
+        gI.player.element.classList.add(`key-${anim.currentKeyFrame}`);
       }
 
       if (

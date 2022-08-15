@@ -1,5 +1,5 @@
 import Game from './models/game.model';
-import { HITBOX_RADIUS } from './config';
+import { HITBOX_RADIUS, TICK_PER_ANIMATION_KEYFRAME } from './config';
 
 function canMakeAction(gI, object) {
   const nextAction = object.actions[object.currentAction + 1];
@@ -7,7 +7,7 @@ function canMakeAction(gI, object) {
     nextAction &&
     (!nextAction.condition ||
       (nextAction.condition && gI.inventory[nextAction.condition])) &&
-    !gI.currentAction
+    !gI.currentLines
   );
 }
 
@@ -32,6 +32,19 @@ export function renderScene() {
       }
     }
 
+    // Animation
+    if (object.animation) {
+      const anim = object.animation;
+      if (gI.tick % anim.tickPerFrame === 0) {
+        object.element.classList.remove(`key-${anim.currentKeyFrame}`);
+        anim.currentKeyFrame++;
+        if (anim.currentKeyFrame > anim.nbKeyframes) {
+          anim.currentKeyFrame = 0;
+        }
+        object.element.classList.add(`key-${anim.currentKeyFrame}`);
+      }
+    }
+
     if (object.visible) {
       object.element.style.display = 'block';
       object.element.style.left = `${object.x}px`;
@@ -41,10 +54,11 @@ export function renderScene() {
     }
   });
 
+  // Display action button
   if (gI.currentAvailableAction) {
     const object = gI.sceneObjects[gI.currentAvailableAction];
     gI.actionButton.visible = true;
-    gI.actionButton.x = object.x - HITBOX_RADIUS / 2;
+    gI.actionButton.x = object.x - 10 - gI.actionButton.width;
     gI.actionButton.y = object.y + object.height + gI.actionButton.height;
     gI.currentAvailableAction = object.id;
   } else {

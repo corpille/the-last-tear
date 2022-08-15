@@ -3,15 +3,15 @@ import Game from './models/game.model';
 export function displayNextActionMessage() {
   const gI = Game.getInstance();
   document.querySelector('#bubble')?.remove();
-  if (gI.currentAction.length) {
-    const message = gI.currentAction.shift();
+  if (gI.currentLines.length) {
+    const message = gI.currentLines.shift();
     const object = gI.sceneObjects[message.p];
     const objectBubbleElement = document.createElement('div');
     objectBubbleElement.innerHTML = message.msg;
     objectBubbleElement.id = 'bubble';
     object.element.appendChild(objectBubbleElement);
   } else {
-    gI.currentAction = undefined;
+    gI.currentLines = undefined;
   }
 }
 
@@ -29,8 +29,10 @@ export function toggleAction() {
       !nextAction.condition ||
       (nextAction.condition && gI.inventory[nextAction.condition])
     ) {
-      object.currentAction = nextActionIndex;
-      gI.currentAction = nextAction.lines;
+      if (!nextAction.repeat) {
+        object.currentAction = nextActionIndex;
+      }
+      gI.currentLines = [...nextAction.lines];
       if (gI.inventory[nextAction.condition]) {
         delete gI.inventory[nextAction.condition];
       }

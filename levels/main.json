@@ -2,12 +2,37 @@
   "width": 3000,
   "objects": [
     {
+      "id": "tombstone_deave",
+      "x": 670,
+      "y": 0,
+      "width": 110,
+      "height": 80,
+      "visible": true,
+      "actions": [
+        {
+          "type": "msg",
+          "repeat": true,
+          "lines": [
+            {
+              "msg": "Here rest Deave",
+              "p": "tombstone_deave"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "deave",
       "x": 800,
       "y": 0,
-      "width": 110,
+      "width": 90,
       "height": 100,
       "visible": true,
+      "animation": {
+        "nbKeyframes": 2,
+        "currentKeyFrame": 0,
+        "tickPerFrame": 50
+      },
       "actions": [
         {
           "type": "msg",
@@ -49,7 +74,7 @@
       "x": 1300,
       "y": 0,
       "width": 100,
-      "height": 100,
+      "height": 50,
       "visible": true,
       "actions": [
         {

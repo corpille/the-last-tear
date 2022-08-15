@@ -1,0 +1,29 @@
+#gift {
+  box-shadow: 30px -80px 0 0 #ff0000, 60px -80px 0 0 #ff0000,
+    20px -70px 0 0 #ff0000, 40px -70px 0 0 #ff0000, 50px -70px 0 0 #ff0000,
+    70px -70px 0 0 #ff0000, 30px -60px 0 0 #ff0000, 40px -60px 0 0 #ff0000,
+    50px -60px 0 0 #ff0000, 60px -60px 0 0 #ff0000, 0px -50px 0 0 #303f46,
+    10px -50px 0 0 #303f46, 20px -50px 0 0 #303f46, 30px -50px 0 0 #303f46,
+    40px -50px 0 0 #303f46, 50px -50px 0 0 #303f46, 60px -50px 0 0 #303f46,
+    70px -50px 0 0 #303f46, 80px -50px 0 0 #303f46, 90px -50px 0 0 #303f46,
+    0px -40px 0 0 #303f46, 10px -40px 0 0 #ffffff, 20px -40px 0 0 #ffffff,
+    30px -40px 0 0 #ffffff, 40px -40px 0 0 #ff0000, 50px -40px 0 0 #ff0000,
+    60px -40px 0 0 #ffffff, 70px -40px 0 0 #ffffff, 80px -40px 0 0 #ffffff,
+    90px -40px 0 0 #303f46, 0px -30px 0 0 #303f46, 10px -30px 0 0 #ff0000,
+    20px -30px 0 0 #ff0000, 30px -30px 0 0 #ff0000, 40px -30px 0 0 #ff0000,
+    50px -30px 0 0 #ff0000, 60px -30px 0 0 #ff0000, 70px -30px 0 0 #ff0000,
+    80px -30px 0 0 #ff0000, 90px -30px 0 0 #303f46, 0px -20px 0 0 #303f46,
+    10px -20px 0 0 #ff0000, 20px -20px 0 0 #ff0000, 30px -20px 0 0 #ff0000,
+    40px -20px 0 0 #ff0000, 50px -20px 0 0 #ff0000, 60px -20px 0 0 #ff0000,
+    70px -20px 0 0 #ff0000, 80px -20px 0 0 #ff0000, 90px -20px 0 0 #303f46,
+    0px -10px 0 0 #303f46, 10px -10px 0 0 #ffffff, 20px -10px 0 0 #ffffff,
+    30px -10px 0 0 #ffffff, 40px -10px 0 0 #ff0000, 50px -10px 0 0 #ff0000,
+    60px -10px 0 0 #ffffff, 70px -10px 0 0 #ffffff, 80px -10px 0 0 #ffffff,
+    90px -10px 0 0 #303f46, 10px -0px 0 0 #303f46, 20px -0px 0 0 #303f46,
+    30px -0px 0 0 #303f46, 40px -0px 0 0 #303f46, 50px -0px 0 0 #303f46,
+    60px -0px 0 0 #303f46, 70px -0px 0 0 #303f46, 80px -0px 0 0 #303f46,
+    90px -0px 0 0 #303f46;
+  height: 10px;
+  width: 10px;
+  background-color: #303f46;
+}

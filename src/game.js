@@ -2,7 +2,7 @@ import { renderScene, renderInventory } from './render';
 import { handleMovement, jump } from './movement';
 import { bindCommands } from './input';
 import { loadLevel, createObject } from './level';
-import { FRAME_DURATION, TICK_PER_ANIMATION_KEYFRAME } from './config';
+import { FRAME_DURATION, TICK_PER_CYCLE } from './config';
 import Game from './models/game.model';
 
 const Bertrand = {
@@ -13,8 +13,11 @@ const Bertrand = {
   height: 130,
   visible: true,
   element: document.querySelector('#bertrand'),
-  nbKeyframes: 4,
-  currentKeyFrame: 0,
+  movementAnimation: {
+    nbKeyframes: 4,
+    currentKeyFrame: 0,
+    tickPerFrame: 5,
+  },
 };
 
 const ActionButton = {
@@ -54,6 +57,6 @@ export async function startGame() {
 
     renderInventory();
 
-    game.tick = game.tick === TICK_PER_ANIMATION_KEYFRAME ? 0 : game.tick + 1;
+    game.tick = game.tick === TICK_PER_CYCLE ? 0 : game.tick + 1;
   }, FRAME_DURATION);
 }
