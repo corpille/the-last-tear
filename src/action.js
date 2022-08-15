@@ -18,16 +18,27 @@ export function displayNextActionMessage() {
 export function toggleAction() {
   const gI = Game.getInstance();
   const object = gI.sceneObjects[gI.currentAvailableAction];
-  object.currentAction++;
   if (object.currentAction >= object.actions.length - 1) {
     gI.actionButton.visible = false;
   }
+  const nextActionIndex = object.currentAction + 1;
+  const nextAction = object.actions[nextActionIndex];
   gI.currentAvailableAction = undefined;
-  if (object.actions[object.currentAction].type === 'msg') {
-    gI.currentAction = object.actions[object.currentAction].lines;
-    displayNextActionMessage();
-  } else if (object.actions[object.currentAction].type === 'pickup') {
-    gI.inventory.push(object);
+  if (nextAction.type === 'msg') {
+    if (
+      !nextAction.condition ||
+      (nextAction.condition && gI.inventory[nextAction.condition])
+    ) {
+      object.currentAction = nextActionIndex;
+      gI.currentAction = nextAction.lines;
+      if (gI.inventory[nextAction.condition]) {
+        delete gI.inventory[nextAction.condition];
+      }
+      return displayNextActionMessage();
+    }
+  } else if (nextAction.type === 'pickup') {
+    object.currentAction = nextActionIndex;
+    gI.inventory[object.id] = object;
     object.visible = false;
     object.element.remove();
   }

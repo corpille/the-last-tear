@@ -1,6 +1,16 @@
 import Game from './models/game.model';
 import { HITBOX_RADIUS } from './config';
 
+function canMakeAction(gI, object) {
+  const nextAction = object.actions[object.currentAction + 1];
+  return (
+    nextAction &&
+    (!nextAction.condition ||
+      (nextAction.condition && gI.inventory[nextAction.condition])) &&
+    !gI.currentAction
+  );
+}
+
 export function renderScene() {
   const gI = Game.getInstance();
   Object.values(gI.sceneObjects).forEach((object) => {
@@ -14,7 +24,7 @@ export function renderScene() {
         gI.player.x + gI.player.width > object.x - HITBOX_RADIUS &&
         gI.player.x + gI.player.width <
           object.x + object.width + HITBOX_RADIUS &&
-        !gI.currentAction
+        canMakeAction(gI, object)
       ) {
         gI.currentAvailableAction = object.id;
       } else if (gI.currentAvailableAction === object.id) {
@@ -44,9 +54,9 @@ export function renderScene() {
 
 export function renderInventory() {
   const gI = Game.getInstance();
-  if (gI.inventoryElement.children.length != gI.inventory.length) {
+  if (gI.inventoryElement.children.length != Object.keys(gI.inventory).length) {
     gI.inventoryElement.innerHTML = '';
-    gI.inventory.forEach((object) => {
+    Object.values(gI.inventory).forEach((object) => {
       const slot = document.createElement('div');
       slot.classList.add('slot');
       const item = document.createElement('div');

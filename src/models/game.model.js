@@ -8,7 +8,7 @@ export default (function () {
       canvasElement: document.querySelector('#canvas'),
       levelElement: document.querySelector('#level'),
       levelElementPos: 0,
-      inventory: [],
+      inventory: {},
     };
     return gI;
   };

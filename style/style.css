@@ -8,8 +8,9 @@
 }
 
 :root {
+  --dark: #111;
   --primary: #1d3557;
-  --secondary: #457b9d;
+  --secondary: #caf0f8;
   --light: #a8dadc;
   --clear: #f1faee;
   --action: #e63946;
@@ -22,7 +23,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background: var(--primary);
+  background: var(--dark);
   color: var(--clear);
   display: flex;
   justify-content: center;
@@ -38,7 +39,6 @@ body {
   max-height: 640px;
   height: 100%;
   width: 100%;
-  background-color: var(--clear);
   overflow: hidden;
   color: var(--primary);
 }
@@ -75,7 +75,7 @@ body {
   left: 0;
   height: 100%;
   width: 2000px;
-  background-color: var(--clear);
+  background-color: var(--secondary);
 }
 
 #level * {

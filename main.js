@@ -3,4 +3,5 @@ import { startGame } from './src/game';
 
 const startBtn = document.querySelector('#start-btn');
 
-startBtn.addEventListener('click', startGame);
+// startBtn.addEventListener('click', startGame);
+startGame();

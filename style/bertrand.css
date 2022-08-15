@@ -167,6 +167,19 @@
   transform: none;
 }
 
+#bertrand.left #bubble {
+  transform: rotateY(180deg);
+}
+
+#bertrand.left #bubble:before {
+  left: auto;
+  right: 0;
+
+  border-top: 15px solid var(--primary);
+  border-left: 15px solid transparent;
+  border-right: none;
+}
+
 #bertrand.left {
   transform: rotateY(180deg) translate(-90px, 0);
 }

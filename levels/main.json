@@ -27,6 +27,20 @@
               "p": "deave"
             }
           ]
+        },
+        {
+          "type": "msg",
+          "condition": "gift",
+          "lines": [
+            {
+              "msg": "I'm sorry, I brought you a gift to make up for my behavior",
+              "p": "bertrand"
+            },
+            {
+              "msg": "Oh ! Thank you, that's alright I forgive you",
+              "p": "deave"
+            }
+          ]
         }
       ]
     },
