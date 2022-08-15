@@ -1,4 +1,16 @@
 import Game from './models/game.model';
+import Audio from './audio';
+
+function displayMessage(gI, el, msg) {
+  const aI = Audio.getInstance();
+  aI.playTypingSound(gI);
+  if (msg.length) {
+    el.innerHTML += msg.shift();
+    setTimeout(() => {
+      displayMessage(gI, el, msg);
+    }, 30);
+  }
+}
 
 export function displayNextActionMessage() {
   const gI = Game.getInstance();
@@ -7,9 +19,9 @@ export function displayNextActionMessage() {
     const message = gI.currentLines.shift();
     const object = gI.sceneObjects[message.p];
     const objectBubbleElement = document.createElement('div');
-    objectBubbleElement.innerHTML = message.msg;
     objectBubbleElement.id = 'bubble';
     object.element.appendChild(objectBubbleElement);
+    displayMessage(gI, objectBubbleElement, message.msg.split(''));
   } else {
     gI.currentLines = undefined;
   }

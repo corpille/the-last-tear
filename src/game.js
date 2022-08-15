@@ -4,10 +4,11 @@ import { bindCommands } from './input';
 import { loadLevel, createObject } from './level';
 import { FRAME_DURATION, TICK_PER_CYCLE } from './config';
 import Game from './models/game.model';
+import Audio from './audio';
 
 const Bertrand = {
   id: 'bertrand',
-  x: 50,
+  x: 550,
   y: 0,
   width: 100,
   height: 130,
@@ -32,23 +33,25 @@ const ActionButton = {
 };
 
 async function init() {
-  const game = Game.getInstance();
+  const gI = Game.getInstance();
+  const audio = Audio.getInstance();
   bindCommands();
   await loadLevel('main');
-  game.actionButton = createObject(ActionButton, game);
-  game.player = createObject(Bertrand, game);
-  return game;
+  gI.actionButton = createObject(ActionButton, gI);
+  gI.player = createObject(Bertrand, gI);
+  audio.playBgMusic(gI);
+  return gI;
 }
 
 export async function startGame() {
   document.querySelector('#home-page').style.display = 'none';
   document.querySelector('#canvas').style.display = 'flex';
 
-  const game = await init();
+  const gI = await init();
 
   // Game loop
   setInterval(() => {
-    if (game.jumpState !== 0) {
+    if (gI.jumpState !== 0) {
       jump();
     }
     handleMovement();
@@ -57,6 +60,6 @@ export async function startGame() {
 
     renderInventory();
 
-    game.tick = game.tick === TICK_PER_CYCLE ? 0 : game.tick + 1;
+    gI.tick = gI.tick === TICK_PER_CYCLE ? 0 : gI.tick + 1;
   }, FRAME_DURATION);
 }

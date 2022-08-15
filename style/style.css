@@ -33,7 +33,6 @@ body {
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  letter-spacing: 10px;
 }
 
 #canvas {
@@ -126,7 +125,7 @@ body {
   border-radius: 5px;
   width: 300px;
   min-height: 50px;
-  font-size: 20px;
+  font-size: 18px;
   transition: all 0.3s;
 }
 
