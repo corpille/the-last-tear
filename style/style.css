@@ -1,9 +1,5 @@
 @import url('./home-page.css');
 @import url('./puddle.css');
-@import url('./deave.css');
-@import url('./action-btn.css');
-@import url('./gift.css');
-@import url('./tombstone_deave.css');
 
 :root {
   --dark: #111;

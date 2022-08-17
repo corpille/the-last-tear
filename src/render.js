@@ -1,5 +1,6 @@
 import Game from './models/game.model';
-import { HITBOX_RADIUS, TICK_PER_ANIMATION_KEYFRAME } from './config';
+import { HITBOX_RADIUS, DEFAULT_PIXEL_SIZE } from './config';
+import { renderSprite } from './sprite';
 
 function canMakeAction(gI, object) {
   const nextAction = object.actions[object.currentAction + 1];
@@ -15,7 +16,7 @@ export function renderScene() {
   const gI = Game.getInstance();
   Object.values(gI.sceneObjects).forEach((object) => {
     if (
-      object.visible &&
+      !object.hidden &&
       object.actions &&
       object.actions.length > 0 &&
       object.currentAction < object.actions.length - 1
@@ -33,19 +34,18 @@ export function renderScene() {
     }
 
     // Animation
-    if (object.visible && object.animation) {
+    if (!object.hidden && object.animation) {
       const anim = object.animation;
       if (gI.tick % anim.tickPerFrame === 0) {
-        object.element.classList.remove(`key-${anim.currentKeyFrame}`);
+        renderSprite(object, object.idleSprites[anim.currentKeyFrame]);
         anim.currentKeyFrame++;
-        if (anim.currentKeyFrame > anim.nbKeyframes) {
+        if (anim.currentKeyFrame > anim.nbKeyframes - 1) {
           anim.currentKeyFrame = 0;
         }
-        object.element.classList.add(`key-${anim.currentKeyFrame}`);
       }
     }
 
-    if (object.visible) {
+    if (!object.hidden) {
       object.element.style.opacity = '1';
       object.element.style.left = `${object.x}px`;
       object.element.style.bottom = `${object.y}px`;
@@ -57,12 +57,12 @@ export function renderScene() {
   // Display action button
   if (gI.currentAvailableAction) {
     const object = gI.sceneObjects[gI.currentAvailableAction];
-    gI.actionButton.visible = true;
-    gI.actionButton.x = object.x - 10 - gI.actionButton.width;
-    gI.actionButton.y = object.y + object.height + gI.actionButton.height;
+    gI.actionButton.hidden = false;
+    gI.actionButton.x = object.x - gI.actionButton.width;
+    gI.actionButton.y = object.y + object.height;
     gI.currentAvailableAction = object.id;
   } else {
-    gI.actionButton.visible = false;
+    gI.actionButton.hidden = true;
   }
 }
 

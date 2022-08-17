@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "vite build --logLevel silent",
     "preview": "vite preview",
-    "package": "yarn build ; zip -q -r build.zip dist/ ; ls -lh build.zip | awk '{print \"Final size\", $5}'"
+    "package": "rm -r build.zip dist/ ; yarn build ; zip -q -r build.zip dist/ ; ls -lh build.zip | awk '{print \"Final size\", $5}'"
   },
   "repository": {
     "type": "git",

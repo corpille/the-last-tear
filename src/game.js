@@ -4,6 +4,7 @@ import { bindCommands } from './input';
 import { loadLevel, createObject } from './level';
 import { FRAME_DURATION, STEP, TICK_PER_CYCLE } from './config';
 import Game from './models/game.model';
+import { puddle, actionButton } from './sprites';
 import Audio from './audio';
 import { displayMessage } from './utils';
 
@@ -15,24 +16,17 @@ const Player = {
   id: 'puddle',
   x: -10,
   y: 0,
-  width: 100,
-  height: 130,
-  visible: true,
-  movementAnimation: {
-    nbKeyframes: 4,
-    currentKeyFrame: 0,
-    tickPerFrame: 5,
-  },
+  ...puddle,
+  movementSprites: [puddle.sprite, ...puddle.movementSprites, puddle.sprite],
 };
 
 const ActionButton = {
-  id: 'action-btn',
+  id: 'actionButton',
   x: 0,
   y: 0,
-  width: 44,
-  height: 44,
-  visible: false,
+  hidden: true,
   hasBubble: false,
+  ...actionButton,
 };
 
 async function init() {
@@ -69,7 +63,7 @@ async function launchStartCinematic() {
 export async function startGame() {
   document.querySelector('#home-page').style.display = 'none';
 
-  await launchStartCinematic();
+  // await launchStartCinematic();
 
   const gI = await init();
 

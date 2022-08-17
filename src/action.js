@@ -17,7 +17,7 @@ export async function displayNextActionMessage() {
     delete gI.currentLines;
     if (gI.extraAction) {
       if (gI.extraAction.type == 'show') {
-        gI.sceneObjects[gI.extraAction.p].visible = true;
+        gI.sceneObjects[gI.extraAction.p].hidden = false;
         if (gI.extraAction.toggleAction) {
           gI.currentAvailableAction = gI.extraAction.p;
           toggleAction();
@@ -31,7 +31,7 @@ export function toggleAction() {
   const gI = Game.getInstance();
   const object = gI.sceneObjects[gI.currentAvailableAction];
   if (object.currentAction >= object.actions.length - 1) {
-    gI.actionButton.visible = false;
+    gI.actionButton.hidden = true;
   }
   const nextActionIndex = object.currentAction + 1;
   const nextAction = object.actions[nextActionIndex];
@@ -53,7 +53,7 @@ export function toggleAction() {
   } else if (nextAction.type === 'pickup') {
     object.currentAction = nextActionIndex;
     gI.inventory[object.id] = object;
-    object.visible = false;
+    object.hidden = true;
     object.element.remove();
   }
 }

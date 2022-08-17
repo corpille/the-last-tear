@@ -6,3 +6,4 @@ window.audio = new AudioContext();
 const startBtn = document.querySelector('#start-btn');
 
 startBtn.addEventListener('click', startGame);
+startGame();

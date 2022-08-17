@@ -1,11 +1,10 @@
 import Game from './models/game.model';
 import { STEP } from './config';
+import { generateSprite, renderSprite } from './sprite';
 
 export function stopPlayer(gI) {
   gI.xOffset = 0;
-  gI.player.element.classList.remove(
-    `key-${gI.player.movementAnimation.currentKeyFrame}`
-  );
+  renderSprite(gI.player, gI.player.sprite);
   gI.player.movementAnimation.currentKeyFrame = 0;
 }
 
@@ -17,19 +16,23 @@ export function handleMovement() {
       gI.player.x + gI.xOffset < gI.autoMove ||
       (gI.player.x + gI.xOffset > 0 &&
         gI.player.x + gI.xOffset <
-          gI.canvasElement.offsetWidth + gI.delta - gI.player.width)
+          gI.canvasElement.offsetWidth +
+            gI.delta -
+            gI.player.sprite[0].length * 10)
     ) {
       gI.player.x += gI.xOffset;
 
       // Animation
       const anim = gI.player.movementAnimation;
       if (gI.tick % anim.tickPerFrame === 0) {
-        gI.player.element.classList.remove(`key-${anim.currentKeyFrame}`);
+        renderSprite(
+          gI.player,
+          gI.player.movementSprites[anim.currentKeyFrame]
+        );
         anim.currentKeyFrame++;
         if (anim.currentKeyFrame > anim.nbKeyframes) {
           anim.currentKeyFrame = 0;
         }
-        gI.player.element.classList.add(`key-${anim.currentKeyFrame}`);
       }
 
       if (
