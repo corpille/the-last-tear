@@ -2,9 +2,25 @@
   "width": 3000,
   "objects": [
     {
-      "id": "tree",
-      "x": 900,
-      "y": 0
+      "id": "wideTree",
+      "x": 20,
+      "y": 0,
+      "repeat": true,
+      "spacing": 10
+    },
+    {
+      "id": "bush",
+      "x": 10,
+      "y": 0,
+      "repeat": true,
+      "spacing": 10
+    },
+    {
+      "id": "tallTree",
+      "x": -20,
+      "y": 0,
+      "repeat": true,
+      "spacing": 20
     },
     {
       "id": "tombstone_deave",

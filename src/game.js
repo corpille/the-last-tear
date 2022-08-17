@@ -22,8 +22,6 @@ const Player = {
 
 const ActionButton = {
   id: 'actionButton',
-  x: 0,
-  y: 0,
   hidden: true,
   hasBubble: false,
   ...actionButton,
@@ -37,6 +35,7 @@ async function init() {
   await loadLevel('level1');
   gI.actionButton = createObject(ActionButton, gI);
   gI.player = createObject(Player, gI);
+  gI.player.element.classList.add('player');
   gI.xOffset = STEP;
   gI.autoMove = 500;
   // audio.playBgMusic(gI);

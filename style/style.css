@@ -1,5 +1,4 @@
 @import url('./home-page.css');
-@import url('./puddle.css');
 
 :root {
   --dark: #111;
@@ -7,7 +6,7 @@
   --secondary: #457b9d;
   --light: #a8dadc;
   --clear: #f1faee;
-  --action: #ff8f0f;
+  --action: #3f51b5;
 }
 
 *,
@@ -103,7 +102,7 @@ body {
   left: 0;
   height: 100%;
   width: 2000px;
-  background-color: var(--clear);
+  background-color: #7bb6ff;
   border-bottom: 10px solid #7e4900;
 }
 
@@ -148,8 +147,8 @@ body {
   left: 100px;
   padding: 20px;
   background: var(--clear);
-  border: 5px solid #414141;
-  color: #414141;
+  border: 5px solid #343a40;
+  color: #343a40;
   border-radius: 5px;
   width: 300px;
   min-height: 50px;
@@ -177,4 +176,25 @@ body {
   font-size: 12px;
   color: var(--action);
   font-weight: bold;
+}
+
+.player.right {
+  transform: none;
+}
+
+.player.left #bubble {
+  transform: rotateY(180deg);
+}
+
+.player.left #bubble:before {
+  left: auto;
+  right: 0;
+
+  border-top: 15px solid var(--primary);
+  border-left: 15px solid transparent;
+  border-right: none;
+}
+
+.player.left {
+  transform: rotateY(180deg) translate(-90px, 0);
 }

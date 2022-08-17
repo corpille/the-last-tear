@@ -1,5 +1,5 @@
 {
-  "colors": ["#414141", "#b0e1de", "#7bbfbe", "#ff8f0f", "#de7403", "#ffffff"],
+  "colors": ["#343a40", "#b0e1de", "#7bbfbe", "#ff8f0f", "#de7403", "#ffffff"],
   "sprite": [
     [0, 0, -1, -1, 0, 0, -1, -1, -1],
     [0, 1, 0, 0, 0, 1, 0, -1, -1],
@@ -45,6 +45,6 @@
   "animation": {
     "nbKeyframes": 2,
     "currentKeyFrame": 0,
-    "tickPerFrame": 100
+    "tickPerFrame": 70
   }
 }
