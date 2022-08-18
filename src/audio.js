@@ -74,15 +74,14 @@ export default (function () {
   function playTypingSound(gI) {
     const osc = gI.audioCtx.createOscillator();
     osc.type = 'triangle';
-
     const gain = gI.audioCtx.createGain();
     gain.gain.exponentialRampToValueAtTime(
       0.00001,
       gI.audioCtx.currentTime + 0.08
     );
-    gain.gain.value = 0.5;
+    gain.gain.value = 0.2;
 
-    osc.frequency.setValueAtTime(notes.F5, gI.audioCtx.currentTime);
+    osc.frequency.setValueAtTime(notes.G5, gI.audioCtx.currentTime);
     osc.start(0);
     osc.connect(gain);
     gain.connect(gI.audioCtx.destination);

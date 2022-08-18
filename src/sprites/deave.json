@@ -44,7 +44,7 @@
   "animation": {
     "nbKeyframes": 2,
     "currentKeyFrame": 0,
-    "tickPerFrame": 70
+    "tickPerFrame": 100
   },
   "bubbleShift": -10
 }

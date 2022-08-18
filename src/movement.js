@@ -24,7 +24,8 @@ export function handleMovement() {
 
       // Animation
       const anim = gI.player.movementAnimation;
-      if (gI.tick % anim.tickPerFrame === 0) {
+      if (anim.currentTick == anim.tickPerFrame) {
+        anim.currentTick = -1;
         renderSprite(
           gI.player,
           gI.player.movementSprites[anim.currentKeyFrame]
@@ -34,6 +35,7 @@ export function handleMovement() {
           anim.currentKeyFrame = 0;
         }
       }
+      anim.currentTick++;
 
       if (
         gI.player.x >= gI.canvasElement.offsetWidth / 2 + -gI.player.width &&

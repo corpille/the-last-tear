@@ -13,6 +13,12 @@ export function createObject(o, gI, levelWidth) {
     o.sprite,
     o.spriteScale
   );
+  if (o.animation) {
+    o.animation.currentTick = 0;
+  }
+  if (o.movementAnimation) {
+    o.movementAnimation.currentTick = 0;
+  }
   o.spacing = o.spacing || 0;
   let x = 1;
   const offset = o.width;

@@ -36,13 +36,15 @@ export function renderScene() {
     // Animation
     if (!object.hidden && object.animation) {
       const anim = object.animation;
-      if (gI.tick % anim.tickPerFrame === 0) {
+      if (anim.currentTick == anim.tickPerFrame) {
+        anim.currentTick = -1;
         renderSprite(object, object.idleSprites[anim.currentKeyFrame]);
         anim.currentKeyFrame++;
         if (anim.currentKeyFrame > anim.nbKeyframes - 1) {
           anim.currentKeyFrame = 0;
         }
       }
+      anim.currentTick++;
     }
 
     if (!object.hidden) {
