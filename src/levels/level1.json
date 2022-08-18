@@ -43,7 +43,7 @@
               "p": "snail",
               "action": {
                 "type": "give",
-                "p": "color1"
+                "p": "color"
               }
             }
           ]

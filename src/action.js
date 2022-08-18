@@ -1,5 +1,6 @@
 import Game from './models/game.model';
 import { displayMessage } from './utils';
+import * as sprites from './sprites';
 
 export async function displayNextActionMessage() {
   const gI = Game.getInstance();
@@ -26,6 +27,12 @@ export async function displayNextActionMessage() {
           gI.currentAvailableAction = gI.extraAction.p;
           toggleAction();
         }
+      } else if (gI.extraAction.type == 'give') {
+        const object = {
+          id: gI.extraAction.p,
+          ...sprites[gI.extraAction.p],
+        };
+        gI.inventory[object.id] = object;
       }
     }
   }

@@ -7,6 +7,7 @@ import wideTree from './wide-tree.json';
 import bush from './bush.json';
 import snail from './snail.json';
 import rocks from './rocks.json';
+import color from './color.json';
 
 export {
   puddle,
@@ -18,4 +19,5 @@ export {
   bush,
   snail,
   rocks,
+  color,
 };

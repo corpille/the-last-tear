@@ -1,6 +1,6 @@
 import Game from './models/game.model';
-import { HITBOX_RADIUS, DEFAULT_PIXEL_SIZE } from './config';
-import { renderSprite } from './sprite';
+import { HITBOX_RADIUS } from './config';
+import { renderSprite, generateSprite } from './sprite';
 
 function canMakeAction(gI, object) {
   const nextAction = object.actions[object.currentAction + 1];
@@ -77,6 +77,14 @@ export function renderInventory() {
       slot.classList.add('slot');
       const item = document.createElement('div');
       item.id = object.id;
+      const { boxShadow, backgroundColor, size } = generateSprite(
+        object.sprite,
+        object.spriteScale
+      );
+      item.style.height = size;
+      item.style.width = size;
+      item.style.boxShadow = boxShadow;
+      item.style.backgroundColor = backgroundColor;
       slot.appendChild(item);
       gI.inventoryElement.appendChild(slot);
     });

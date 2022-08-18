@@ -92,8 +92,10 @@ body {
   bottom: 0;
 }
 
-#inventory .slot #gift {
-  transform: scale(0.45);
+#inventory .slot #color {
+  transform: scale(0.3);
+  bottom: 2px;
+  left: 5px;
 }
 
 #level {
