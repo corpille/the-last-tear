@@ -6,7 +6,7 @@
   --secondary: #457b9d;
   --light: #a8dadc;
   --clear: #f1faee;
-  --action: #3f51b5;
+  --action: #204d85;
 }
 
 *,
@@ -102,8 +102,17 @@ body {
   left: 0;
   height: 100%;
   width: 2000px;
-  background-color: #7bb6ff;
-  border-bottom: 10px solid #7e4900;
+  background-color: #a6dde3;
+  border-bottom: 10px solid #5c4b4b;
+}
+
+#level:before {
+  content: '';
+  position: absolute;
+  height: 150px;
+  width: 100%;
+  bottom: 0;
+  background-color: #405351;
 }
 
 #level * {

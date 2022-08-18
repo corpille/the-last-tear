@@ -5,8 +5,7 @@
       "id": "wideTree",
       "x": 20,
       "y": 0,
-      "repeat": true,
-      "spacing": 10
+      "repeat": true
     },
     {
       "id": "bush",
@@ -20,7 +19,12 @@
       "x": -20,
       "y": 0,
       "repeat": true,
-      "spacing": 20
+      "spacing": 10
+    },
+    {
+      "id": "snail",
+      "x": 1000,
+      "y": 0
     },
     {
       "id": "tombstone_deave",

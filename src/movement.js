@@ -1,6 +1,6 @@
 import Game from './models/game.model';
 import { STEP } from './config';
-import { generateSprite, renderSprite } from './sprite';
+import { renderSprite } from './sprite';
 
 export function stopPlayer(gI) {
   gI.xOffset = 0;

@@ -11,7 +11,6 @@ export function createObject(o, gI, levelWidth) {
   o.width = o.sprite[0].length * scale;
   const { boxShadow, backgroundColor, size } = generateSprite(
     o.sprite,
-    o.colors,
     o.spriteScale
   );
   o.spacing = o.spacing || 0;

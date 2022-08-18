@@ -5,6 +5,7 @@ import tombstone_deave from './tombstone_deave.json';
 import tallTree from './tall-tree.json';
 import wideTree from './wide-tree.json';
 import bush from './bush.json';
+import snail from './snail.json';
 
 export {
   puddle,
@@ -14,4 +15,5 @@ export {
   tallTree,
   wideTree,
   bush,
+  snail,
 };
