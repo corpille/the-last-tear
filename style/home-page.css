@@ -1,4 +1,5 @@
 #home-page {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -6,11 +7,44 @@
   height: 100%;
   width: 100%;
   padding: 5%;
-  background-color: var(--primary);
+  background-color: var(--dark);
+}
+#home-page:before,
+#home-page:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 600px;
+  width: 600px;
+  background-color: #81906c;
+  border-top-right-radius: 500px;
+}
+
+#home-page:after {
+  right: 0;
+  left: auto;
+  border-top-left-radius: 500px;
+  border-top-right-radius: 0;
+  background-color: #d4b8b2;
 }
 
 #home-page h1 {
   font-size: 80px;
+}
+
+#home-page #puddle {
+  position: absolute;
+  left: 50px;
+  bottom: 50px;
+  transform: scale(3);
+}
+#home-page #deave {
+  position: absolute;
+  z-index: 2;
+  right: 350px;
+  bottom: 50px;
+  transform: scale(3);
 }
 
 #home-page menu {

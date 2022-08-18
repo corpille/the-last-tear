@@ -12,7 +12,7 @@ const startText = `Puddle has been through tough time these days.
 He just lost his best friend Deave in a flight accident.
 After a few days of crying and weeping, he comes to his friend grave to say goodbye to him one last time...`;
 
-const Player = {
+export const Player = {
   id: 'puddle',
   x: -10,
   y: 0,
