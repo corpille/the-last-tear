@@ -1,5 +1,5 @@
 {
-  "width": 3000,
+  "width": 2000,
   "objects": [
     {
       "id": "wideTree",
@@ -22,9 +22,33 @@
       "spacing": 10
     },
     {
-      "id": "snail",
-      "x": 1000,
+      "id": "rocks",
+      "x": 1500,
       "y": 0
+    },
+    {
+      "id": "snail",
+      "x": 1600,
+      "y": 0,
+      "actions": [
+        {
+          "type": "msg",
+          "lines": [
+            {
+              "msg": "Hey little guy, did you find any color ?",
+              "p": "puddle"
+            },
+            {
+              "msg": "Oh yeah dude ! Here is your the one I found",
+              "p": "snail",
+              "action": {
+                "type": "give",
+                "p": "color1"
+              }
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "tombstone_deave",

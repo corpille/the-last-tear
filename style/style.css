@@ -152,8 +152,6 @@ body {
 
 #bubble {
   position: absolute;
-  bottom: 140px;
-  left: 100px;
   padding: 20px;
   background: var(--clear);
   border: 5px solid #343a40;

@@ -45,5 +45,6 @@
     "nbKeyframes": 2,
     "currentKeyFrame": 0,
     "tickPerFrame": 70
-  }
+  },
+  "bubbleShift": -10
 }

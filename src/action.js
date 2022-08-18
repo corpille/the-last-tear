@@ -9,6 +9,10 @@ export async function displayNextActionMessage() {
     const object = gI.sceneObjects[message.p];
     const objectBubbleElement = document.createElement('div');
     objectBubbleElement.id = 'bubble';
+    objectBubbleElement.style.bottom = `${object.height + 15}px`;
+    objectBubbleElement.style.left = `${
+      object.width / 2 + (object.bubbleShift ?? 0)
+    }px`;
     object.element.appendChild(objectBubbleElement);
     gI.extraAction = message.action;
     await displayMessage(gI, objectBubbleElement, message.msg.split(''));

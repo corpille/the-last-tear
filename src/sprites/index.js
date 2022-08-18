@@ -6,6 +6,7 @@ import tallTree from './tall-tree.json';
 import wideTree from './wide-tree.json';
 import bush from './bush.json';
 import snail from './snail.json';
+import rocks from './rocks.json';
 
 export {
   puddle,
@@ -16,4 +17,5 @@ export {
   wideTree,
   bush,
   snail,
+  rocks,
 };
