@@ -52,12 +52,18 @@ export function generateSprite(sprite, spriteScale = 10) {
 }
 
 export function renderSprite(object, sprite) {
-  const { boxShadow, backgroundColor, size } = generateSprite(
-    sprite,
-    object.spriteScale
-  );
-  object.element.style.height = size;
-  object.element.style.width = size;
-  object.element.style.boxShadow = boxShadow;
-  object.element.style.backgroundColor = backgroundColor;
+  if (!sprite.boxShadow) {
+    const { boxShadow, backgroundColor, size } = generateSprite(
+      sprite,
+      object.spriteScale
+    );
+    sprite.size = size;
+    sprite.boxShadow = boxShadow;
+    sprite.backgroundColor = backgroundColor;
+  }
+
+  object.element.style.height = sprite.size;
+  object.element.style.width = sprite.size;
+  object.element.style.boxShadow = sprite.boxShadow;
+  object.element.style.backgroundColor = sprite.backgroundColor;
 }

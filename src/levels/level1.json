@@ -1,6 +1,6 @@
 {
-  "width": 2000,
-  "objects": [
+  "width": 3000,
+  "background": [
     {
       "id": "wideTree",
       "x": 20,
@@ -25,7 +25,9 @@
       "id": "rocks",
       "x": 1500,
       "y": 0
-    },
+    }
+  ],
+  "objects": [
     {
       "id": "snail",
       "x": 1600,

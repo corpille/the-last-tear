@@ -27,12 +27,12 @@ const ActionButton = {
   ...actionButton,
 };
 
-async function init() {
+function init() {
   document.querySelector('#canvas').style.display = 'flex';
   const gI = Game.getInstance();
   const audio = Audio.getInstance();
   bindCommands();
-  await loadLevel('level1');
+  loadLevel('level1');
   gI.actionButton = createObject(ActionButton, gI);
   gI.player = createObject(Player, gI);
   gI.player.element.classList.add('player');

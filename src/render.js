@@ -14,6 +14,7 @@ function canMakeAction(gI, object) {
 
 export function renderScene() {
   const gI = Game.getInstance();
+  // console.log(gI.sceneObjects);
   Object.values(gI.sceneObjects).forEach((object) => {
     if (
       !object.hidden &&

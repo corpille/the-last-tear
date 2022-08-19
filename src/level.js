@@ -45,12 +45,59 @@ export function createObject(o, gI, levelWidth) {
   return object || o;
 }
 
-export async function loadLevel(name) {
+export function drawBakground(gI, backgroundElements, levelWidth) {
+  backgroundElements.forEach((object) => {
+    const scale = object.spriteScale || DEFAULT_PIXEL_SIZE;
+    const sprites = [object.sprite, ...(object?.variants || [])].map(
+      (sprite) => ({
+        ...generateSprite(sprite, object.spriteScale),
+        sprite,
+        width: sprite[0].length * scale,
+      })
+    );
+    const maxWidth = sprites.reduce((r, s) => (r > s.width ? r : s.width), 0);
+    let lastx = object.x;
+    const nbSprite = object.repeat ? Math.ceil(levelWidth / maxWidth) : 1;
+    for (let i = 0; i < nbSprite; i++) {
+      const sI = Math.floor(Math.random() * sprites.length);
+      const sprite = sprites[sI];
+      const o = Object.assign({}, object, {
+        x: lastx,
+        height: sprite.length * scale,
+        width: sprite.width,
+        id: `${object.id}${nbSprite > 1 ? '-' + i : ''}`,
+      });
+      o.element = document.createElement('div');
+      o.element.id = o.id;
+      const cssText = `
+        height: ${sprite.size};
+        width: ${sprite.size};
+        background-color: ${sprite.backgroundColor};
+        left: ${o.x}px;
+        bottom: ${o.y}px;
+        box-shadow: ${sprite.boxShadow};
+      `;
+      o.element.style.cssText = cssText;
+      gI.levelElement.appendChild(o.element);
+      lastx += o.width;
+    }
+  });
+}
+
+export function loadLevel(name) {
   const gI = Game.getInstance();
   const level = levels[name];
   gI.levelElement.innerHTML = '';
   gI.levelElement.style.width = `${level.width}px`;
   gI.delta = gI.levelElement.offsetWidth - gI.canvasElement.offsetWidth;
+  drawBakground(
+    gI,
+    level.background.map((object) => ({
+      ...object,
+      ...sprites[object.id],
+    })),
+    level.width
+  );
   level.objects.forEach((object) =>
     createObject(
       {
