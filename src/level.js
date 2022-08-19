@@ -32,6 +32,7 @@ export function createObject(o, gI, levelWidth) {
     object.x = lastx;
     object.id = `${object.id}${x > 1 ? '-' + i : ''}`;
     object.element = document.createElement('div');
+    object.element.classList.add(object.id);
     object.element.id = object.id;
     object.element.style.height = size;
     object.element.style.width = size;
@@ -63,13 +64,16 @@ export function drawBakground(gI, backgroundElements, levelWidth) {
       const sprite = sprites[sI];
       const o = Object.assign({}, object, {
         x: lastx,
+        y: object.spread ? Math.round(Math.random() * 250) + 250 : object.y,
         height: sprite.length * scale,
         width: sprite.width,
         id: `${object.id}${nbSprite > 1 ? '-' + i : ''}`,
       });
       o.element = document.createElement('div');
       o.element.id = o.id;
+      o.element.classList.add(object.id);
       const cssText = `
+        animation-delay: ${Math.random()}s;
         height: ${sprite.size};
         width: ${sprite.size};
         background-color: ${sprite.backgroundColor};
@@ -79,7 +83,8 @@ export function drawBakground(gI, backgroundElements, levelWidth) {
       `;
       o.element.style.cssText = cssText;
       gI.levelElement.appendChild(o.element);
-      lastx += o.width;
+      lastx +=
+        o.width + (object.spread ? Math.round(Math.random() * 200) + 100 : 0);
     }
   });
 }

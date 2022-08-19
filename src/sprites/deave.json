@@ -41,10 +41,5 @@
       [-1, 12, 12, -1, 12, 12, 12, -1, -1]
     ]
   ],
-  "animation": {
-    "nbKeyframes": 2,
-    "currentKeyFrame": 0,
-    "tickPerFrame": 100
-  },
   "bubbleShift": -10
 }

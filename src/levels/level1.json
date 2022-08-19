@@ -2,6 +2,13 @@
   "width": 3000,
   "background": [
     {
+      "id": "cloud",
+      "x": -500,
+      "y": 500,
+      "repeat": true,
+      "spread": true
+    },
+    {
       "id": "wideTree",
       "x": 20,
       "y": 0,
@@ -11,15 +18,13 @@
       "id": "bush",
       "x": 10,
       "y": 0,
-      "repeat": true,
-      "spacing": 10
+      "repeat": true
     },
     {
       "id": "tallTree",
       "x": -20,
       "y": 0,
-      "repeat": true,
-      "spacing": 10
+      "repeat": true
     },
     {
       "id": "rocks",
@@ -41,7 +46,7 @@
               "p": "puddle"
             },
             {
-              "msg": "Oh yeah dude ! Here is your the one I found",
+              "msg": "Oh yeah dude ! Here is the one I found, have fun with it !",
               "p": "snail",
               "action": {
                 "type": "give",
@@ -80,7 +85,7 @@
     {
       "id": "deave",
       "x": 800,
-      "y": 10,
+      "y": 20,
       "hidden": true,
       "actions": [
         {
@@ -137,12 +142,6 @@
             {
               "msg": "Alright ... I'll look for them.",
               "p": "puddle"
-            }
-          ],
-          "lines": [
-            {
-              "msg": "yo!",
-              "p": "deave"
             }
           ]
         },

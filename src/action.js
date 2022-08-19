@@ -29,18 +29,28 @@ function handleEndAction(gI) {
 export async function displayNextActionMessage() {
   const gI = Game.getInstance();
   document.querySelector('#bubble')?.remove();
+  clearTimeout(gI.textTimeout);
   if (gI.currentLines.length) {
     const message = gI.currentLines.shift();
     const object = gI.sceneObjects[message.p];
     const objectBubbleElement = document.createElement('div');
     objectBubbleElement.id = 'bubble';
-    objectBubbleElement.style.bottom = `${object.height + 15}px`;
-    objectBubbleElement.style.left = `${
-      object.width / 2 + (object.bubbleShift ?? 0)
-    }px`;
-    object.element.appendChild(objectBubbleElement);
+    let posX =
+      gI.levelElementPos +
+      object.x +
+      object.width / 2 +
+      (object.bubbleShift ?? 0);
+    if (posX + 300 > window.innerWidth) {
+      objectBubbleElement.classList.add('reverse');
+      posX -= 300;
+    }
+    objectBubbleElement.style.bottom = `${object.y + object.height + 25}px`;
+    objectBubbleElement.style.left = `${posX}px`;
+    const txt = document.createElement('div');
+    objectBubbleElement.appendChild(txt);
+    gI.canvasElement.appendChild(objectBubbleElement);
     gI.extraAction = message.action;
-    await displayMessage(gI, objectBubbleElement, message.msg.split(''));
+    await displayMessage(gI, txt, message.msg.split(''));
     objectBubbleElement.classList.add('continue');
   } else {
     delete gI.currentLines;

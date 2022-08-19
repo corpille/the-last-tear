@@ -44,7 +44,7 @@ function init() {
   gI.actionButton = createObject(ActionButton, gI);
   gI.player = createObject(Player, gI);
   gI.player.element.classList.add('player');
-  gI.xOffset = STEP;
+  gI.xOffset = 3;
   gI.autoMove = 500;
   audio.playBgMusic(gI);
   return gI;
@@ -71,8 +71,7 @@ export async function launchEndCinematic() {
 async function launchStartCinematic() {
   const gI = Game.getInstance();
   const start = document.querySelector('.fullscreen');
-  start.style.cssText =
-    'visibility: visible; transition: none; opacity: 1; z-index: 3';
+  start.style.cssText = 'visibility: visible; transition: none; opacity: 1';
   const startTxt = document.querySelector('.fullscreen-txt');
   await displayMessage(gI, startTxt, startText.split(''));
   const c = document.getElementById('continue');
@@ -80,6 +79,7 @@ async function launchStartCinematic() {
   return new Promise((resolve) => {
     document.addEventListener('keydown', (event) => {
       if (event.key === 'e') {
+        start.style.opacity = 0;
         resolve();
       }
     });

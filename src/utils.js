@@ -5,7 +5,6 @@ let timeout;
 
 export function displayMessage(gI, el, msg, p) {
   if (!p) {
-    clearTimeout(timeout);
     p = {};
     let promise = new Promise(function (resolve, reject) {
       p.resolve = resolve;
@@ -18,8 +17,8 @@ export function displayMessage(gI, el, msg, p) {
   if (msg.length) {
     const c = msg.shift();
     el.innerHTML += c === '\n' ? '<br/>' : c;
-    timeout = setTimeout(() => {
-      clearTimeout(timeout);
+    gI.textTimeout = setTimeout(() => {
+      clearTimeout(gI.timeout);
       displayMessage(gI, el, msg, p);
     }, CHAR_DELAY + (c === '\n' ? 100 : 0));
   } else {

@@ -8,6 +8,7 @@ import bush from './bush.json';
 import snail from './snail.json';
 import rocks from './rocks.json';
 import color from './color.json';
+import cloud from './cloud.json';
 
 export {
   puddle,
@@ -20,4 +21,5 @@ export {
   snail,
   rocks,
   color,
+  cloud,
 };

@@ -27,6 +27,18 @@ body {
   align-items: center;
   overflow: hidden;
 }
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(20px);
+  }
+}
+.cloud,
+.deave {
+  animation: float 5s infinite;
+}
 
 #canvas {
   display: none;
@@ -165,6 +177,11 @@ body {
 .player.left #bubble {
   transform: rotateY(180deg);
 }
+#bubble.reverse,
+#bubble.reverse:after,
+#bubble.reverse div {
+  transform: rotateY(180deg);
+}
 
 .player.left #bubble:before {
   left: auto;
@@ -173,6 +190,11 @@ body {
   border-top: 15px solid var(--primary);
   border-left: 15px solid transparent;
   border-right: none;
+}
+
+#bubble.reverse:after {
+  right: auto;
+  left: 5px;
 }
 
 .player.left {

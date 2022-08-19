@@ -28,6 +28,8 @@ const melody = [
   ['C4:4', 'F4:4', 'A4:4'],
 ];
 
+const volume = 0.05;
+
 export default (function () {
   var constructeur = function () {
     const gI = {
@@ -40,19 +42,20 @@ export default (function () {
 
   function playTypingSound(gI) {
     const osc = gI.audioCtx.createOscillator();
-    osc.type = 'triangle';
-    const gain = gI.audioCtx.createGain();
-    gain.gain.exponentialRampToValueAtTime(
+    osc.type = 'sine';
+    const time = gI.audioCtx.currentTime;
+    const g = gI.audioCtx.createGain();
+    g.gain.exponentialRampToValueAtTime(
       0.00001,
       gI.audioCtx.currentTime + 0.08
     );
-    gain.gain.value = 0.2;
-
+    g.gain.value = volume;
     osc.frequency.setValueAtTime(notes.G5, gI.audioCtx.currentTime);
+
     osc.start(0);
-    osc.connect(gain);
-    gain.connect(gI.audioCtx.destination);
-    return gain;
+    osc.connect(g);
+    g.connect(gI.audioCtx.destination);
+    return g;
   }
 
   function playNote(gI, time, frequency, duration) {
@@ -76,7 +79,7 @@ export default (function () {
     const g = gI.audioCtx.createGain();
     g.gain.cancelScheduledValues(time);
     g.gain.setValueAtTime(0, time);
-    g.gain.linearRampToValueAtTime(0.5, time + attackTime);
+    g.gain.linearRampToValueAtTime(volume, time + attackTime);
     g.gain.linearRampToValueAtTime(0, time + duration - releaseTime);
     osc.connect(g);
     g.connect(filter1);
