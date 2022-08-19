@@ -21,7 +21,7 @@ export function displayMessage(gI, el, msg, p) {
     timeout = setTimeout(() => {
       clearTimeout(timeout);
       displayMessage(gI, el, msg, p);
-    }, CHAR_DELAY);
+    }, CHAR_DELAY + (c === '\n' ? 100 : 0));
   } else {
     p.resolve();
   }

@@ -12,6 +12,12 @@ const startText = `Puddle has been through tough time these days.
 He just lost his best friend Deave in a flight accident.
 After a few days of crying and weeping, he comes to his friend grave to say goodbye to him one last time...`;
 
+const endText = `After their last encounter Puddle never went to his friend grave.
+He followed his friend's advice and try to lived his life to the fullest.
+Even though he made some new friend along the way, he never forgot Deave, the friend that reminded him who he was.
+
+The End`;
+
 export const Player = {
   id: 'puddle',
   x: -10,
@@ -26,6 +32,8 @@ const ActionButton = {
   hasBubble: false,
   ...actionButton,
 };
+
+const pTimeout = (ms) => new Promise((res) => setTimeout(res, ms));
 
 function init() {
   document.querySelector('#canvas').style.display = 'flex';
@@ -42,11 +50,30 @@ function init() {
   return gI;
 }
 
+export async function launchEndCinematic() {
+  const gI = Game.getInstance();
+  const deave = gI.sceneObjects['deave'];
+  deave.element.style.transition = 'opacity 2s';
+  gI.sceneObjects['deave'].hidden = true;
+  await pTimeout(2000);
+  gI.player.element.classList.add('left');
+  gI.xOffset = -3;
+  gI.autoMove = -120;
+  const el = document.querySelector('.fullscreen');
+  el.style.cssText = 'visibility: visible; z-index: 3';
+  await pTimeout(3000);
+  el.style.opacity = 1;
+  await pTimeout(2000);
+  const startTxt = document.querySelector('.fullscreen-txt');
+  await displayMessage(gI, startTxt, endText.split(''));
+}
+
 async function launchStartCinematic() {
   const gI = Game.getInstance();
-  const start = document.getElementById('start');
-  start.style.visibility = 'visible';
-  const startTxt = document.getElementById('start-txt');
+  const start = document.querySelector('.fullscreen');
+  start.style.cssText =
+    'visibility: visible; transition: none; opacity: 1; z-index: 3';
+  const startTxt = document.querySelector('.fullscreen-txt');
   await displayMessage(gI, startTxt, startText.split(''));
   const c = document.getElementById('continue');
   c.style.visibility = 'visible';

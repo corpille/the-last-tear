@@ -15,7 +15,7 @@ const notes = {
   B5: 987.77,
 };
 const BPM = 120;
-const attackTime = 0.0008;
+const attackTime = 0.008;
 const releaseTime = 0.0008;
 const melody = [
   ['F4:4', 'A4:4', 'C5:4', 'C4:1', 'D4:1:1', 'E4:1:2', 'F4:1:3'],
@@ -109,7 +109,7 @@ export default (function () {
   }
 
   function playBgMusic(gI) {
-    playMelody(gI, 0);
+    // playMelody(gI, 0);
   }
 
   var instance = null;

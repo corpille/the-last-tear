@@ -4,17 +4,19 @@ import { renderSprite, generateSprite } from './sprite';
 
 function canMakeAction(gI, object) {
   const nextAction = object.actions[object.currentAction + 1];
-  return (
-    nextAction &&
-    (!nextAction.condition ||
-      (nextAction.condition && gI.inventory[nextAction.condition])) &&
-    !gI.currentLines
-  );
+  if (!nextAction || gI.currentLines) {
+    return false;
+  }
+  if (nextAction.type === 'cond') {
+    if (!gI.inventory[nextAction.condition] && nextAction.bad === undefined) {
+      return false;
+    }
+  }
+  return true;
 }
 
 export function renderScene() {
   const gI = Game.getInstance();
-  // console.log(gI.sceneObjects);
   Object.values(gI.sceneObjects).forEach((object) => {
     if (
       !object.hidden &&

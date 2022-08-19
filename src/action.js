@@ -1,6 +1,30 @@
 import Game from './models/game.model';
 import { displayMessage } from './utils';
 import * as sprites from './sprites';
+import { launchEndCinematic } from './game';
+
+function handleEndAction(gI) {
+  if (!gI.extraAction) return;
+  switch (gI.extraAction.type) {
+    case 'show':
+      gI.sceneObjects[gI.extraAction.p].hidden = false;
+      if (gI.extraAction.toggleAction) {
+        gI.currentAvailableAction = gI.extraAction.p;
+        toggleAction();
+      }
+      return;
+    case 'give':
+      const object = {
+        id: gI.extraAction.p,
+        ...sprites[gI.extraAction.p],
+      };
+      gI.inventory[object.id] = object;
+      return;
+    case 'end':
+      launchEndCinematic();
+      return;
+  }
+}
 
 export async function displayNextActionMessage() {
   const gI = Game.getInstance();
@@ -20,21 +44,7 @@ export async function displayNextActionMessage() {
     objectBubbleElement.classList.add('continue');
   } else {
     delete gI.currentLines;
-    if (gI.extraAction) {
-      if (gI.extraAction.type == 'show') {
-        gI.sceneObjects[gI.extraAction.p].hidden = false;
-        if (gI.extraAction.toggleAction) {
-          gI.currentAvailableAction = gI.extraAction.p;
-          toggleAction();
-        }
-      } else if (gI.extraAction.type == 'give') {
-        const object = {
-          id: gI.extraAction.p,
-          ...sprites[gI.extraAction.p],
-        };
-        gI.inventory[object.id] = object;
-      }
-    }
+    handleEndAction(gI);
   }
 }
 
@@ -45,13 +55,18 @@ export function toggleAction() {
     gI.actionButton.hidden = true;
   }
   const nextActionIndex = object.currentAction + 1;
-  const nextAction = object.actions[nextActionIndex];
+  let nextAction = object.actions[nextActionIndex];
   gI.currentAvailableAction = undefined;
-  if (nextAction.type === 'msg') {
-    if (
-      !nextAction.condition ||
-      (nextAction.condition && gI.inventory[nextAction.condition])
-    ) {
+  switch (nextAction.type) {
+    case 'cond':
+      if (gI.inventory[nextAction.condition]) {
+        delete gI.inventory[nextAction.condition];
+        gI.currentLines = [...object.actions[nextAction.good].lines];
+      } else {
+        gI.currentLines = [...object.actions[nextAction.bad].lines];
+      }
+      return displayNextActionMessage();
+    case 'msg':
       if (!nextAction.repeat) {
         object.currentAction = nextActionIndex;
       }
@@ -60,11 +75,11 @@ export function toggleAction() {
         delete gI.inventory[nextAction.condition];
       }
       return displayNextActionMessage();
-    }
-  } else if (nextAction.type === 'pickup') {
-    object.currentAction = nextActionIndex;
-    gI.inventory[object.id] = object;
-    object.hidden = true;
-    object.element.remove();
+    case 'pickup':
+      object.currentAction = nextActionIndex;
+      gI.inventory[object.id] = object;
+      object.hidden = true;
+      object.element.remove();
+      return;
   }
 }

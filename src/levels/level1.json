@@ -138,14 +138,41 @@
               "msg": "Alright ... I'll look for them.",
               "p": "puddle"
             }
+          ],
+          "lines": [
+            {
+              "msg": "yo!",
+              "p": "deave"
+            }
+          ]
+        },
+        {
+          "type": "cond",
+          "condition": "color",
+          "good": 2,
+          "bad": 3
+        },
+        {
+          "type": "msg",
+          "lines": [
+            {
+              "msg": "Oh you find the last color of mine !",
+              "p": "deave"
+            },
+            {
+              "msg": "Thank you so much I need to go now bye friend !",
+              "p": "deave",
+              "action": {
+                "type": "end"
+              }
+            }
           ]
         },
         {
           "type": "msg",
-          "repeat": true,
           "lines": [
             {
-              "msg": "I need my colors to get back to the Death World, can you find them ?",
+              "msg": "I need my colors before get back to the Death World, can you find them ?",
               "p": "deave"
             }
           ]

@@ -13,7 +13,8 @@ export function handleMovement() {
   // Movement
   if (gI.xOffset) {
     if (
-      gI.player.x + gI.xOffset < gI.autoMove ||
+      (gI.xOffset > 0 && gI.player.x + gI.xOffset < gI.autoMove) ||
+      (gI.xOffset < 0 && gI.player.x + gI.xOffset > gI.autoMove) ||
       (gI.player.x + gI.xOffset > 0 &&
         gI.player.x + gI.xOffset <
           gI.canvasElement.offsetWidth +
@@ -47,7 +48,11 @@ export function handleMovement() {
         gI.levelElementPos -= gI.xOffset;
       }
     }
-    if (gI.autoMove && gI.player.x > gI.autoMove) {
+    if (
+      gI.autoMove &&
+      ((gI.xOffset > 0 && gI.player.x > gI.autoMove) ||
+        (gI.xOffset < 0 && gI.player.x < gI.autoMove))
+    ) {
       delete gI.autoMove;
       stopPlayer(gI);
     }
