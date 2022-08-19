@@ -38,7 +38,7 @@ function init() {
   gI.player.element.classList.add('player');
   gI.xOffset = STEP;
   gI.autoMove = 500;
-  // audio.playBgMusic(gI);
+  audio.playBgMusic(gI);
   return gI;
 }
 

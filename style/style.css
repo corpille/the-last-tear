@@ -122,6 +122,7 @@ body {
 
 #bubble {
   position: absolute;
+  z-index: 999;
   padding: 20px;
   background: var(--clear);
   border: 5px solid #343a40;

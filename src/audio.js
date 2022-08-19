@@ -16,50 +16,15 @@ const notes = {
 };
 const BPM = 140;
 
-const tetris = [
-  [notes.E5, 1],
-  [notes.B4, 0.5],
-  [notes.C5, 0.5],
-  [notes.D5, 0.25],
-  [notes.E5, 0.25],
-  [notes.D5, 0.5],
-  [notes.C5, 0.5],
-  [notes.B4, 0.5],
-  [notes.A4, 1],
-  [notes.A4, 0.5],
-  [notes.C5, 0.5],
-  [notes.E5, 1],
-  [notes.D5, 0.5],
-  [notes.C5, 0.5],
-  [notes.B4, 1],
-  [notes.B4, 0.5],
-  [notes.C5, 0.5],
-  [notes.D5, 1],
-  [notes.E5, 1],
-  [notes.C5, 1],
-  [notes.C5, 1],
-  [0, 1],
-  [0, 0.5],
-  [notes.D5, 1],
-  [notes.F5, 0.5],
-  [notes.A5, 1],
-  [notes.G5, 0.5],
-  [notes.F5, 0.5],
-  [notes.E5, 1.5],
-  [notes.C5, 0.5],
-  [notes.E5, 1],
-  [notes.D5, 0.5],
-  [notes.C5, 0.5],
-  [notes.B4, 1],
-  [notes.B4, 0.5],
-  [notes.C5, 0.5],
-  [notes.D5, 1],
-  [notes.E5, 1],
-  [notes.C5, 1],
-  [notes.A4, 1],
-  [0, 0.01],
-  [notes.A4, 1],
-  [0, 0.5],
+const melody = [
+  [notes.F4, 4],
+  [notes.E4, 4],
+  [notes.D4, 4],
+  [notes.E4, 4],
+  [notes.F4, 4],
+  [notes.E4, 4],
+  [notes.D4, 4],
+  [notes.C4, 4],
 ];
 
 export default (function () {
@@ -88,29 +53,42 @@ export default (function () {
     return gain;
   }
 
-  function playScale4(osc, gI, i) {
-    if (i === tetris.length) {
+  function playMelody(osc, gI, i) {
+    if (i === melody.length) {
       i = 0;
     }
-    const [note, time] = tetris[i];
+    const [note, time] = melody[i];
     osc.frequency.setValueAtTime(note, gI.audioCtx.currentTime);
     const wait = setTimeout(() => {
       clearTimeout(wait);
-      playScale4(osc, gI, i + 1);
+      playMelody(osc, gI, i + 1);
     }, time * (60000 / BPM));
   }
 
   function playBgMusic(gI) {
     const osc = gI.audioCtx.createOscillator();
     osc.type = 'triangle';
+    let filter1 = gI.audioCtx.createBiquadFilter();
+    filter1.type = 'highpass';
+    filter1.frequency.value = 190;
+    let filter2 = gI.audioCtx.createBiquadFilter();
+    filter2.type = 'notch';
+    filter2.frequency.value = 1223;
+    let filter3 = gI.audioCtx.createBiquadFilter();
+    filter3.type = 'highshelf';
+    filter3.frequency.value = 1870;
+    filter3.gain.value = -14.5;
     const g = gI.audioCtx.createGain();
-    g.gain.value = 0.3;
+    g.gain.value = 0.1;
 
     osc.frequency.setValueAtTime(261.63, gI.audioCtx.currentTime);
     osc.connect(g);
-    g.connect(gI.audioCtx.destination);
+    g.connect(filter1);
+    filter1.connect(filter2);
+    filter2.connect(filter3);
+    filter3.connect(gI.audioCtx.destination);
     osc.start(0);
-    playScale4(osc, gI, 0);
+    playMelody(osc, gI, 0);
   }
 
   var instance = null;
