@@ -15,7 +15,8 @@ const notes = {
   B5: 987.77,
 };
 const BPM = 120;
-
+const attackTime = 0.0008;
+const releaseTime = 0.0008;
 const melody = [
   ['F4:4', 'A4:4', 'C5:4', 'C4:1', 'D4:1:1', 'E4:1:2', 'F4:1:3'],
   ['E4:4', 'G4:4', 'B4:4'],
@@ -55,23 +56,24 @@ export default (function () {
   }
 
   function playNote(gI, time, frequency, duration) {
-    console.log(time, frequency, duration);
-    console.log('playNote');
-    const osc = gI.audioCtx.createOscillator();
-    osc.type = 'triangle';
-    let filter1 = gI.audioCtx.createBiquadFilter();
-    filter1.type = 'highpass';
-    filter1.frequency.value = 190;
-    let filter2 = gI.audioCtx.createBiquadFilter();
-    filter2.type = 'notch';
-    filter2.frequency.value = 1223;
-    let filter3 = gI.audioCtx.createBiquadFilter();
-    filter3.type = 'lowshelf';
-    filter3.frequency.value = 1870;
-    filter3.gain.value = -10.5;
+    const osc = new OscillatorNode(gI.audioCtx, {
+      frequency,
+      type: 'sine',
+    });
+    let filter1 = new BiquadFilterNode(gI.audioCtx, {
+      type: 'highpass',
+      frequency: 190,
+    });
+    let filter2 = new BiquadFilterNode(gI.audioCtx, {
+      type: 'notch',
+      frequency: 1223,
+    });
+    let filter3 = new BiquadFilterNode(gI.audioCtx, {
+      type: 'lowshelf',
+      frequency: 1870,
+      gain: -10.5,
+    });
     const g = gI.audioCtx.createGain();
-    const attackTime = 0.0008;
-    const releaseTime = 0.0008;
     g.gain.cancelScheduledValues(time);
     g.gain.setValueAtTime(0, time);
     g.gain.linearRampToValueAtTime(0.5, time + attackTime);
@@ -81,7 +83,6 @@ export default (function () {
     filter1.connect(filter2);
     filter2.connect(filter3);
     filter3.connect(gI.audioCtx.destination);
-    osc.frequency.value = frequency;
     osc.start(time);
     osc.stop(time + duration);
     return osc;
