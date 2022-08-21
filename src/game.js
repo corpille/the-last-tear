@@ -48,6 +48,8 @@ function init() {
 
 export async function launchEndCinematic() {
   const gI = Game.getInstance();
+  const startTxt = document.querySelector('.fullscreen-txt');
+  startTxt.innerHTML = '';
   const deave = gI.sceneObjects['deave'];
   deave.element.style.transition = 'opacity 2s';
   gI.sceneObjects['deave'].hidden = true;
@@ -60,7 +62,6 @@ export async function launchEndCinematic() {
   await pTimeout(3000);
   el.style.opacity = 1;
   await pTimeout(2000);
-  const startTxt = document.querySelector('.fullscreen-txt');
   await displayMessage(gI, startTxt, endText.split(''));
 }
 
@@ -76,6 +77,7 @@ async function launchStartCinematic() {
     document.addEventListener('keydown', (event) => {
       if (event.key === 'e') {
         start.style.opacity = 0;
+        c.style.visibility = 'hidden';
         resolve();
       }
     });
@@ -84,7 +86,7 @@ async function launchStartCinematic() {
 
 export async function startGame() {
   document.querySelector('#home-page').style.display = 'none';
-  // await launchStartCinematic();
+  await launchStartCinematic();
   const gI = await init();
   setInterval(() => {
     if (gI.jumpState !== 0) {

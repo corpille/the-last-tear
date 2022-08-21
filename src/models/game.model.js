@@ -9,6 +9,7 @@ export default (function () {
       levelElement: document.querySelector('#level'),
       levelElementPos: 0,
       inventory: {},
+      canAction: false,
       audioCtx: new AudioContext(),
     };
     return gI;

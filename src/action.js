@@ -22,6 +22,8 @@ function handleEndAction(gI) {
       return;
     case 'end':
       return launchEndCinematic();
+    case 'start':
+      gI.canAction = true;
   }
 }
 

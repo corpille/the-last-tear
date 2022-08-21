@@ -1,4 +1,7 @@
 export default {
+  server: {
+    port: 8000,
+  },
   json: {
     stringify: true,
   },

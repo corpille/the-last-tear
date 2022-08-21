@@ -3,6 +3,9 @@ import { HITBOX_RADIUS } from './config';
 import { renderSprite, generateSprite } from './sprite';
 
 function canMakeAction(gI, object) {
+  if (!gI.canAction && object.id !== 'tombstone_deave') {
+    return false;
+  }
   const nextAction = object.actions[object.currentAction + 1];
   if (!nextAction || gI.currentLines) {
     return false;

@@ -106,7 +106,7 @@ export default (function () {
   }
 
   function playBgMusic(gI) {
-    // playMelody(gI, 0);
+    playMelody(gI, 0);
   }
 
   var instance = null;

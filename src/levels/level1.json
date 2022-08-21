@@ -141,7 +141,10 @@
             },
             {
               "msg": "Alright ... I'll look for them.",
-              "p": "puddle"
+              "p": "puddle",
+              "action": {
+                "type": "start"
+              }
             }
           ]
         },

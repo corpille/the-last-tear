@@ -25,4 +25,3 @@ home.append(el2);
 renderSprite(Deave, Deave.sprite);
 
 startBtn.addEventListener('click', startGame);
-startGame();
