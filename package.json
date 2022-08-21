@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host",
-    "build": "vite build --logLevel silent",
+    "build": "vite build",
     "preview": "vite preview",
     "package": "rm -r build.zip dist/ ; yarn build ; zip -q -r build.zip dist/ ; ls -lh build.zip | awk '{print \"Final size\", $5}'"
   },
@@ -16,5 +16,8 @@
   "license": "ISC",
   "dependencies": {
     "vite": "^3.0.7"
+  },
+  "devDependencies": {
+    "terser": "^5.14.2"
   }
 }

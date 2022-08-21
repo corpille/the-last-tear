@@ -28,8 +28,20 @@ const colors = [
   '#b089a1',
   '#d4b8b2',
 ];
+var endex = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz=_';
 
-export function generateSprite(sprite, spriteScale = 10) {
+function decode(charcode) {
+  return charcode.length < 2
+    ? endex.indexOf(charcode)
+    : decode(charcode.slice(0, -1)) * endex.length +
+        endex.indexOf(charcode.slice(-1));
+}
+
+export function generateSprite(s, spriteScale = 10) {
+  let sprite = s
+    .split('|')
+    .map((l) => l.split('').map((e) => (e === '-' ? -1 : decode(e))));
+
   const height = sprite.length - 1;
   const boxShadow = sprite.reduce((r, line, y) => {
     let lineShadow = line.reduce(
@@ -46,24 +58,15 @@ export function generateSprite(sprite, spriteScale = 10) {
   }, '');
   return {
     boxShadow: boxShadow.substring(0, boxShadow.length - 2),
-    backgroundColor: sprite[height][0] === -1 ? '' : colors[sprite[height][0]],
+    bg: sprite[height][0] === -1 ? '' : colors[sprite[height][0]],
     size: `${spriteScale}px`,
   };
 }
 
 export function renderSprite(object, sprite) {
-  if (!sprite.boxShadow) {
-    const { boxShadow, backgroundColor, size } = generateSprite(
-      sprite,
-      object.spriteScale
-    );
-    sprite.size = size;
-    sprite.boxShadow = boxShadow;
-    sprite.backgroundColor = backgroundColor;
-  }
-
-  object.element.style.height = sprite.size;
-  object.element.style.width = sprite.size;
-  object.element.style.boxShadow = sprite.boxShadow;
-  object.element.style.backgroundColor = sprite.backgroundColor;
+  const { boxShadow, bg, size } = generateSprite(sprite, object.spriteScale);
+  object.element.style.height = size;
+  object.element.style.width = size;
+  object.element.style.boxShadow = boxShadow;
+  object.element.style.backgroundColor = bg;
 }

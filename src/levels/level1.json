@@ -1,6 +1,6 @@
 {
   "width": 3000,
-  "background": [
+  "bg": [
     {
       "id": "cloud",
       "x": -500,

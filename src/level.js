@@ -4,46 +4,25 @@ import { generateSprite } from './sprite';
 import * as levels from './levels';
 import * as sprites from './sprites';
 
-export function createObject(o, gI, levelWidth) {
+export function createObject(o, gI) {
   const scale = o.spriteScale || DEFAULT_PIXEL_SIZE;
   o.currentAction = -1;
-  o.height = o.sprite.length * scale;
-  o.width = o.sprite[0].length * scale;
-  const { boxShadow, backgroundColor, size } = generateSprite(
-    o.sprite,
-    o.spriteScale
-  );
+  o.height = o.sprite.split('|').length * scale;
+  o.width = o.sprite.split('|')[0].length * scale;
+  const { boxShadow, bg, size } = generateSprite(o.sprite, o.spriteScale);
   if (o.animation) {
     o.animation.currentTick = 0;
   }
   if (o.movementAnimation) {
     o.movementAnimation.currentTick = 0;
   }
-  o.spacing = o.spacing || 0;
-  let x = 1;
-  const offset = o.width;
-  if (o.repeat) {
-    x = Math.ceil(levelWidth / offset);
-  }
-  let object;
-  let lastx = o.x;
-  for (let i = 0; i < x; i++) {
-    object = Object.assign({}, o);
-    object.x = lastx;
-    object.id = `${object.id}${x > 1 ? '-' + i : ''}`;
-    object.element = document.createElement('div');
-    object.element.classList.add(object.id);
-    object.element.id = object.id;
-    object.element.style.height = size;
-    object.element.style.width = size;
-    object.element.style.boxShadow = boxShadow;
-    object.element.style.backgroundColor = backgroundColor;
-    gI.levelElement.appendChild(object.element);
-    gI.sceneObjects[object.id] = object;
-    const off = Math.floor(Math.random() * o.spacing) + 1;
-    lastx = lastx + o.width + off;
-  }
-  return object || o;
+  o.element = document.createElement('div');
+  o.element.classList.add(o.id);
+  o.element.id = o.id;
+  o.element.style.cssText = `height: ${size};width: ${size};background-color: ${bg};box-shadow: ${boxShadow};`;
+  gI.levelElement.appendChild(o.element);
+  gI.sceneObjects[o.id] = o;
+  return o;
 }
 
 export function drawBakground(gI, backgroundElements, levelWidth) {
@@ -53,7 +32,9 @@ export function drawBakground(gI, backgroundElements, levelWidth) {
       (sprite) => ({
         ...generateSprite(sprite, object.spriteScale),
         sprite,
-        width: sprite[0].length * scale,
+        width:
+          (typeof sprite === 'string' ? sprite.split('|') : sprite)[0].length *
+          scale,
       })
     );
     const maxWidth = sprites.reduce((r, s) => (r > s.width ? r : s.width), 0);
@@ -76,7 +57,7 @@ export function drawBakground(gI, backgroundElements, levelWidth) {
         animation-delay: ${Math.random()}s;
         height: ${sprite.size};
         width: ${sprite.size};
-        background-color: ${sprite.backgroundColor};
+        background-color: ${sprite.bg};
         left: ${o.x}px;
         bottom: ${o.y}px;
         box-shadow: ${sprite.boxShadow};
@@ -97,7 +78,7 @@ export function loadLevel(name) {
   gI.delta = gI.levelElement.offsetWidth - gI.canvasElement.offsetWidth;
   drawBakground(
     gI,
-    level.background.map((object) => ({
+    level.bg.map((object) => ({
       ...object,
       ...sprites[object.id],
     })),
@@ -109,8 +90,7 @@ export function loadLevel(name) {
         ...object,
         ...sprites[object.id],
       },
-      gI,
-      level.width
+      gI
     )
   );
 }

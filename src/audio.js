@@ -15,8 +15,6 @@ const notes = {
   B5: 987.77,
 };
 const BPM = 120;
-const attackTime = 0.008;
-const releaseTime = 0.0008;
 const melody = [
   ['F4:4', 'A4:4', 'C5:4', 'C4:1', 'D4:1:1', 'E4:1:2', 'F4:1:3'],
   ['E4:4', 'G4:4', 'B4:4'],
@@ -45,13 +43,9 @@ export default (function () {
     osc.type = 'sine';
     const time = gI.audioCtx.currentTime;
     const g = gI.audioCtx.createGain();
-    g.gain.exponentialRampToValueAtTime(
-      0.00001,
-      gI.audioCtx.currentTime + 0.08
-    );
+    g.gain.exponentialRampToValueAtTime(0.00001, time + 0.08);
     g.gain.value = volume;
-    osc.frequency.setValueAtTime(notes.G5, gI.audioCtx.currentTime);
-
+    osc.frequency.setValueAtTime(notes.G5, time);
     osc.start(0);
     osc.connect(g);
     g.connect(gI.audioCtx.destination);
@@ -79,8 +73,8 @@ export default (function () {
     const g = gI.audioCtx.createGain();
     g.gain.cancelScheduledValues(time);
     g.gain.setValueAtTime(0, time);
-    g.gain.linearRampToValueAtTime(volume, time + attackTime);
-    g.gain.linearRampToValueAtTime(0, time + duration - releaseTime);
+    g.gain.linearRampToValueAtTime(volume, time + 0.008);
+    g.gain.linearRampToValueAtTime(0, time + duration - 0.008);
     osc.connect(g);
     g.connect(filter1);
     filter1.connect(filter2);
@@ -122,7 +116,6 @@ export default (function () {
         instance = new constructeur();
         instance.constructeur = null;
       }
-
       return instance;
     };
   })();

@@ -2,21 +2,17 @@ import { renderScene, renderInventory } from './render';
 import { handleMovement, jump } from './movement';
 import { bindCommands } from './input';
 import { loadLevel, createObject } from './level';
-import { FRAME_DURATION, STEP, TICK_PER_CYCLE } from './config';
+import { FRAME_DURATION, TICK_PER_CYCLE } from './config';
 import Game from './models/game.model';
 import { puddle, actionButton } from './sprites';
 import Audio from './audio';
 import { displayMessage } from './utils';
 
-const startText = `Puddle has been through tough time these days.
-He just lost his best friend Deave in a flight accident.
-After a few days of crying and weeping, he comes to his friend grave to say goodbye to him one last time...`;
+const startText =
+  'Puddle has been through tough time these days.\nHe just lost his best friend Deave in a flight accident.\nAfter a few days of crying and weeping, he comes to his friend grave to say goodbye to him one last time...';
 
-const endText = `After their last encounter Puddle never went to his friend grave.
-He followed his friend's advice and try to lived his life to the fullest.
-Even though he made some new friend along the way, he never forgot Deave, the friend that reminded him who he was.
-
-The End`;
+const endText =
+  "After their last encounter Puddle never went to his friend grave.\nHe followed his friend's advice and try to lived his life to the fullest.\nEven though he made some new friend along the way, he never forgot Deave, the friend that reminded him who he was.\n\nThe End";
 
 export const Player = {
   id: 'puddle',
@@ -88,22 +84,15 @@ async function launchStartCinematic() {
 
 export async function startGame() {
   document.querySelector('#home-page').style.display = 'none';
-
   // await launchStartCinematic();
-
   const gI = await init();
-
-  // Game loop
   setInterval(() => {
     if (gI.jumpState !== 0) {
       jump();
     }
     handleMovement();
-
     renderScene();
-
     renderInventory();
-
     gI.tick = gI.tick === TICK_PER_CYCLE ? 0 : gI.tick + 1;
   }, FRAME_DURATION);
 }

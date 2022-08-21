@@ -21,8 +21,7 @@ function handleEndAction(gI) {
       gI.inventory[object.id] = object;
       return;
     case 'end':
-      launchEndCinematic();
-      return;
+      return launchEndCinematic();
   }
 }
 
@@ -32,30 +31,24 @@ export async function displayNextActionMessage() {
   clearTimeout(gI.textTimeout);
   if (gI.currentLines.length) {
     const message = gI.currentLines.shift();
-    const object = gI.sceneObjects[message.p];
-    const objectBubbleElement = document.createElement('div');
-    objectBubbleElement.id = 'bubble';
-    let posX =
-      gI.levelElementPos +
-      object.x +
-      object.width / 2 +
-      (object.bubbleShift ?? 0);
+    const o = gI.sceneObjects[message.p];
+    const bEl = document.createElement('div');
+    bEl.id = 'bubble';
+    let posX = gI.levelElementPos + o.x + o.width / 2 + (o.bubbleShift ?? 0);
     if (posX + 300 > window.innerWidth) {
-      objectBubbleElement.classList.add('reverse');
+      bEl.classList.add('reverse');
       posX -= 300;
     }
-    objectBubbleElement.style.bottom = `${object.y + object.height + 25}px`;
-    objectBubbleElement.style.left = `${posX}px`;
+    bEl.style.cssText = `bottom: ${o.y + o.height + 25}px; left: ${posX}px;`;
     const txt = document.createElement('div');
-    objectBubbleElement.appendChild(txt);
-    gI.canvasElement.appendChild(objectBubbleElement);
+    bEl.appendChild(txt);
+    gI.canvasElement.appendChild(bEl);
     gI.extraAction = message.action;
     await displayMessage(gI, txt, message.msg.split(''));
-    objectBubbleElement.classList.add('continue');
-  } else {
-    delete gI.currentLines;
-    handleEndAction(gI);
+    return bEl.classList.add('continue');
   }
+  delete gI.currentLines;
+  handleEndAction(gI);
 }
 
 export function toggleAction() {
@@ -90,6 +83,5 @@ export function toggleAction() {
       gI.inventory[object.id] = object;
       object.hidden = true;
       object.element.remove();
-      return;
   }
 }

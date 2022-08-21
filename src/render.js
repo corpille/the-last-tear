@@ -80,14 +80,14 @@ export function renderInventory() {
       slot.classList.add('slot');
       const item = document.createElement('div');
       item.id = object.id;
-      const { boxShadow, backgroundColor, size } = generateSprite(
+      const { boxShadow, bg, size } = generateSprite(
         object.sprite,
         object.spriteScale
       );
       item.style.height = size;
       item.style.width = size;
       item.style.boxShadow = boxShadow;
-      item.style.backgroundColor = backgroundColor;
+      item.style.backgroundColor = bg;
       slot.appendChild(item);
       gI.inventoryElement.appendChild(slot);
     });

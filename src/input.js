@@ -1,7 +1,6 @@
 import Game from './models/game.model';
 import { displayNextActionMessage, toggleAction } from './action';
 import { STEP } from './config';
-import Audio from './audio';
 
 export function bindCommands() {
   document.addEventListener('keyup', function (event) {
