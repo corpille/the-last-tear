@@ -24,17 +24,62 @@ export function createObject(o, gI) {
   gI.sceneObjects[o.id] = o;
   return o;
 }
+function renderObject(gI, id, o, sprite) {
+  o.element = document.createElement('div');
+  o.element.id = o.id;
+  o.element.classList.add(id);
+  const cssText = `
+        animation-delay: ${Math.random()}s;
+        height: ${sprite.size};
+        width: ${sprite.size};
+        background-color: ${sprite.bg};
+        left: ${o.x}px;
+        bottom: ${o.y}px;
+        box-shadow: ${sprite.boxShadow};
+      `;
+  o.element.style.cssText = cssText;
+  gI.levelElement.appendChild(o.element);
+}
+
+function drawStructure(gI, object) {
+  const scale = object.spriteScale || DEFAULT_PIXEL_SIZE;
+  const sprite = generateSprite(object.sprite, scale);
+  const width = object.sprite.split('|')[0].length * scale;
+  const height = object.sprite.split('|').length * scale;
+  let pos = { x: object.x, y: object.y };
+  const struct = object.struct
+    .split('|')
+    .reverse()
+    .map((l) => l.split(''));
+  for (let i = 0; i < struct.length; i++) {
+    for (let j = 0; j < struct[i].length; j++) {
+      if (struct[i][j] === '1') {
+        const o = Object.assign({}, object, {
+          ...pos,
+          height: sprite.length * scale,
+          width: sprite.width,
+          id: `${object.id}${i * struct[i].length + j}`,
+        });
+        renderObject(gI, object.id, o, sprite);
+      }
+      pos.x += width;
+    }
+    pos.y += height;
+    pos.x = object.x;
+  }
+}
 
 export function drawBakground(gI, backgroundElements, levelWidth) {
   backgroundElements.forEach((object) => {
+    if (object.struct) {
+      return drawStructure(gI, object);
+    }
     const scale = object.spriteScale || DEFAULT_PIXEL_SIZE;
     const sprites = [object.sprite, ...(object?.variants || [])].map(
       (sprite) => ({
         ...generateSprite(sprite, object.spriteScale),
         sprite,
-        width:
-          (typeof sprite === 'string' ? sprite.split('|') : sprite)[0].length *
-          scale,
+        width: sprite.split('|')[0].length * scale,
       })
     );
     const maxWidth = sprites.reduce((r, s) => (r > s.width ? r : s.width), 0);
@@ -50,20 +95,7 @@ export function drawBakground(gI, backgroundElements, levelWidth) {
         width: sprite.width,
         id: `${object.id}${nbSprite > 1 ? '-' + i : ''}`,
       });
-      o.element = document.createElement('div');
-      o.element.id = o.id;
-      o.element.classList.add(object.id);
-      const cssText = `
-        animation-delay: ${Math.random()}s;
-        height: ${sprite.size};
-        width: ${sprite.size};
-        background-color: ${sprite.bg};
-        left: ${o.x}px;
-        bottom: ${o.y}px;
-        box-shadow: ${sprite.boxShadow};
-      `;
-      o.element.style.cssText = cssText;
-      gI.levelElement.appendChild(o.element);
+      renderObject(gI, object.id, o, sprite);
       lastx +=
         o.width + (object.spread ? Math.round(Math.random() * 200) + 100 : 0);
     }

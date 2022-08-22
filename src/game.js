@@ -86,7 +86,7 @@ async function launchStartCinematic() {
 
 export async function startGame() {
   document.querySelector('#home-page').style.display = 'none';
-  await launchStartCinematic();
+  // await launchStartCinematic();
   const gI = await init();
   setInterval(() => {
     if (gI.jumpState !== 0) {
