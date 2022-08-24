@@ -21,10 +21,10 @@ export function bindCommands() {
     }
     if (!gI.currentLines) {
       if (key === 'ArrowLeft') {
-        gI.player.element.classList.add('left');
+        gI.player.element.classList.add('flipped');
         gI.xOffset = -STEP;
       } else if (key === 'ArrowRight') {
-        gI.player.element.classList.remove('left');
+        gI.player.element.classList.remove('flipped');
         gI.xOffset = STEP;
       } else if (key === ' ' && gI.jumpState === 0) {
         gI.jumpState = 1;

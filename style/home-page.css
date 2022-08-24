@@ -31,6 +31,12 @@
 
 #home-page h1 {
   font-size: 80px;
+  margin-bottom: 0;
+}
+
+#home-page h3 {
+  font-size: 20px;
+  margin-bottom: 50px;
 }
 
 #home-page #puddle {
@@ -74,11 +80,6 @@
   background-color: var(--clear);
   color: var(--action);
   cursor: pointer;
-}
-
-#home-page h3 {
-  font-size: 20px;
-  margin-top: 50px;
 }
 
 .commands,

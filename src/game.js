@@ -9,7 +9,7 @@ import Audio from './audio';
 import { displayMessage } from './utils';
 
 const startText =
-  'Puddle has been through tough time these days.\nHe just lost his best friend Deave in a flight accident.\nAfter a few days of crying and weeping, he comes to his friend grave to say goodbye to him one last time...';
+  "Puddle has been through a tough time these days.\nHe just lost his best friend Deave in a flight accident.\nAfter a few days of crying and mourning, he comes to his friend's grave to say goodbye to him one last time…";
 
 const endText =
   "After their last encounter Puddle never went to his friend grave.\nHe followed his friend's advice and try to lived his life to the fullest.\nEven though he made some new friend along the way, he never forgot Deave, the friend that reminded him who he was.\n\nThe End";
@@ -54,7 +54,7 @@ export async function launchEndCinematic() {
   deave.element.style.transition = 'opacity 2s';
   gI.sceneObjects['deave'].hidden = true;
   await pTimeout(2000);
-  gI.player.element.classList.add('left');
+  gI.player.element.classList.add('flipped');
   gI.xOffset = -3;
   gI.autoMove = -120;
   const el = document.querySelector('.fullscreen');
@@ -86,7 +86,7 @@ async function launchStartCinematic() {
 
 export async function startGame() {
   document.querySelector('#home-page').style.display = 'none';
-  // await launchStartCinematic();
+  await launchStartCinematic();
   const gI = await init();
   setInterval(() => {
     if (gI.jumpState !== 0) {

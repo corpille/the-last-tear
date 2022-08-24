@@ -3,6 +3,7 @@
   "bg": [
     {
       "id": "cloud",
+      "s": "cloud",
       "x": -500,
       "y": 500,
       "repeat": true,
@@ -10,37 +11,36 @@
     },
     {
       "id": "wideTree",
+      "s": "wideTree",
       "x": 20,
       "y": 0,
       "repeat": true
     },
     {
       "id": "bush",
+      "s": "bush",
       "x": 10,
       "y": 0,
       "repeat": true
     },
     {
       "id": "tallTree",
+      "s": "tallTree",
       "x": -20,
       "y": 0,
       "repeat": true
     },
     {
       "id": "rocks",
+      "s": "rocks",
       "x": 1500,
       "y": 0
-    },
-    {
-      "id": "bush",
-      "x": 100,
-      "y": 0,
-      "struct": "0001|0101|1111"
     }
   ],
   "objects": [
     {
       "id": "snail",
+      "s": "snail",
       "x": 1600,
       "y": 0,
       "actions": [
@@ -65,6 +65,7 @@
     },
     {
       "id": "tombstone_deave",
+      "s": "tombstone",
       "x": 670,
       "y": 0,
       "actions": [
@@ -90,6 +91,7 @@
     },
     {
       "id": "deave",
+      "s": "deave",
       "x": 800,
       "y": 20,
       "hidden": true,
@@ -186,6 +188,26 @@
           ]
         }
       ]
+    },
+    {
+      "id": "well",
+      "s": "well",
+      "x": 200,
+      "y": 0
+    },
+    {
+      "id": "mouse",
+      "s": "mouse",
+      "x": 1000,
+      "y": 0
+    },
+    {
+      "id": "mouse-2",
+      "s": "mouse",
+      "x": 1150,
+      "y": 0,
+      "mod": ["0:3"],
+      "flipped": true
     }
   ]
 }

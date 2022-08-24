@@ -1,3 +1,5 @@
+import { DEFAULT_PIXEL_SIZE } from './config';
+
 const colors = [
   '#f0c188',
   '#ef7e45',
@@ -37,19 +39,17 @@ function decode(charcode) {
         endex.indexOf(charcode.slice(-1));
 }
 
-export function generateSprite(s, spriteScale = 10) {
+export function generateSprite(s, scale = DEFAULT_PIXEL_SIZE) {
   let sprite = s
     .split('|')
     .map((l) => l.split('').map((e) => (e === '-' ? -1 : decode(e))));
-
   const height = sprite.length - 1;
   const boxShadow = sprite.reduce((r, line, y) => {
     let lineShadow = line.reduce(
       (l, colorIndex, x) =>
         (x === 0 && y === height) || colorIndex === -1
           ? l
-          : l +
-            `${x * spriteScale}px ${-(height - y) * spriteScale}px 0 0 ${
+          : `${l}${x * scale}px ${-(height - y) * scale}px 0 0 ${
               colors[colorIndex]
             }, `,
       ''
@@ -59,7 +59,7 @@ export function generateSprite(s, spriteScale = 10) {
   return {
     boxShadow: boxShadow.substring(0, boxShadow.length - 2),
     bg: sprite[height][0] === -1 ? '' : colors[sprite[height][0]],
-    size: `${spriteScale}px`,
+    size: `${scale}px`,
   };
 }
 

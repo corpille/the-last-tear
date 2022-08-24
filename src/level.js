@@ -7,9 +7,15 @@ import * as sprites from './sprites';
 export function createObject(o, gI) {
   const scale = o.spriteScale || DEFAULT_PIXEL_SIZE;
   o.currentAction = -1;
-  o.height = o.sprite.split('|').length * scale;
-  o.width = o.sprite.split('|')[0].length * scale;
-  const { boxShadow, bg, size } = generateSprite(o.sprite, o.spriteScale);
+  let s = o.sprite;
+  o.height = s.split('|').length * scale;
+  o.width = s.split('|')[0].length * scale;
+  if (o.mod) {
+    o.mod.forEach((mod) => {
+      s = s.split(mod[0]).join(mod[2]);
+    });
+  }
+  const { boxShadow, bg, size } = generateSprite(s, o.spriteScale);
   if (o.animation) {
     o.animation.currentTick = 0;
   }
@@ -18,6 +24,9 @@ export function createObject(o, gI) {
   }
   o.element = document.createElement('div');
   o.element.classList.add(o.id);
+  if (o.flipped) {
+    o.element.classList.add('flipped');
+  }
   o.element.id = o.id;
   o.element.style.cssText = `height: ${size};width: ${size};background-color: ${bg};box-shadow: ${boxShadow};`;
   gI.levelElement.appendChild(o.element);
@@ -43,17 +52,23 @@ function renderObject(gI, id, o, sprite) {
 
 function drawStructure(gI, object) {
   const scale = object.spriteScale || DEFAULT_PIXEL_SIZE;
-  const sprite = generateSprite(object.sprite, scale);
-  const width = object.sprite.split('|')[0].length * scale;
-  const height = object.sprite.split('|').length * scale;
+  const sprites = object.sprites.map((sprite) => {
+    return {
+      ...generateSprite(sprite, object),
+      sprite,
+    };
+  });
+  const width = object.sprites[0].split('|')[0].length * scale;
+  const height = object.sprites[0].split('|').length * scale;
   let pos = { x: object.x, y: object.y };
   const struct = object.struct
     .split('|')
     .reverse()
-    .map((l) => l.split(''));
+    .map((l) => l.split('').map((p) => parseInt(p)));
   for (let i = 0; i < struct.length; i++) {
     for (let j = 0; j < struct[i].length; j++) {
-      if (struct[i][j] === '1') {
+      if (struct[i][j] !== 0) {
+        const sprite = sprites[struct[i][j] - 1];
         const o = Object.assign({}, object, {
           ...pos,
           height: sprite.length * scale,
@@ -112,7 +127,7 @@ export function loadLevel(name) {
     gI,
     level.bg.map((object) => ({
       ...object,
-      ...sprites[object.id],
+      ...sprites[object.s],
     })),
     level.width
   );
@@ -120,7 +135,7 @@ export function loadLevel(name) {
     createObject(
       {
         ...object,
-        ...sprites[object.id],
+        ...sprites[object.s],
       },
       gI
     )
