@@ -12,6 +12,9 @@ import cloud from './cloud.json';
 import house from './house.json';
 import well from './well.json';
 import mouse from './mouse.json';
+import chicken from './chicken.json';
+import fox from './fox.json';
+import lama from './lama.json';
 
 export {
   puddle,
@@ -28,4 +31,7 @@ export {
   house,
   well,
   mouse,
+  chicken,
+  fox,
+  lama,
 };
