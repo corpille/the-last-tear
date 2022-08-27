@@ -3,15 +3,22 @@ import { HITBOX_RADIUS } from './config';
 import { renderSprite, generateSprite } from './sprite';
 
 function canMakeAction(gI, object) {
-  if (!gI.canAction && object.id !== 'tombstone_deave') {
+  if (!gI.canAction && object.id !== 'tb_deave') {
     return false;
   }
   const nextAction = object.actions[object.currentAction + 1];
   if (!nextAction || gI.currentLines) {
     return false;
   }
+  if (
+    nextAction.type === 'msg' &&
+    nextAction.cond &&
+    !gI.inventory[nextAction.cond]
+  ) {
+    return false;
+  }
   if (nextAction.type === 'cond') {
-    if (!gI.inventory[nextAction.condition] && nextAction.bad === undefined) {
+    if (!gI.inventory[nextAction.cond] && nextAction.bad === undefined) {
       return false;
     }
   }
@@ -78,21 +85,23 @@ export function renderInventory() {
   const gI = Game.getInstance();
   if (gI.inventoryElement.children.length != Object.keys(gI.inventory).length) {
     gI.inventoryElement.innerHTML = '';
-    Object.values(gI.inventory).forEach((object) => {
-      const slot = document.createElement('div');
-      slot.classList.add('slot');
-      const item = document.createElement('div');
-      item.id = object.id;
-      const { boxShadow, bg, size } = generateSprite(
-        object.sprite,
-        object.spriteScale
-      );
-      item.style.height = size;
-      item.style.width = size;
-      item.style.boxShadow = boxShadow;
-      item.style.backgroundColor = bg;
-      slot.appendChild(item);
-      gI.inventoryElement.appendChild(slot);
-    });
+    Object.values(gI.inventory)
+      .filter((o) => !o.id.startsWith('tmp_'))
+      .forEach((object) => {
+        const slot = document.createElement('div');
+        slot.classList.add('slot');
+        const item = document.createElement('div');
+        item.id = object.id;
+        const { boxShadow, bg, size } = generateSprite(
+          object.sprite,
+          object.spriteScale
+        );
+        item.style.height = size;
+        item.style.width = size;
+        item.style.boxShadow = boxShadow;
+        item.style.backgroundColor = bg;
+        slot.appendChild(item);
+        gI.inventoryElement.appendChild(slot);
+      });
   }
 }

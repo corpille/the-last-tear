@@ -8,10 +8,9 @@ function handleEndAction(gI) {
   switch (gI.extraAction.type) {
     case 'show':
       gI.sceneObjects[gI.extraAction.p].hidden = false;
-      if (gI.extraAction.toggleAction) {
-        gI.currentAvailableAction = gI.extraAction.p;
-        toggleAction();
-      }
+      return;
+    case 'canAction':
+      gI.canAction = true;
       return;
     case 'give':
       const object = {
@@ -19,21 +18,29 @@ function handleEndAction(gI) {
         ...sprites[gI.extraAction.p],
       };
       gI.inventory[object.id] = object;
+      console.log('give', gI.extraAction.p, gI.inventory);
       return;
     case 'end':
       return launchEndCinematic();
     case 'start':
       gI.canAction = true;
   }
+  delete gI.extraAction;
 }
 
 export async function displayNextActionMessage() {
   const gI = Game.getInstance();
   document.querySelector('#bubble')?.remove();
   clearTimeout(gI.textTimeout);
+  if (gI.extraAction) {
+    handleEndAction(gI);
+  }
   if (gI.currentLines.length) {
-    const message = gI.currentLines.shift();
-    const o = gI.sceneObjects[message.p];
+    const [message, author, action] = gI.currentLines.shift().split(':');
+    if (author) {
+      gI.currentAuthor = author;
+    }
+    const o = gI.sceneObjects[gI.currentAuthor];
     const bEl = document.createElement('div');
     bEl.id = 'bubble';
     let posX = gI.levelElementPos + o.x + o.width / 2 + (o.bubbleShift ?? 0);
@@ -45,12 +52,15 @@ export async function displayNextActionMessage() {
     const txt = document.createElement('div');
     bEl.appendChild(txt);
     gI.canvasElement.appendChild(bEl);
-    gI.extraAction = message.action;
-    await displayMessage(gI, txt, message.msg.split(''));
+    if (action) {
+      const [type, p] = gI.currentDiag.actions[parseInt(action)].split(':');
+      gI.extraAction = { type, p };
+    }
+    await displayMessage(gI, txt, message.split(''));
     return bEl.classList.add('continue');
+  } else {
+    delete gI.currentLines;
   }
-  delete gI.currentLines;
-  handleEndAction(gI);
 }
 
 export function toggleAction() {
@@ -59,29 +69,34 @@ export function toggleAction() {
   if (object.currentAction >= object.actions.length - 1) {
     gI.actionButton.hidden = true;
   }
-  const nextActionIndex = object.currentAction + 1;
-  let nextAction = object.actions[nextActionIndex];
+  const actionIndex = object.currentAction + 1;
+  let action = object.actions[actionIndex];
   gI.currentAvailableAction = undefined;
-  switch (nextAction.type) {
+  let diag;
+  switch (action.type) {
     case 'cond':
-      if (gI.inventory[nextAction.condition]) {
-        delete gI.inventory[nextAction.condition];
-        gI.currentLines = [...object.actions[nextAction.good].lines];
+      if (gI.inventory[action.condition]) {
+        delete gI.inventory[action.condition];
+        diag = gI.diag[action.good];
       } else {
-        gI.currentLines = [...object.actions[nextAction.bad].lines];
+        diag = gI.diag[action.bad];
       }
+      gI.currentLines = [...diag.lines];
+      gI.currentDiag = diag;
       return displayNextActionMessage();
     case 'msg':
-      if (!nextAction.repeat) {
-        object.currentAction = nextActionIndex;
+      if (!action.repeat) {
+        object.currentAction = actionIndex;
       }
-      gI.currentLines = [...nextAction.lines];
-      if (gI.inventory[nextAction.condition]) {
-        delete gI.inventory[nextAction.condition];
+      diag = gI.diag[action.diag];
+      gI.currentLines = [...diag.lines];
+      gI.currentDiag = diag;
+      if (gI.inventory[action.condition]) {
+        delete gI.inventory[action.condition];
       }
       return displayNextActionMessage();
     case 'pickup':
-      object.currentAction = nextActionIndex;
+      object.currentAction = actionIndex;
       gI.inventory[object.id] = object;
       object.hidden = true;
       object.element.remove();

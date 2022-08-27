@@ -37,6 +37,101 @@
       "y": 0
     }
   ],
+  "diag": [
+    {
+      "lines": [
+        "Here rest Deave, he will be missed:tb_deave",
+        "I… I miss you friend… I truly miss you…:puddle",
+        "Things have not been the same since you’ve been gone, not as fun as it was",
+        "I really wish I could have spent more time with you…::0",
+        "Oh crap ! This guy wasn’t joking with the whole “getting you out of here”:deave",
+        "Puddle ? Is this you ? What are you doing here ?",
+        "Dea … Dea … Deave ? Is this you ? I must be dreaming, is this really you ?:puddle",
+        "Yeah it’s me buddy ! I don’t really know I got here though …:deave",
+        "I’ve met some weird dude in the Death World and my head must be unpleasant so much so that he kick me right up to the world of the living",
+        "*looks at himself *\nOooh ! I see why you didn’t recognise me, weird, must be a side effect of what he did to me",
+        "Are you ok bud ?",
+        "I don’t know, my dead best friend just came out of nowhere, grayed out and …:puddle",
+        "I’ve missed you Deave",
+        "I’ve missed you Puddle. *hugs Puddle* But you have to move on you can’t hold to dead people for ever:deave",
+        "I guess … all the time with you is always extra anyway:puddle",
+        "Thanks a lot dude, I guess you could start asking that snail over there he might have seen them.:deave:1"
+      ],
+      "actions": ["show:deave", "canAction"]
+    },
+    {
+      "lines": [
+        "Hi, I’m Puddle, my friend over there is kind of trapped here he is in a pickle:puddle",
+        "I’m looking for his colors so I can help him cross over to the Death World",
+        "Did you see anything weird lately ?",
+        "Oh hi there, I’m Snail ! That’s seems quite a story you got here:snail",
+        "Well I’ve seen some colorful shards fall down the sky around the time your friend arrived that might be it",
+        "Oh really?\n That must be it ! Did you see where they fell ?:puddle",
+        "I think I saw one fall near the well. You should check it out.:snail",
+        "Thank you so much Snail, I will check it out !:puddle:0"
+      ],
+      "actions": ["give:tmp_snail"]
+    },
+    {
+      "lines": [
+        "You look around the well and see a small crater, probably where the colors fell.:well",
+        "Besides the hole, three set of footstep can be seen",
+        "One has some cheese crumbs scattered on them",
+        "One is covered with bloody feathers",
+        "One is …"
+      ]
+    },
+    {
+      "lines": [
+        "Oh you find the last color of mine !:deave",
+        "Thank you so much I need to go now bye friend !::0"
+      ],
+      "actions": ["end"]
+    },
+    {
+      "lines": [
+        "I need my colors before get back to the Death World, can you find them ?:deave"
+      ]
+    },
+    {
+      "lines": [
+        "He.. Hello:puddle",
+        "I can’t ! I can't, I'm going to kill him, I swear I’m going to kill him !:mouse1",
+        "Well I’d like to see that ! It’s not with your small arms that you’re going to do anything!:mouse2",
+        "Ummh ! I’m sorry to bother you but I’m looking for some artifact, some sort of colorful shards.:puddle",
+        "I was following some footsteps and it led me to you, did you, by any chance, grab them ? I really need them to help a friend",
+        "I’m sure Mouse 1 found them, stealing is his style !:mouse2",
+        "Oh don’t you dare put that on me, I couldn’t care less about shard or whatever !:mouse1",
+        "Please, I really need those, it’s really important to me.:puddle",
+        "Alright, listen dude I have one of them...:mouse1",
+        "Ha! See I told you he was the stealing type !:mouse2",
+        "… but I’m not going to give them to you unless I get the keys to the shop that my brother refuses to give to me.:mouse1",
+        "It’s not that I don’t want to, it's that I don’t have them you do !:mouse2",
+        "Well you see the issue here, good luck on convincing this butthead:mouse1",
+        "But I don't know where your keys are…:Puddle"
+      ]
+    },
+    {
+      "lines": [
+        "Are these yours ?:puddle",
+        "There we go, I told you I didn’t have them !:mouse2",
+        "You always think I’m a liar anyway whatever I do",
+        "Well for once it was not you !:mouse1",
+        "You know you guys should not be fighting like this…:puddle",
+        "I just lost my best friend… and… let’s just say it was really hard",
+        "I regret not cherishing the moment with him more",
+        "Don’t be like me, don’t regret not being close to one another, because when Death’s come, apologies won’t be enough",
+        "I’m sorry about your friend and I guess you’re right, I was too hard on you Mouse 2:mouse1",
+        "I’m sorry",
+        "It’s alright. *Hugs Mouse 1* Just try to not lose the keys next time:mouse2",
+        "Haha very funny.\nAnyway here is your shard thank you for your help:mouse1",
+        "Thank you, I'll go give it to him !:Puddle"
+      ]
+    },
+    {
+      "lines": ["Did you find our keys:mouse1"]
+    }
+  ],
   "objects": [
     {
       "id": "snail",
@@ -46,46 +141,19 @@
       "actions": [
         {
           "type": "msg",
-          "lines": [
-            {
-              "msg": "Hey little guy, did you find any color ?",
-              "p": "puddle"
-            },
-            {
-              "msg": "Oh yeah dude ! Here is the one I found, have fun with it !",
-              "p": "snail",
-              "action": {
-                "type": "give",
-                "p": "color"
-              }
-            }
-          ]
+          "diag": 1
         }
       ]
     },
     {
-      "id": "tombstone_deave",
+      "id": "tb_deave",
       "s": "tombstone",
       "x": 670,
       "y": 0,
       "actions": [
         {
           "type": "msg",
-          "lines": [
-            {
-              "msg": "Here rest Deave, he will be missed",
-              "p": "tombstone_deave"
-            },
-            {
-              "msg": "It's true ... I really miss you my friend ... I wish you were there ...",
-              "p": "puddle",
-              "action": {
-                "type": "show",
-                "p": "deave",
-                "toggleAction": true
-              }
-            }
-          ]
+          "diag": 0
         }
       ]
     },
@@ -97,95 +165,10 @@
       "hidden": true,
       "actions": [
         {
-          "type": "msg",
-          "lines": [
-            {
-              "msg": "Oh shit ! This guy wasn't joking after all !",
-              "p": "deave"
-            },
-            {
-              "msg": "Puddle ? Is it you ? What are you doing here ?!",
-              "p": "deave"
-            },
-            {
-              "msg": "Dea ... Dea ... Deave ? Is this you ? Is this really you ?",
-              "p": "puddle"
-            },
-            {
-              "msg": "Yeah it's me buddy, I've met some weird dude in the Death World and he wasn't to please to meet me and here I am I guess !",
-              "p": "deave"
-            },
-            {
-              "msg": "*looks at himself*\nOooh !\nI can see why you didn't recognise me, must be a side effet of what he did to me",
-              "p": "deave"
-            },
-            {
-              "msg": "Are you ok bud ?",
-              "p": "deave"
-            },
-            {
-              "msg": "Ummh I don't know my dead best friend just came out of nowhere ! I've missed you friend.",
-              "p": "puddle"
-            },
-            {
-              "msg": "I've missed you too Puddle.\n* Hugs Puddle *\n*clear his throat*\n Well ...",
-              "p": "deave"
-            },
-            {
-              "msg": "I'm sorry to ask you this but would you mind helping me get back to the Death World ? I can't really stay here long, rules of the almighty and all.",
-              "p": "deave"
-            },
-            {
-              "msg": "But you've just arrived ! I finally got you back, a second chance !",
-              "p": "puddle"
-            },
-            {
-              "msg": "Yeah that's not really how it works, but I'll still be here for a while I need you to help me get my colors back before I can leave",
-              "p": "deave"
-            },
-            {
-              "msg": "They must have been scattered somewhere in the process",
-              "p": "deave"
-            },
-            {
-              "msg": "Alright ... I'll look for them.",
-              "p": "puddle",
-              "action": {
-                "type": "start"
-              }
-            }
-          ]
-        },
-        {
           "type": "cond",
-          "condition": "color",
+          "cond": "color",
           "good": 2,
           "bad": 3
-        },
-        {
-          "type": "msg",
-          "lines": [
-            {
-              "msg": "Oh you find the last color of mine !",
-              "p": "deave"
-            },
-            {
-              "msg": "Thank you so much I need to go now bye friend !",
-              "p": "deave",
-              "action": {
-                "type": "end"
-              }
-            }
-          ]
-        },
-        {
-          "type": "msg",
-          "lines": [
-            {
-              "msg": "I need my colors before get back to the Death World, can you find them ?",
-              "p": "deave"
-            }
-          ]
         }
       ]
     },
@@ -193,18 +176,38 @@
       "id": "well",
       "s": "well",
       "x": 200,
-      "y": 0
+      "y": 0,
+      "actions": [
+        {
+          "type": "msg",
+          "diag": 2,
+          "cond": "tmp_snail"
+        }
+      ]
     },
     {
-      "id": "mouse",
+      "id": "mouse1",
       "s": "mouse",
-      "x": 1200,
-      "y": 0
+      "x": 2200,
+      "y": 0,
+      "actions": [
+        {
+          "type": "msg",
+          "diag": 5,
+          "cond": "tmp_snail"
+        },
+        {
+          "type": "cond",
+          "cond": "key",
+          "good": 6,
+          "bad": 7
+        }
+      ]
     },
     {
-      "id": "mouse-2",
+      "id": "mouse2",
       "s": "mouse",
-      "x": 1330,
+      "x": 2330,
       "y": 0,
       "mod": ["0:3"],
       "flipped": true
@@ -212,19 +215,19 @@
     {
       "id": "chicken",
       "s": "chicken",
-      "x": 1450,
+      "x": 2450,
       "y": 0
     },
     {
       "id": "lama",
       "s": "lama",
-      "x": 800,
+      "x": 1800,
       "y": 0
     },
     {
       "id": "fox",
       "s": "fox",
-      "x": 1000,
+      "x": 2000,
       "y": 0
     }
   ]

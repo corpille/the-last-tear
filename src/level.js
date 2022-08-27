@@ -123,6 +123,7 @@ export function loadLevel(name) {
   gI.levelElement.innerHTML = '';
   gI.levelElement.style.width = `${level.width}px`;
   gI.delta = gI.levelElement.offsetWidth - gI.canvasElement.offsetWidth;
+  gI.diag = level.diag;
   drawBakground(
     gI,
     level.bg.map((object) => ({
