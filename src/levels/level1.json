@@ -28,21 +28,43 @@
       "repeat": true
     },
     {
-      "id": "rocks",
+      "id": "r1",
       "s": "rocks",
       "x": 2030,
       "flipped": true
     },
     {
-      "id": "rocks",
+      "id": "r2",
       "s": "rocks",
       "x": 1500
     },
     {
+      "id": "r3",
+      "s": "rocks",
+      "x": 2580
+    },
+    {
+      "id": "r5",
+      "s": "rocks",
+      "x": 3150,
+      "flipped": true
+    },
+    {
+      "id": "r4",
+      "s": "rocks",
+      "x": 3300,
+      "flipped": true
+    },
+    {
       "id": "cemetery",
-      "s": "house",
+      "s": "cemetery",
       "x": -90,
       "struct": "442442442446|331331331335|331331331335"
+    },
+    {
+      "id": "house",
+      "s": "house",
+      "x": 4050
     }
   ],
   "diag": [
