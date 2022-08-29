@@ -24,10 +24,10 @@ export function createObject(o, gI) {
   }
   o.element = document.createElement('div');
   o.element.classList.add(o.id);
+  o.element.id = o.id;
   if (o.flipped) {
     o.element.classList.add('flipped');
   }
-  o.element.id = o.id;
   o.element.style.cssText = `height: ${size};width: ${size};background-color: ${bg};box-shadow: ${boxShadow};`;
   gI.levelElement.appendChild(o.element);
   gI.sceneObjects[o.id] = o;
@@ -46,6 +46,9 @@ function renderObject(gI, id, o, sprite) {
         bottom: ${o.y}px;
         box-shadow: ${sprite.boxShadow};
       `;
+  if (o.flipped) {
+    o.element.classList.add('flipped');
+  }
   o.element.style.cssText = cssText;
   gI.levelElement.appendChild(o.element);
 }
@@ -54,7 +57,7 @@ function drawStructure(gI, object) {
   const scale = object.spriteScale || DEFAULT_PIXEL_SIZE;
   const sprites = object.sprites.map((sprite) => {
     return {
-      ...generateSprite(sprite, object),
+      ...generateSprite(sprite, object.spriteScale),
       sprite,
     };
   });
@@ -84,7 +87,7 @@ function drawStructure(gI, object) {
   }
 }
 
-export function drawBakground(gI, backgroundElements, levelWidth) {
+export function drawBackground(gI, backgroundElements, levelWidth) {
   backgroundElements.forEach((object) => {
     if (object.struct) {
       return drawStructure(gI, object);
@@ -124,19 +127,21 @@ export function loadLevel(name) {
   gI.levelElement.style.width = `${level.width}px`;
   gI.delta = gI.levelElement.offsetWidth - gI.canvasElement.offsetWidth;
   gI.diag = level.diag;
-  drawBakground(
+  drawBackground(
     gI,
-    level.bg.map((object) => ({
-      ...object,
-      ...sprites[object.s],
+    level.bg.map((o) => ({
+      ...o,
+      ...sprites[o.s],
+      y: o.y || 0,
     })),
     level.width
   );
-  level.objects.forEach((object) =>
+  level.objects.forEach((o) =>
     createObject(
       {
-        ...object,
-        ...sprites[object.s],
+        ...o,
+        ...sprites[o.s],
+        y: o.y || 0,
       },
       gI
     )

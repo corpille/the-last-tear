@@ -1,5 +1,5 @@
 {
-  "width": 3000,
+  "width": 10000,
   "bg": [
     {
       "id": "cloud",
@@ -13,28 +13,36 @@
       "id": "wideTree",
       "s": "wideTree",
       "x": 20,
-      "y": 0,
       "repeat": true
     },
     {
       "id": "bush",
       "s": "bush",
       "x": 10,
-      "y": 0,
       "repeat": true
     },
     {
       "id": "tallTree",
       "s": "tallTree",
       "x": -20,
-      "y": 0,
       "repeat": true
     },
     {
       "id": "rocks",
       "s": "rocks",
-      "x": 1500,
-      "y": 0
+      "x": 2030,
+      "flipped": true
+    },
+    {
+      "id": "rocks",
+      "s": "rocks",
+      "x": 1500
+    },
+    {
+      "id": "cemetery",
+      "s": "house",
+      "x": -90,
+      "struct": "442442442446|331331331335|331331331335"
     }
   ],
   "diag": [
@@ -130,14 +138,16 @@
     },
     {
       "lines": ["Did you find our keys:mouse1"]
+    },
+    {
+      "lines": ["You look under the chicken and find an old key:chicken"]
     }
   ],
   "objects": [
     {
       "id": "snail",
       "s": "snail",
-      "x": 1600,
-      "y": 0,
+      "x": 1640,
       "actions": [
         {
           "type": "msg",
@@ -145,11 +155,15 @@
         }
       ]
     },
+    { "id": "tb1", "s": "tombstone", "x": 25, "mod": ["A:D"] },
+    { "id": "tb2", "s": "tombstone", "x": 150, "mod": ["B:D", "A:B"] },
+    { "id": "tb3", "s": "tombstone", "x": 290, "mod": ["B:D"] },
+    { "id": "tb4", "s": "tombstone", "x": 425, "mod": ["B:D"] },
+    { "id": "tb5", "s": "tombstone", "x": 540, "mod": ["A:D"] },
     {
       "id": "tb_deave",
       "s": "tombstone",
       "x": 670,
-      "y": 0,
       "actions": [
         {
           "type": "msg",
@@ -157,6 +171,8 @@
         }
       ]
     },
+    { "id": "tb6", "s": "tombstone", "x": 800, "mod": ["B:D"] },
+    { "id": "tb7", "s": "tombstone", "x": 930, "mod": ["B:D", "A:B"] },
     {
       "id": "deave",
       "s": "deave",
@@ -167,16 +183,15 @@
         {
           "type": "cond",
           "cond": "color",
-          "good": 2,
-          "bad": 3
+          "good": 3,
+          "bad": 4
         }
       ]
     },
     {
       "id": "well",
       "s": "well",
-      "x": 200,
-      "y": 0,
+      "x": 2800,
       "actions": [
         {
           "type": "msg",
@@ -188,8 +203,7 @@
     {
       "id": "mouse1",
       "s": "mouse",
-      "x": 2200,
-      "y": 0,
+      "x": 4200,
       "actions": [
         {
           "type": "msg",
@@ -207,28 +221,30 @@
     {
       "id": "mouse2",
       "s": "mouse",
-      "x": 2330,
-      "y": 0,
+      "x": 4430,
       "mod": ["0:3"],
       "flipped": true
     },
     {
       "id": "chicken",
       "s": "chicken",
-      "x": 2450,
-      "y": 0
+      "x": 9200,
+      "actions": [
+        {
+          "type": "msg",
+          "diag": 8
+        }
+      ]
     },
     {
       "id": "lama",
       "s": "lama",
-      "x": 1800,
-      "y": 0
+      "x": 6000
     },
     {
       "id": "fox",
       "s": "fox",
-      "x": 2000,
-      "y": 0
+      "x": 5800
     }
   ]
 }

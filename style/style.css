@@ -198,5 +198,8 @@ body {
 }
 
 .flipped {
+  transform: rotateY(180deg);
+}
+.player.flipped {
   transform: rotateY(180deg) translate(-90px, 0);
 }
