@@ -1,3 +1,4 @@
 {
-  "sprite": "--CC-CC----|-CQC-CQC---|-CCC-CCC---|---CCC-----|--CEEEC----|-CEECEEC---|CQEEEEEC---|--C0000C---|--C0000C---|-CFFFFFC---|-CFFFFFC---|-CFFFEEC---|-CFEEEEC---|--CCCCC-C--|--C---C--CC"
+  "sprite": "--CC-CC----|-CQC-CQC---|-CCC-CCC---|---CCC-----|--CEEEC----|-CEECEEC---|CQEEEEEC---|--C0000C---|--C0000C---|-CFFFFFC---|-CFFFFFC---|-CFFFEEC---|-CFEEEEC---|--CCCCC-C--|--C---C--CC",
+  "bubbleShift": -10
 }

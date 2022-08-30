@@ -1,15 +1,15 @@
-import Game from './models/game.model';
+import Game from './game';
 import { HITBOX_RADIUS } from './config';
 import { renderSprite, generateSprite } from './sprite';
 
 function canMakeAction(gI, object) {
-  if (!gI.canAction && object.id !== 'tb_deave') {
-    return false;
-  }
-  const nextAction = object.actions[object.currentAction + 1];
+  const nextAction = object.actions[object.currAction + 1];
   if (!nextAction || gI.currentLines) {
     return false;
   }
+  const inv = Object.keys(gI.inventory);
+  const cond = Object.keys(nextAction).filter((c) => c.startsWith('c_'));
+  const item = cond.find((c) => inv.includes(c.slice(2, c.length)));
   if (
     nextAction.type === 'msg' &&
     nextAction.cond &&
@@ -18,7 +18,7 @@ function canMakeAction(gI, object) {
     return false;
   }
   if (nextAction.type === 'cond') {
-    if (!gI.inventory[nextAction.cond] && nextAction.bad === undefined) {
+    if (!item && nextAction.bad === undefined) {
       return false;
     }
   }
@@ -32,7 +32,7 @@ export function renderScene() {
       !object.hidden &&
       object.actions &&
       object.actions.length > 0 &&
-      object.currentAction < object.actions.length - 1
+      object.currAction < object.actions.length - 1
     ) {
       if (
         gI.player.x + gI.player.width > object.x - HITBOX_RADIUS &&
@@ -83,19 +83,18 @@ export function renderScene() {
 
 export function renderInventory() {
   const gI = Game.getInstance();
-  if (gI.inventoryElement.children.length != Object.keys(gI.inventory).length) {
+  if (gI.inventoryChanged) {
+    gI.inventoryChanged = false;
     gI.inventoryElement.innerHTML = '';
-    Object.values(gI.inventory)
-      .filter((o) => !o.id.startsWith('tmp_'))
-      .forEach((object) => {
+    Object.keys(gI.inventory)
+      .filter((id) => !id.startsWith('tmp_'))
+      .forEach((id) => {
+        const o = gI.inventory[id];
         const slot = document.createElement('div');
         slot.classList.add('slot');
         const item = document.createElement('div');
-        item.id = object.id;
-        const { boxShadow, bg, size } = generateSprite(
-          object.sprite,
-          object.spriteScale
-        );
+        item.id = o.id;
+        const { boxShadow, bg, size } = generateSprite(o.sprite, o.spriteScale);
         item.style.height = size;
         item.style.width = size;
         item.style.boxShadow = boxShadow;

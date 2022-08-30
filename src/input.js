@@ -1,4 +1,4 @@
-import Game from './models/game.model';
+import Game from './game';
 import { displayNextActionMessage, toggleAction } from './action';
 import { STEP } from './config';
 
@@ -33,7 +33,7 @@ export function bindCommands() {
     if (key === 'e') {
       if (gI.currentAvailableAction && !gI.currentLines) {
         toggleAction();
-      } else if (gI.currentLines) {
+      } else if (gI.currentLines && !gI.isInAction) {
         clearTimeout(0);
         displayNextActionMessage();
       }

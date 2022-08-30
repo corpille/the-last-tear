@@ -6,7 +6,7 @@
     "dev": "vite --host",
     "build": "vite build",
     "preview": "vite preview",
-    "package": "rm -r build.zip dist/ ; yarn build ; zip -q -r build.zip dist/ ; ls -lh build.zip | awk '{print \"Final size\", $5}'"
+    "package": "rm -r build.zip dist/ ; yarn build ; zip -q -r build.zip dist/ ; ls -l build.zip | awk '{print \"Final size\", $5, \"/ 13312, remaining \", 13312 - $5}'"
   },
   "repository": {
     "type": "git",

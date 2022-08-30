@@ -87,7 +87,7 @@
         "I guess … all the time with you is always extra anyway:puddle",
         "Thanks a lot dude, I guess you could start asking that snail over there he might have seen them.:deave:1"
       ],
-      "actions": ["show:deave", "canAction"]
+      "actions": ["show:deave", "give:tmp_start"]
     },
     {
       "lines": [
@@ -105,10 +105,9 @@
     {
       "lines": [
         "You look around the well and see a small crater, probably where the colors fell.:well",
-        "Besides the hole, three set of footstep can be seen",
+        "Besides the hole, two set of footstep can be seen",
         "One has some cheese crumbs scattered on them",
-        "One is covered with bloody feathers",
-        "One is …"
+        "One is covered with bloody feathers"
       ]
     },
     {
@@ -138,7 +137,7 @@
         "… but I’m not going to give them to you unless I get the keys to the shop that my brother refuses to give to me.:mouse1",
         "It’s not that I don’t want to, it's that I don’t have them you do !:mouse2",
         "Well you see the issue here, good luck on convincing this butthead:mouse1",
-        "But I don't know where your keys are…:Puddle"
+        "But I don't know where your keys are…:puddle"
       ]
     },
     {
@@ -155,14 +154,42 @@
         "I’m sorry",
         "It’s alright. *Hugs Mouse 1* Just try to not lose the keys next time:mouse2",
         "Haha very funny.\nAnyway here is your shard thank you for your help:mouse1",
-        "Thank you, I'll go give it to him !:Puddle"
-      ]
+        "Thank you, I'll go give it to him !:puddle:0"
+      ],
+      "actions": ["give:color1"]
     },
     {
       "lines": ["Did you find our keys:mouse1"]
     },
     {
-      "lines": ["You look under the chicken and find an old key:chicken"]
+      "lines": ["You look under the chicken and find an old key:chicken:0"],
+      "actions": ["give:key"]
+    },
+    {
+      "lines": [
+        "Grr ... I can't talk to you right now !\n My brother pissed me off !:mouse1"
+      ]
+    },
+    {
+      "lines": ["Oh man! I'm in big trouble! Oh man!:fox"]
+    },
+    {
+      "lines": ["Here is the last color:fox:0"],
+      "actions": ["give:color2"]
+    },
+    {
+      "lines": [
+        "Oh great you found the color of my beak ! Let me try it on !:deave:0",
+        "Perfect! It looks great"
+      ],
+      "actions": ["color:color1"]
+    },
+    {
+      "lines": [
+        "Oh great you found the color of my furr ! Let me try it on !:deave:0",
+        "Perfect! It looks great"
+      ],
+      "actions": ["color:color2"]
     }
   ],
   "objects": [
@@ -173,6 +200,7 @@
       "actions": [
         {
           "type": "msg",
+          "cond": "tmp_start",
           "diag": 1
         }
       ]
@@ -204,9 +232,13 @@
       "actions": [
         {
           "type": "cond",
-          "cond": "color",
-          "good": 3,
+          "c_color1": 12,
+          "c_color2": 13,
           "bad": 4
+        },
+        {
+          "type": "msg",
+          "diag": 3
         }
       ]
     },
@@ -228,14 +260,13 @@
       "x": 4200,
       "actions": [
         {
-          "type": "msg",
-          "diag": 5,
-          "cond": "tmp_snail"
+          "type": "cond",
+          "c_tmp_snail": 5,
+          "bad": 9
         },
         {
           "type": "cond",
-          "cond": "key",
-          "good": 6,
+          "c_key": 6,
           "bad": 7
         }
       ]
@@ -243,18 +274,19 @@
     {
       "id": "mouse2",
       "s": "mouse",
-      "x": 4430,
+      "x": 4400,
       "mod": ["0:3"],
       "flipped": true
     },
     {
       "id": "chicken",
       "s": "chicken",
-      "x": 9200,
+      "x": 3800,
       "actions": [
         {
           "type": "msg",
-          "diag": 8
+          "diag": 8,
+          "cond": "tmp_snail"
         }
       ]
     },
@@ -266,7 +298,14 @@
     {
       "id": "fox",
       "s": "fox",
-      "x": 5800
+      "x": 5800,
+      "actions": [
+        {
+          "type": "cond",
+          "c_tmp_snail": 11,
+          "bad": 10
+        }
+      ]
     }
   ]
 }

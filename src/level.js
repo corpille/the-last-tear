@@ -1,12 +1,12 @@
-import Game from './models/game.model';
+import Game from './game';
 import { DEFAULT_PIXEL_SIZE } from './config';
 import { generateSprite } from './sprite';
-import * as levels from './levels';
+import level from './level.json';
 import * as sprites from './sprites';
 
 export function createObject(o, gI) {
   const scale = o.spriteScale || DEFAULT_PIXEL_SIZE;
-  o.currentAction = -1;
+  o.currAction = -1;
   let s = o.sprite;
   o.height = s.split('|').length * scale;
   o.width = s.split('|')[0].length * scale;
@@ -120,9 +120,8 @@ export function drawBackground(gI, backgroundElements, levelWidth) {
   });
 }
 
-export function loadLevel(name) {
+export function loadLevel() {
   const gI = Game.getInstance();
-  const level = levels[name];
   gI.levelElement.innerHTML = '';
   gI.levelElement.style.width = `${level.width}px`;
   gI.delta = gI.levelElement.offsetWidth - gI.canvasElement.offsetWidth;

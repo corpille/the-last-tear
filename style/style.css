@@ -104,10 +104,17 @@ body {
   bottom: 0;
 }
 
-#inventory .slot #color {
+#inventory .slot #color1,
+#inventory .slot #color2 {
   transform: scale(0.3);
   bottom: 2px;
   left: 5px;
+}
+
+#inventory .slot #key {
+  transform: scale(0.17) rotate(90deg) translateX(-155px);
+  bottom: 5px;
+  left: 9px;
 }
 
 #level {
@@ -132,6 +139,11 @@ body {
 #level * {
   position: absolute;
   transition: opacity 0.3s;
+}
+
+#level .deave {
+  opacity: 0;
+  transition: all 3s;
 }
 
 #bubble {
@@ -159,6 +171,7 @@ body {
   border-top: 15px solid #414141;
   border-right: 15px solid transparent;
 }
+
 #bubble.continue:after {
   content: 'Press E to continue';
   display: block;
@@ -199,6 +212,9 @@ body {
 
 .flipped {
   transform: rotateY(180deg);
+}
+.mouse2.flipped {
+  transform-origin: 45px;
 }
 .player.flipped {
   transform: rotateY(180deg) translate(-90px, 0);

@@ -1,4 +1,4 @@
-import Game from './models/game.model';
+import Game from './game';
 import { STEP } from './config';
 import { renderSprite } from './sprite';
 

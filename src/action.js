@@ -1,30 +1,41 @@
-import Game from './models/game.model';
+import Game from './game';
 import { displayMessage } from './utils';
 import * as sprites from './sprites';
-import { launchEndCinematic } from './game';
+import { renderSprite } from './sprite';
+import { launchEndCinematic } from './index';
+import { pTimeout } from './utils';
 
-function handleEndAction(gI) {
+async function handleEndAction(gI) {
   if (!gI.extraAction) return;
+  gI.isInAction = true;
   switch (gI.extraAction.type) {
     case 'show':
       gI.sceneObjects[gI.extraAction.p].hidden = false;
-      return;
-    case 'canAction':
-      gI.canAction = true;
-      return;
+      await pTimeout(3000);
+      break;
     case 'give':
       const object = {
         id: gI.extraAction.p,
         ...sprites[gI.extraAction.p],
       };
       gI.inventory[object.id] = object;
-      console.log('give', gI.extraAction.p, gI.inventory);
-      return;
+      gI.inventoryChanged = true;
+      break;
     case 'end':
-      return launchEndCinematic();
-    case 'start':
-      gI.canAction = true;
+      launchEndCinematic();
+      break;
+    case 'color':
+      const o = gI.sceneObjects.deave;
+      let mod =
+        gI.extraAction.p === 'color1' ? ['F:1', 'E:2'] : ['B:I', 'A:J', 'G:H'];
+      mod.map((mod) => {
+        o.sprite = o.sprite.split(mod[0]).join(mod[2]);
+        renderSprite(o, o.sprite);
+      });
+      await pTimeout(3000);
+      break;
   }
+  gI.isInAction = false;
   delete gI.extraAction;
 }
 
@@ -33,7 +44,7 @@ export async function displayNextActionMessage() {
   document.querySelector('#bubble')?.remove();
   clearTimeout(gI.textTimeout);
   if (gI.extraAction) {
-    handleEndAction(gI);
+    await handleEndAction(gI);
   }
   if (gI.currentLines.length) {
     const [message, author, action] = gI.currentLines.shift().split(':');
@@ -63,42 +74,48 @@ export async function displayNextActionMessage() {
   }
 }
 
+function cond(gI, action) {
+  const inv = Object.keys(gI.inventory);
+  const cond = Object.keys(action).filter((c) => c.startsWith('c_'));
+  const item = cond.find((c) => inv.includes(c.slice(2, c.length)));
+  let diag;
+  if (item) {
+    if (!item.slice(2, item.length).startsWith('tmp_')) {
+      delete gI.inventory[item.slice(2, item.length)];
+      gI.inventoryChanged = true;
+    }
+    diag = gI.diag[action[item]];
+    delete action[item];
+    if (!Object.keys(action).filter((c) => c.startsWith('c_')).length) {
+      gI.sceneObjects[gI.currentAvailableAction].actions.shift();
+    }
+    gI.currentAvailableAction = undefined;
+  } else {
+    diag = gI.diag[action.bad];
+  }
+  gI.currentLines = [...diag.lines];
+  gI.currentDiag = diag;
+  return displayNextActionMessage();
+}
+
 export function toggleAction() {
   const gI = Game.getInstance();
-  const object = gI.sceneObjects[gI.currentAvailableAction];
-  if (object.currentAction >= object.actions.length - 1) {
+  const o = gI.sceneObjects[gI.currentAvailableAction];
+  if (o.currAction >= o.actions.length - 1) {
     gI.actionButton.hidden = true;
   }
-  const actionIndex = object.currentAction + 1;
-  let action = object.actions[actionIndex];
-  gI.currentAvailableAction = undefined;
-  let diag;
+  let action = o.actions[o.currAction + 1];
   switch (action.type) {
     case 'cond':
-      if (gI.inventory[action.condition]) {
-        delete gI.inventory[action.condition];
-        diag = gI.diag[action.good];
-      } else {
-        diag = gI.diag[action.bad];
-      }
-      gI.currentLines = [...diag.lines];
-      gI.currentDiag = diag;
-      return displayNextActionMessage();
+      return cond(gI, action);
     case 'msg':
       if (!action.repeat) {
-        object.currentAction = actionIndex;
+        o.currAction = o.currAction + 1;
       }
-      diag = gI.diag[action.diag];
+      const diag = gI.diag[action.diag];
       gI.currentLines = [...diag.lines];
       gI.currentDiag = diag;
-      if (gI.inventory[action.condition]) {
-        delete gI.inventory[action.condition];
-      }
+      gI.currentAvailableAction = undefined;
       return displayNextActionMessage();
-    case 'pickup':
-      object.currentAction = actionIndex;
-      gI.inventory[object.id] = object;
-      object.hidden = true;
-      object.element.remove();
   }
 }

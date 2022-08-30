@@ -1,5 +1,5 @@
 import './style/style.css';
-import { startGame, Player } from './src/game';
+import { startGame, Player } from './src';
 import { deave } from './src/sprites';
 import { renderSprite } from './src/sprite';
 
