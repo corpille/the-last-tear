@@ -5,11 +5,11 @@ import { renderSprite } from './sprite';
 export function stopPlayer(gI) {
   gI.xOffset = 0;
   renderSprite(gI.player, gI.player.sprite);
-  gI.player.movementAnimation.currentKeyFrame = 0;
+  gI.player.movAn.currKF = 0;
 }
 
 export function handleMovement() {
-  const gI = Game.getInstance();
+  const gI = Game.getIns();
   // Movement
   if (gI.xOffset) {
     if (
@@ -17,35 +17,29 @@ export function handleMovement() {
       (gI.xOffset < 0 && gI.player.x + gI.xOffset > gI.autoMove) ||
       (gI.player.x + gI.xOffset > 0 &&
         gI.player.x + gI.xOffset <
-          gI.canvasElement.offsetWidth +
-            gI.delta -
-            gI.player.sprite[0].length * 10)
+          gI.canEl.offsetWidth + gI.delta - gI.player.sprite[0].length * 10)
     ) {
       gI.player.x += gI.xOffset;
 
       // Animation
-      const anim = gI.player.movementAnimation;
-      if (anim.currentTick == anim.tickPerFrame) {
-        anim.currentTick = -1;
-        renderSprite(
-          gI.player,
-          gI.player.movementSprites[anim.currentKeyFrame]
-        );
-        anim.currentKeyFrame++;
-        if (anim.currentKeyFrame > anim.nbKeyframes) {
-          anim.currentKeyFrame = 0;
+      const anim = gI.player.movAn;
+      if (anim.tick === anim.tickPerFrame) {
+        anim.tick = -1;
+        renderSprite(gI.player, gI.player.movS[anim.currKF]);
+        anim.currKF++;
+        if (anim.currKF > anim.nbKeyframes) {
+          anim.currKF = 0;
         }
       }
-      anim.currentTick++;
+      anim.tick++;
 
       if (
-        gI.player.x >= gI.canvasElement.offsetWidth / 2 + -gI.player.width &&
-        gI.player.x <=
-          gI.levelElement.offsetWidth - gI.canvasElement.offsetWidth / 2 &&
-        gI.levelElementPos - gI.xOffset > -gI.delta &&
-        gI.levelElementPos - gI.xOffset < 0
+        gI.player.x >= gI.canEl.offsetWidth / 2 + -gI.player.width &&
+        gI.player.x <= gI.levEl.offsetWidth - gI.canEl.offsetWidth / 2 &&
+        gI.levElPos - gI.xOffset > -gI.delta &&
+        gI.levElPos - gI.xOffset < 0
       ) {
-        gI.levelElementPos -= gI.xOffset;
+        gI.levElPos -= gI.xOffset;
       }
     }
     if (
@@ -56,21 +50,16 @@ export function handleMovement() {
       delete gI.autoMove;
       stopPlayer(gI);
     }
-    gI.levelElement.style.left = `${gI.levelElementPos}px`;
+    gI.levEl.style.left = `${gI.levElPos}px`;
   }
 }
 
 export function jump() {
-  const gI = Game.getInstance();
-  if (gI.jumpState === 1) {
-    gI.player.y += STEP;
-    if (gI.player.y === 100) {
-      gI.jumpState = 2;
-    }
-  } else if (gI.jumpState === 2) {
-    gI.player.y -= STEP;
-    if (gI.player.y === 0) {
-      gI.jumpState = 0;
-    }
+  const gI = Game.getIns();
+  gI.player.y += gI.jump * STEP;
+  if (gI.jump === 1 && gI.player.y > 100) {
+    gI.jump = -1;
+  } else if (gI.jump === -1 && gI.player.y === 0) {
+    gI.jump = 0;
   }
 }

@@ -44,7 +44,7 @@ export function generateSprite(s, scale = DEFAULT_PIXEL_SIZE) {
     .split('|')
     .map((l) => l.split('').map((e) => (e === '-' ? -1 : decode(e))));
   const height = sprite.length - 1;
-  const boxShadow = sprite.reduce((r, line, y) => {
+  const bs = sprite.reduce((r, line, y) => {
     let lineShadow = line.reduce(
       (l, colorIndex, x) =>
         (x === 0 && y === height) || colorIndex === -1
@@ -57,16 +57,16 @@ export function generateSprite(s, scale = DEFAULT_PIXEL_SIZE) {
     return r + lineShadow;
   }, '');
   return {
-    boxShadow: boxShadow.substring(0, boxShadow.length - 2),
+    bs: bs.substring(0, bs.length - 2),
     bg: sprite[height][0] === -1 ? '' : colors[sprite[height][0]],
-    size: `${scale}px`,
+    s: `${scale}px`,
   };
 }
 
 export function renderSprite(object, sprite) {
-  const { boxShadow, bg, size } = generateSprite(sprite, object.spriteScale);
-  object.element.style.height = size;
-  object.element.style.width = size;
-  object.element.style.boxShadow = boxShadow;
-  object.element.style.backgroundColor = bg;
+  const { bs, bg, s } = generateSprite(sprite, object.scale);
+  object.el.style.height = s;
+  object.el.style.width = s;
+  object.el.style.boxShadow = bs;
+  object.el.style.backgroundColor = bg;
 }

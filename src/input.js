@@ -4,34 +4,35 @@ import { STEP } from './config';
 
 export function bindCommands() {
   document.addEventListener('keyup', function (event) {
-    const gI = Game.getInstance();
+    const gI = Game.getIns();
     const key = event.key;
     if (!gI.autoMove && (key === 'ArrowLeft' || key === 'ArrowRight')) {
       gI.xOffset = 0;
-      gI.player.element.classList.remove(`key-${gI.player.currentKeyFrame}`);
-      gI.player.currentKeyFrame = 0;
+      gI.player.el.classList.remove(`key-${gI.player.currKF}`);
+      gI.player.currKF = 0;
     }
   });
 
   document.addEventListener('keydown', function (event) {
-    const gI = Game.getInstance();
+    const gI = Game.getIns();
     const key = event.key;
     if (gI.autoMove) {
       return;
     }
     if (!gI.currentLines) {
       if (key === 'ArrowLeft') {
-        gI.player.element.classList.add('flipped');
+        gI.player.el.classList.add('flipped');
         gI.xOffset = -STEP;
       } else if (key === 'ArrowRight') {
-        gI.player.element.classList.remove('flipped');
+        gI.player.el.classList.remove('flipped');
         gI.xOffset = STEP;
-      } else if (key === ' ' && gI.jumpState === 0) {
-        gI.jumpState = 1;
+      } else if (key === ' ' && gI.jump === 0) {
+        gI.jump = 1;
       }
     }
     if (key === 'e') {
       if (gI.currentAvailableAction && !gI.currentLines) {
+        gI.xOffset = 0;
         toggleAction();
       } else if (gI.currentLines && !gI.isInAction) {
         clearTimeout(0);

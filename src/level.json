@@ -69,7 +69,7 @@
   ],
   "diag": [
     {
-      "lines": [
+      "l": [
         "Here rest Deave, he will be missed:tb_deave",
         "I… I miss you friend… I truly miss you…:puddle",
         "Things have not been the same since you’ve been gone, not as fun as it was",
@@ -90,7 +90,7 @@
       "actions": ["show:deave", "give:tmp_start"]
     },
     {
-      "lines": [
+      "l": [
         "Hi, I’m Puddle, my friend over there is kind of trapped here he is in a pickle:puddle",
         "I’m looking for his colors so I can help him cross over to the Death World",
         "Did you see anything weird lately ?",
@@ -103,7 +103,7 @@
       "actions": ["give:tmp_snail"]
     },
     {
-      "lines": [
+      "l": [
         "You look around the well and see a small crater, probably where the colors fell.:well",
         "Besides the hole, two set of footstep can be seen",
         "One has some cheese crumbs scattered on them",
@@ -111,19 +111,19 @@
       ]
     },
     {
-      "lines": [
+      "l": [
         "Oh you find the last color of mine !:deave",
         "Thank you so much I need to go now bye friend !::0"
       ],
       "actions": ["end"]
     },
     {
-      "lines": [
+      "l": [
         "I need my colors before get back to the Death World, can you find them ?:deave"
       ]
     },
     {
-      "lines": [
+      "l": [
         "He.. Hello:puddle",
         "I can’t ! I can't, I'm going to kill him, I swear I’m going to kill him !:mouse1",
         "Well I’d like to see that ! It’s not with your small arms that you’re going to do anything!:mouse2",
@@ -141,7 +141,7 @@
       ]
     },
     {
-      "lines": [
+      "l": [
         "Are these yours ?:puddle",
         "There we go, I told you I didn’t have them !:mouse2",
         "You always think I’m a liar anyway whatever I do",
@@ -159,33 +159,33 @@
       "actions": ["give:color1"]
     },
     {
-      "lines": ["Did you find our keys:mouse1"]
+      "l": ["Did you find our keys:mouse1"]
     },
     {
-      "lines": ["You look under the chicken and find an old key:chicken:0"],
+      "l": ["You look under the chicken and find an old key:chicken:0"],
       "actions": ["give:key"]
     },
     {
-      "lines": [
+      "l": [
         "Grr ... I can't talk to you right now !\n My brother pissed me off !:mouse1"
       ]
     },
     {
-      "lines": ["Oh man! I'm in big trouble! Oh man!:fox"]
+      "l": ["Oh man! I'm in big trouble! Oh man!:fox"]
     },
     {
-      "lines": ["Here is the last color:fox:0"],
+      "l": ["Here is the last color:fox:0"],
       "actions": ["give:color2"]
     },
     {
-      "lines": [
+      "l": [
         "Oh great you found the color of my beak ! Let me try it on !:deave:0",
         "Perfect! It looks great"
       ],
       "actions": ["color:color1"]
     },
     {
-      "lines": [
+      "l": [
         "Oh great you found the color of my furr ! Let me try it on !:deave:0",
         "Perfect! It looks great"
       ],

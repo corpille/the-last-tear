@@ -10,7 +10,7 @@ const home = document.querySelector('#home-page');
 
 const el = document.createElement('div');
 el.id = Player.id;
-Player.element = el;
+Player.el = el;
 renderSprite(Player, Player.sprite);
 home.append(el);
 
@@ -20,7 +20,7 @@ const Deave = {
 };
 const el2 = document.createElement('div');
 el2.id = Deave.id;
-Deave.element = el2;
+Deave.el = el2;
 home.append(el2);
 renderSprite(Deave, Deave.sprite);
 

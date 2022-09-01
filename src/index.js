@@ -2,7 +2,7 @@ import { renderScene, renderInventory } from './render';
 import { handleMovement, jump } from './movement';
 import { bindCommands } from './input';
 import { loadLevel, createObject } from './level';
-import { FRAME_DURATION, TICK_PER_CYCLE } from './config';
+import { TICK_PER_CYCLE } from './config';
 import Game from './game';
 import { puddle, actionButton } from './sprites';
 import Audio from './audio';
@@ -18,7 +18,7 @@ export const Player = {
   id: 'puddle',
   y: 0,
   ...puddle,
-  movementSprites: [puddle.sprite, ...puddle.movementSprites, puddle.sprite],
+  movS: [puddle.sprite, ...puddle.movS, puddle.sprite],
 };
 
 const ActionButton = {
@@ -30,29 +30,28 @@ const ActionButton = {
 
 function init() {
   document.querySelector('#canvas').style.display = 'flex';
-  const gI = Game.getInstance();
-  const audio = Audio.getInstance();
+  const gI = Game.getIns();
   bindCommands();
   loadLevel();
   gI.actionButton = createObject(ActionButton, gI);
-  Player.x = -gI.levelElementPos - 10;
+  Player.x = -gI.levElPos - 10;
   gI.player = createObject(Player, gI);
-  gI.player.element.classList.add('player');
+  gI.player.el.classList.add('player');
   gI.xOffset = 3;
   gI.autoMove = 500;
-  audio.playBgMusic(gI);
+  Audio.getIns().playBgMusic(gI);
   return gI;
 }
 
 export async function launchEndCinematic() {
-  const gI = Game.getInstance();
+  const gI = Game.getIns();
   const startTxt = document.querySelector('.fullscreen-txt');
   startTxt.innerHTML = '';
-  const deave = gI.sceneObjects['deave'];
-  deave.element.style.transition = 'opacity 2s';
-  gI.sceneObjects['deave'].hidden = true;
+  const deave = gI.scene['deave'];
+  deave.el.style.transition = 'opacity 2s';
+  gI.scene['deave'].hidden = true;
   await pTimeout(2000);
-  gI.player.element.classList.add('flipped');
+  gI.player.el.classList.add('flipped');
   gI.xOffset = -3;
   gI.autoMove = -120;
   const el = document.querySelector('.fullscreen');
@@ -65,7 +64,7 @@ export async function launchEndCinematic() {
 
 async function launchStartCinematic() {
   return new Promise(async (resolve) => {
-    const gI = Game.getInstance();
+    const gI = Game.getIns();
     const start = document.querySelector('.fullscreen');
     const c = document.getElementById('continue');
     start.style.cssText = 'visibility: visible; transition: none; opacity: 1';
@@ -88,12 +87,12 @@ export async function startGame() {
   await launchStartCinematic();
   const gI = await init();
   setInterval(() => {
-    if (gI.jumpState !== 0) {
+    if (gI.jump !== 0) {
       jump();
     }
     handleMovement();
     renderScene();
     renderInventory();
     gI.tick = gI.tick === TICK_PER_CYCLE ? 0 : gI.tick + 1;
-  }, FRAME_DURATION);
+  }, 1000 / 60);
 }

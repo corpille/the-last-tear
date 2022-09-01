@@ -5,59 +5,57 @@ import level from './level.json';
 import * as sprites from './sprites';
 
 export function createObject(o, gI) {
-  const scale = o.spriteScale || DEFAULT_PIXEL_SIZE;
+  const scale = o.scale || DEFAULT_PIXEL_SIZE;
   o.currAction = -1;
-  let s = o.sprite;
-  o.height = s.split('|').length * scale;
-  o.width = s.split('|')[0].length * scale;
+  let sp = o.sprite;
+  o.height = sp.split('|').length * scale;
+  o.width = sp.split('|')[0].length * scale;
   if (o.mod) {
     o.mod.forEach((mod) => {
-      s = s.split(mod[0]).join(mod[2]);
+      sp = sp.split(mod[0]).join(mod[2]);
     });
   }
-  const { boxShadow, bg, size } = generateSprite(s, o.spriteScale);
+  const { bs, bg, s } = generateSprite(sp, o.scale);
   if (o.animation) {
-    o.animation.currentTick = 0;
+    o.animation.tick = 0;
   }
-  if (o.movementAnimation) {
-    o.movementAnimation.currentTick = 0;
+  if (o.movAn) {
+    o.movAn.tick = 0;
   }
-  o.element = document.createElement('div');
-  o.element.classList.add(o.id);
-  o.element.id = o.id;
+  o.el = document.createElement('div');
+  o.el.classList.add(o.id);
+  o.el.id = o.id;
   if (o.flipped) {
-    o.element.classList.add('flipped');
+    o.el.classList.add('flipped');
   }
-  o.element.style.cssText = `height: ${size};width: ${size};background-color: ${bg};box-shadow: ${boxShadow};`;
-  gI.levelElement.appendChild(o.element);
-  gI.sceneObjects[o.id] = o;
+  o.el.style.cssText = `height:${s};width:${s};background-color:${bg};box-shadow:${bs};`;
+  gI.levEl.appendChild(o.el);
+  gI.scene[o.id] = o;
   return o;
 }
+
 function renderObject(gI, id, o, sprite) {
-  o.element = document.createElement('div');
-  o.element.id = o.id;
-  o.element.classList.add(id);
-  const cssText = `
-        animation-delay: ${Math.random()}s;
-        height: ${sprite.size};
-        width: ${sprite.size};
-        background-color: ${sprite.bg};
-        left: ${o.x}px;
-        bottom: ${o.y}px;
-        box-shadow: ${sprite.boxShadow};
+  o.el = document.createElement('div');
+  o.el.id = o.id;
+  o.el.classList.add(id);
+  const cssText = `animation-delay:${Math.random()}s;height:${sprite.s};width:${
+    sprite.s
+  };background-color:${sprite.bg};left:${o.x}px;bottom:${o.y}px;box-shadow:${
+    sprite.bs
+  };
       `;
   if (o.flipped) {
-    o.element.classList.add('flipped');
+    o.el.classList.add('flipped');
   }
-  o.element.style.cssText = cssText;
-  gI.levelElement.appendChild(o.element);
+  o.el.style.cssText = cssText;
+  gI.levEl.appendChild(o.el);
 }
 
 function drawStructure(gI, object) {
-  const scale = object.spriteScale || DEFAULT_PIXEL_SIZE;
+  const scale = object.scale || DEFAULT_PIXEL_SIZE;
   const sprites = object.sprites.map((sprite) => {
     return {
-      ...generateSprite(sprite, object.spriteScale),
+      ...generateSprite(sprite, object.scale),
       sprite,
     };
   });
@@ -92,10 +90,10 @@ export function drawBackground(gI, backgroundElements, levelWidth) {
     if (object.struct) {
       return drawStructure(gI, object);
     }
-    const scale = object.spriteScale || DEFAULT_PIXEL_SIZE;
+    const scale = object.scale || DEFAULT_PIXEL_SIZE;
     const sprites = [object.sprite, ...(object?.variants || [])].map(
       (sprite) => ({
-        ...generateSprite(sprite, object.spriteScale),
+        ...generateSprite(sprite, object.scale),
         sprite,
         width: sprite.split('|')[0].length * scale,
       })
@@ -121,10 +119,10 @@ export function drawBackground(gI, backgroundElements, levelWidth) {
 }
 
 export function loadLevel() {
-  const gI = Game.getInstance();
-  gI.levelElement.innerHTML = '';
-  gI.levelElement.style.width = `${level.width}px`;
-  gI.delta = gI.levelElement.offsetWidth - gI.canvasElement.offsetWidth;
+  const gI = Game.getIns();
+  gI.levEl.innerHTML = '';
+  gI.levEl.style.width = `${level.width}px`;
+  gI.delta = gI.levEl.offsetWidth - gI.canEl.offsetWidth;
   gI.diag = level.diag;
   drawBackground(
     gI,

@@ -1,12 +1,12 @@
 {
-  "movementAnimation": {
+  "movAn": {
     "nbKeyframes": 4,
-    "currentKeyFrame": 0,
+    "currKF": 0,
     "tickPerFrame": 5
   },
   "bubbleShift": 10,
   "sprite": "----CCCC--|---CGHHHC-|---CGHHHC-|---CCH211C|---CGH211C|---CGHHHC-|---CGHHHC-|--CFGHHHC-|--CFHGFHC-|CCEFFFHHC-|CEEFHHHHC-|-CCFHHHC--|--CCCCC---|--C---C---",
-  "movementSprites": [
+  "movS": [
     "----------|----CCCC--|---CGHHHC-|---CGHHHC-|---CCH211C|---CGH211C|---CGHHHC-|--CFGHHHC-|--CFHGFHC-|CCEFFFHHC-|CEEFHHHHC-|-CCFHHHC--|--CCCCC---|--C----C--",
     "----------|----CCCC--|---CGHHHC-|---CGHHHC-|---CCH211C|---CGH211C|---CGHHHC-|--CFGHHHC-|--CFHGFHC-|CCEFFFHHC-|CEEFHHHHC-|-CCFHHHC--|--CCCCC---|---C---C--",
     "----CCCC--|---CGHHHC-|---CGHHHC-|---CCH211C|---CGH211C|---CGHHHC-|---CGHHHC-|--CFGHHHC-|--CFHGFHC-|CCEFFFHHC-|CEEFHHHHC-|-CCFHHHC--|--CCCCC---|---C--C---"

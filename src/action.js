@@ -10,7 +10,7 @@ async function handleEndAction(gI) {
   gI.isInAction = true;
   switch (gI.extraAction.type) {
     case 'show':
-      gI.sceneObjects[gI.extraAction.p].hidden = false;
+      gI.scene[gI.extraAction.p].hidden = false;
       await pTimeout(3000);
       break;
     case 'give':
@@ -25,7 +25,7 @@ async function handleEndAction(gI) {
       launchEndCinematic();
       break;
     case 'color':
-      const o = gI.sceneObjects.deave;
+      const o = gI.scene.deave;
       let mod =
         gI.extraAction.p === 'color1' ? ['F:1', 'E:2'] : ['B:I', 'A:J', 'G:H'];
       mod.map((mod) => {
@@ -40,7 +40,7 @@ async function handleEndAction(gI) {
 }
 
 export async function displayNextActionMessage() {
-  const gI = Game.getInstance();
+  const gI = Game.getIns();
   document.querySelector('#bubble')?.remove();
   clearTimeout(gI.textTimeout);
   if (gI.extraAction) {
@@ -51,10 +51,10 @@ export async function displayNextActionMessage() {
     if (author) {
       gI.currentAuthor = author;
     }
-    const o = gI.sceneObjects[gI.currentAuthor];
+    const o = gI.scene[gI.currentAuthor];
     const bEl = document.createElement('div');
     bEl.id = 'bubble';
-    let posX = gI.levelElementPos + o.x + o.width / 2 + (o.bubbleShift ?? 0);
+    let posX = gI.levElPos + o.x + o.width / 2 + (o.bubbleShift ?? 0);
     if (posX + 300 > window.innerWidth) {
       bEl.classList.add('reverse');
       posX -= 300;
@@ -62,7 +62,7 @@ export async function displayNextActionMessage() {
     bEl.style.cssText = `bottom: ${o.y + o.height + 25}px; left: ${posX}px;`;
     const txt = document.createElement('div');
     bEl.appendChild(txt);
-    gI.canvasElement.appendChild(bEl);
+    gI.canEl.appendChild(bEl);
     if (action) {
       const [type, p] = gI.currentDiag.actions[parseInt(action)].split(':');
       gI.extraAction = { type, p };
@@ -87,20 +87,20 @@ function cond(gI, action) {
     diag = gI.diag[action[item]];
     delete action[item];
     if (!Object.keys(action).filter((c) => c.startsWith('c_')).length) {
-      gI.sceneObjects[gI.currentAvailableAction].actions.shift();
+      gI.scene[gI.currentAvailableAction].actions.shift();
     }
     gI.currentAvailableAction = undefined;
   } else {
     diag = gI.diag[action.bad];
   }
-  gI.currentLines = [...diag.lines];
+  gI.currentLines = [...diag.l];
   gI.currentDiag = diag;
   return displayNextActionMessage();
 }
 
 export function toggleAction() {
-  const gI = Game.getInstance();
-  const o = gI.sceneObjects[gI.currentAvailableAction];
+  const gI = Game.getIns();
+  const o = gI.scene[gI.currentAvailableAction];
   if (o.currAction >= o.actions.length - 1) {
     gI.actionButton.hidden = true;
   }
@@ -113,7 +113,7 @@ export function toggleAction() {
         o.currAction = o.currAction + 1;
       }
       const diag = gI.diag[action.diag];
-      gI.currentLines = [...diag.lines];
+      gI.currentLines = [...diag.l];
       gI.currentDiag = diag;
       gI.currentAvailableAction = undefined;
       return displayNextActionMessage();
