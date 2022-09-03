@@ -1,15 +1,12 @@
 import Game from './game';
 import { HITBOX_RADIUS } from './config';
-import { renderSprite, generateSprite } from './sprite';
+import { generateSprite } from './sprite';
 
 function canMakeAction(gI, object) {
   const nextAction = object.actions[object.currAction + 1];
   if (!nextAction || gI.currentLines) {
     return false;
   }
-  const inv = Object.keys(gI.inventory);
-  const cond = Object.keys(nextAction).filter((c) => c.startsWith('c_'));
-  const item = cond.find((c) => inv.includes(c.slice(2, c.length)));
   if (
     nextAction.type === 'msg' &&
     nextAction.cond &&
@@ -17,6 +14,9 @@ function canMakeAction(gI, object) {
   ) {
     return false;
   }
+  const inv = Object.keys(gI.inventory);
+  const cond = Object.keys(nextAction).filter((c) => c.startsWith('c_'));
+  const item = cond.find((c) => inv.includes(c.slice(2, c.length)));
   if (nextAction.type === 'cond') {
     if (!item && nextAction.bad === undefined) {
       return false;
@@ -46,11 +46,15 @@ export function renderScene() {
       }
     }
 
-    if (!object.hidden) {
+    if (
+      !object.hidden &&
+      (object.el.style.left !== `${object.x}px` ||
+        object.el.style.bottom !== `${object.y}px`)
+    ) {
       object.el.style.opacity = '1';
       object.el.style.left = `${object.x}px`;
       object.el.style.bottom = `${object.y}px`;
-    } else {
+    } else if (object.hidden && object.el.style.opacity !== '0') {
       object.el.style.opacity = '0';
     }
   });

@@ -1,4 +1,5 @@
 @import url('./home-page.css');
+@import url('./game.css');
 
 :root {
   --dark: #111;
@@ -29,15 +30,15 @@ body {
 }
 @keyframes float {
   0% {
-    transform: translateY(0px);
+    transform: translate3d(0, 0, 0);
   }
   50% {
-    transform: translateY(20px);
+    transform: translate3d(0, 20px, 0);
   }
 }
 .cloud,
 .deave {
-  animation: float 5s infinite;
+  animation: linear 5s infinite float;
 }
 
 #canvas {
@@ -149,7 +150,7 @@ body {
 #bubble {
   position: absolute;
   z-index: 999;
-  padding: 20px;
+  padding: 20px 20px 25px 20px;
   background: var(--clear);
   border: 5px solid #343a40;
   color: #343a40;
@@ -211,11 +212,11 @@ body {
 }
 
 .flipped {
-  transform: rotateY(180deg);
+  transform: rotate3d(0, 1, 0, 180deg);
 }
 .mouse2.flipped {
-  transform-origin: 45px;
+  /* transform-origin: 45px; */
 }
 .player.flipped {
-  transform: rotateY(180deg) translate(-90px, 0);
+  transform: rotate3d(0, 1, 0, 180deg) translate3d(-90px, 0, 0);
 }

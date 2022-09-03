@@ -26,29 +26,16 @@ const melody = [
   ['C4:4', 'F4:4', 'A4:4'],
 ];
 
-const volume = 0.05;
+const MAIN_VOLUME = 0.05;
 let audioInst = null;
 export default class Audio {
   i = 0;
 
   playTypingSound(gI) {
-    const osc = new OscillatorNode(gI.audioCtx, {
-      frequency: notes.G5,
-      type: 'sine',
-    });
-    const g = gI.audioCtx.createGain();
-    g.gain.exponentialRampToValueAtTime(
-      0.00001,
-      gI.audioCtx.currentTime + 0.08
-    );
-    g.gain.value = volume;
-    osc.start(0);
-    osc.connect(g);
-    g.connect(gI.audioCtx.destination);
-    return g;
+    this.playNote(gI, gI.audioCtx.currentTime, notes.D5, 0.1, 0.1);
   }
 
-  playNote(gI, time, frequency, duration) {
+  playNote(gI, time, frequency, duration, volume = MAIN_VOLUME) {
     const osc = new OscillatorNode(gI.audioCtx, {
       frequency,
       type: 'sine',
@@ -109,99 +96,3 @@ export default class Audio {
     return audioInst;
   }
 }
-
-// export default (function () {
-//   var constructeur = function () {
-//     const gI = {
-//       playTypingSound,
-//       playBgMusic,
-//       playNote,
-//     };
-//     return gI;
-//   };
-
-//   function playTypingSound(gI) {
-//     const osc = new OscillatorNode(gI.audioCtx, {
-//       frequency: notes.G5,
-//       type: 'sine',
-//     });
-//     const g = gI.audioCtx.createGain();
-//     g.gain.exponentialRampToValueAtTime(
-//       0.00001,
-//       gI.audioCtx.currentTime + 0.08
-//     );
-//     g.gain.value = volume;
-//     osc.start(0);
-//     osc.connect(g);
-//     g.connect(gI.audioCtx.destination);
-//     return g;
-//   }
-
-//   function playNote(gI, time, frequency, duration) {
-//     const osc = new OscillatorNode(gI.audioCtx, {
-//       frequency,
-//       type: 'sine',
-//     });
-//     let filter1 = new BiquadFilterNode(gI.audioCtx, {
-//       type: 'highpass',
-//       frequency: 190,
-//     });
-//     let filter2 = new BiquadFilterNode(gI.audioCtx, {
-//       type: 'notch',
-//       frequency: 1223,
-//     });
-//     let filter3 = new BiquadFilterNode(gI.audioCtx, {
-//       type: 'lowshelf',
-//       frequency: 1870,
-//       gain: -10.5,
-//     });
-//     const g = gI.audioCtx.createGain();
-//     g.gain.cancelScheduledValues(time);
-//     g.gain.setValueAtTime(0, time);
-//     g.gain.linearRampToValueAtTime(volume, time + 0.008);
-//     g.gain.linearRampToValueAtTime(0, time + duration - 0.008);
-//     osc.connect(g);
-//     g.connect(filter1);
-//     filter1.connect(filter2);
-//     filter2.connect(filter3);
-//     filter3.connect(gI.audioCtx.destination);
-//     osc.start(time);
-//     osc.stop(time + duration);
-//     return osc;
-//   }
-
-//   function playMelody(gI, i) {
-//     if (i === melody.length) {
-//       i = 0;
-//     }
-//     const chord = melody[i];
-//     chord.forEach((note) => {
-//       const [n, duration, delay = 0] = note.split(':');
-//       playNote(
-//         gI,
-//         gI.audioCtx.currentTime + (delay * 60) / BPM,
-//         notes[n],
-//         (duration * 60) / BPM
-//       );
-//     });
-//     const wait = setTimeout(() => {
-//       clearTimeout(wait);
-//       playMelody(gI, i + 1);
-//     }, 4 * (60000 / BPM));
-//   }
-
-//   function playBgMusic(gI) {
-//     playMelody(gI, 0);
-//   }
-
-//   var instance = null;
-//   return new (function () {
-//     this.getIns = function () {
-//       if (instance == null) {
-//         instance = new constructeur();
-//         instance.constructeur = null;
-//       }
-//       return instance;
-//     };
-//   })();
-// })();

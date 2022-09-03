@@ -1,5 +1,5 @@
 {
-  "width": 10000,
+  "width": 7000,
   "bg": [
     {
       "id": "cloud",
@@ -65,7 +65,14 @@
       "id": "house",
       "s": "house",
       "x": 4050
-    }
+    },
+    { "id": "tb1", "s": "tombstone", "x": 25, "mod": ["A:D"] },
+    { "id": "tb2", "s": "tombstone", "x": 150, "mod": ["B:D", "A:B"] },
+    { "id": "tb3", "s": "tombstone", "x": 290, "mod": ["B:D"] },
+    { "id": "tb4", "s": "tombstone", "x": 425, "mod": ["B:D"] },
+    { "id": "tb5", "s": "tombstone", "x": 540, "mod": ["A:D"] },
+    { "id": "tb6", "s": "tombstone", "x": 800, "mod": ["B:D"] },
+    { "id": "tb7", "s": "tombstone", "x": 930, "mod": ["B:D", "A:B"] }
   ],
   "diag": [
     {
@@ -94,13 +101,13 @@
         "Hi, I’m Puddle, my friend over there is kind of trapped here he is in a pickle:puddle",
         "I’m looking for his colors so I can help him cross over to the Death World",
         "Did you see anything weird lately ?",
-        "Oh hi there, I’m Snail ! That’s seems quite a story you got here:snail",
+        "Oh hi there, I’m Snail ! That’s seems quite a story you got here:snail:0",
         "Well I’ve seen some colorful shards fall down the sky around the time your friend arrived that might be it",
         "Oh really?\n That must be it ! Did you see where they fell ?:puddle",
         "I think I saw one fall near the well. You should check it out.:snail",
-        "Thank you so much Snail, I will check it out !:puddle:0"
+        "Thank you so much Snail, I will check it out !:puddle:1"
       ],
-      "actions": ["give:tmp_snail"]
+      "actions": ["play", "give:tmp_snail"]
     },
     {
       "l": [
@@ -159,7 +166,7 @@
       "actions": ["give:color1"]
     },
     {
-      "l": ["Did you find our keys:mouse1"]
+      "l": ["Did you find our key?:mouse1"]
     },
     {
       "l": ["You look under the chicken and find an old key:chicken:0"],
@@ -200,16 +207,11 @@
       "actions": [
         {
           "type": "msg",
-          "cond": "tmp_start",
+          "condd": "tmp_start",
           "diag": 1
         }
       ]
     },
-    { "id": "tb1", "s": "tombstone", "x": 25, "mod": ["A:D"] },
-    { "id": "tb2", "s": "tombstone", "x": 150, "mod": ["B:D", "A:B"] },
-    { "id": "tb3", "s": "tombstone", "x": 290, "mod": ["B:D"] },
-    { "id": "tb4", "s": "tombstone", "x": 425, "mod": ["B:D"] },
-    { "id": "tb5", "s": "tombstone", "x": 540, "mod": ["A:D"] },
     {
       "id": "tb_deave",
       "s": "tombstone",
@@ -221,8 +223,6 @@
         }
       ]
     },
-    { "id": "tb6", "s": "tombstone", "x": 800, "mod": ["B:D"] },
-    { "id": "tb7", "s": "tombstone", "x": 930, "mod": ["B:D", "A:B"] },
     {
       "id": "deave",
       "s": "deave",
@@ -281,7 +281,7 @@
     {
       "id": "chicken",
       "s": "chicken",
-      "x": 3800,
+      "x": 6800,
       "actions": [
         {
           "type": "msg",

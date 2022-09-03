@@ -50,7 +50,7 @@ export function handleMovement() {
       delete gI.autoMove;
       stopPlayer(gI);
     }
-    gI.levEl.style.left = `${gI.levElPos}px`;
+    gI.levEl.style.transform = `translate3d(${gI.levElPos}px,0, 0)`;
   }
 }
 

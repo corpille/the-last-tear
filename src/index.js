@@ -39,7 +39,7 @@ function init() {
   gI.player.el.classList.add('player');
   gI.xOffset = 3;
   gI.autoMove = 500;
-  Audio.getIns().playBgMusic(gI);
+  // Audio.getIns().playBgMusic(gI);
   return gI;
 }
 
@@ -84,7 +84,7 @@ async function launchStartCinematic() {
 
 export async function startGame() {
   document.querySelector('#home-page').style.display = 'none';
-  await launchStartCinematic();
+  // await launchStartCinematic();
   const gI = await init();
   setInterval(() => {
     if (gI.jump !== 0) {

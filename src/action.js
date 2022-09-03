@@ -3,7 +3,8 @@ import { displayMessage } from './utils';
 import * as sprites from './sprites';
 import { renderSprite } from './sprite';
 import { launchEndCinematic } from './index';
-import { pTimeout } from './utils';
+import { pTimeout, defer } from './utils';
+import { playLetterGame } from './letterGame';
 
 async function handleEndAction(gI) {
   if (!gI.extraAction) return;
@@ -23,6 +24,11 @@ async function handleEndAction(gI) {
       break;
     case 'end':
       launchEndCinematic();
+      break;
+    case 'play':
+      const p = defer();
+      playLetterGame(gI, p);
+      await p.promise;
       break;
     case 'color':
       const o = gI.scene.deave;
