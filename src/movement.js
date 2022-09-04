@@ -17,7 +17,7 @@ export function handleMovement() {
       (gI.xOffset < 0 && gI.player.x + gI.xOffset > gI.autoMove) ||
       (gI.player.x + gI.xOffset > 0 &&
         gI.player.x + gI.xOffset <
-          gI.canEl.offsetWidth + gI.delta - gI.player.sprite[0].length * 10)
+          gI.canEl.offsetWidth + gI.delta - gI.player.sprite.indexOf('|') * 10)
     ) {
       gI.player.x += gI.xOffset;
 

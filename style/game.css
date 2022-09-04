@@ -59,22 +59,8 @@
   animation: linear 0.7s shrink;
 }
 
-button {
+#play {
   margin-top: 20px;
-  border: 2px solid white;
   color: white;
-  background: transparent;
-  color: block;
-  height: 60px;
-  font-size: 30px;
-  text-transform: uppercase;
-  padding: 0 20px;
-  border-radius: 5px;
-  transition: background 0.3s;
-}
-
-button:hover {
-  background: white;
-  color: #333;
-  cursor: pointer;
+  font-size: 20px;
 }

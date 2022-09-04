@@ -92,13 +92,17 @@ export function drawBackground(gI, backgroundElements, levelWidth) {
       return drawStructure(gI, object);
     }
     const scale = object.scale || DEFAULT_PIXEL_SIZE;
-    const sprites = [object.sprite, ...(object?.variants || [])].map(
-      (sprite) => ({
-        ...generateSprite(sprite, object.scale),
-        sprite,
-        width: sprite.split('|')[0].length * scale,
-      })
-    );
+    let sp = object.sprite;
+    if (object.mod) {
+      object.mod.forEach((mod) => {
+        sp = sp.split(mod[0]).join(mod[2]);
+      });
+    }
+    const sprites = [sp, ...(object?.variants || [])].map((sprite) => ({
+      ...generateSprite(sprite, object.scale),
+      sprite,
+      width: sprite.split('|')[0].length * scale,
+    }));
     const maxWidth = sprites.reduce((r, s) => (r > s.width ? r : s.width), 0);
     let lastx = object.x;
     const nbSprite = object.repeat ? Math.ceil(levelWidth / maxWidth) : 1;

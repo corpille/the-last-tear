@@ -15,17 +15,24 @@ const duration = 0.7;
 let endPromise;
 let i = 0;
 let timeout;
+let isPlaying = false;
 
 function keyListener(event) {
   const key = event.key;
-  if (key === word[i]) {
-    if (timeout) {
-      clearTimeout(timeout);
+  if (isPlaying === false) {
+    if (key === 'Enter') {
+      return countdown();
     }
-    const el = $(`.key-${i}`);
-    el?.classList.remove('active');
-    i++;
-    playWord();
+  } else {
+    if (key === word[i]) {
+      if (timeout) {
+        clearTimeout(timeout);
+      }
+      const el = $(`.key-${i}`);
+      el?.classList.remove('active');
+      i++;
+      playWord();
+    }
   }
 }
 
@@ -60,15 +67,16 @@ async function playSequence(words) {
       await p.promise;
     } catch (e) {
       isGood = false;
+      isPlaying = false;
     }
   }
   if (!isGood) {
     letters.innerText = 'You failed !';
-    go.innerText = 'Try again !';
+    go.innerText = 'Press enter to try again';
     go.style.display = 'block';
   } else {
     letters.innerText = 'Well done !';
-    go.innerText = 'Go back';
+    go.innerText = 'Press enter go back';
     go.style.display = 'block';
     go.removeEventListener('click', countdown);
     go.addEventListener('click', endgame);
@@ -83,9 +91,11 @@ function endgame() {
   document.removeEventListener('keydown', keyListener);
   go.removeEventListener('click', endgame);
   endPromise.resolve();
+  isPlaying = false;
 }
 
 async function countdown() {
+  isPlaying = true;
   go.style.display = 'none';
   letters.innerHTML = '3';
   await pTimeout(1000);
@@ -93,14 +103,13 @@ async function countdown() {
   await pTimeout(1000);
   letters.innerHTML = '1';
   await pTimeout(1000);
-  document.addEventListener('keydown', keyListener);
   playSequence(phrase.toLowerCase().split(' '));
 }
 
 export function playLetterGame(gI, p) {
   endPromise = p;
   unBindCommands();
+  document.addEventListener('keydown', keyListener);
   game.style.display = 'flex';
   gI.levEl.classList.add('bg');
-  go.addEventListener('click', countdown);
 }

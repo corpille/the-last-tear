@@ -49,7 +49,8 @@ export function renderScene() {
     if (
       !object.hidden &&
       (object.el.style.left !== `${object.x}px` ||
-        object.el.style.bottom !== `${object.y}px`)
+        object.el.style.bottom !== `${object.y}px` ||
+        object.id === 'actionButton')
     ) {
       object.el.style.opacity = '1';
       object.el.style.left = `${object.x}px`;
@@ -65,7 +66,6 @@ export function renderScene() {
     gI.actionButton.hidden = false;
     gI.actionButton.x = object.x - gI.actionButton.width;
     gI.actionButton.y = object.y + object.height;
-    gI.currAvailAct = object.id;
   } else {
     gI.actionButton.hidden = true;
   }
