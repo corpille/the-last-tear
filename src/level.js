@@ -2,7 +2,8 @@ import Game from './game';
 import { DEFAULT_PIXEL_SIZE } from './config';
 import { generateSprite } from './sprite';
 import level from './level.json';
-import * as sprites from './sprites';
+import sprites from './sprites.json';
+import { rand } from './utils';
 
 export function createObject(o, gI) {
   const scale = o.scale || DEFAULT_PIXEL_SIZE;
@@ -102,18 +103,17 @@ export function drawBackground(gI, backgroundElements, levelWidth) {
     let lastx = object.x;
     const nbSprite = object.repeat ? Math.ceil(levelWidth / maxWidth) : 1;
     for (let i = 0; i < nbSprite; i++) {
-      const sI = Math.floor(Math.random() * sprites.length);
+      const sI = rand(0, sprites.length);
       const sprite = sprites[sI];
       const o = Object.assign({}, object, {
         x: lastx,
-        y: object.spread ? Math.round(Math.random() * 250) + 250 : object.y,
+        y: object.spread ? rand(250, 500) : object.y,
         height: sprite.length * scale,
         width: sprite.width,
         id: `${object.id}${nbSprite > 1 ? '-' + i : ''}`,
       });
       renderObject(gI, object.id, o, sprite);
-      lastx +=
-        o.width + (object.spread ? Math.round(Math.random() * 200) + 100 : 0);
+      lastx += o.width + (object.spread ? rand(100, 300) : 0);
     }
   });
 }

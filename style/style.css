@@ -51,7 +51,7 @@ body {
   color: var(--primary);
 }
 
-.fullscreen {
+.fs {
   position: absolute;
   top: 0;
   left: 0;
@@ -69,7 +69,7 @@ body {
   transition: opacity 2s;
   opacity: 0;
 }
-.fullscreen-txt {
+.fs-txt {
   width: 100%;
   text-align: left;
 }

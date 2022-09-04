@@ -2,9 +2,9 @@ import { unBindCommands, bindCommands } from './input';
 import { pTimeout, defer } from './utils';
 import Game from './game';
 
-const letters = document.getElementById('letters');
-const game = document.getElementById('game');
-const go = document.getElementById('play');
+const letters = $('#letters');
+const game = $('#game');
+const go = $('#play');
 
 const phrase =
   'My dear Suzy I know we had our differences but I love you please forgive me';
@@ -22,7 +22,7 @@ function keyListener(event) {
     if (timeout) {
       clearTimeout(timeout);
     }
-    const el = document.querySelector(`.key-${i}`);
+    const el = $(`.key-${i}`);
     el?.classList.remove('active');
     i++;
     playWord();
@@ -40,7 +40,7 @@ function playWord() {
   if (word.length === i) {
     return p.resolve();
   }
-  const el = document.querySelector(`.key-${i}`);
+  const el = $(`.key-${i}`);
   el?.classList.add('active');
   timeout = setTimeout(() => {
     p.reject();

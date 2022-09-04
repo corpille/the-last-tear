@@ -2,6 +2,8 @@ import Audio from './audio';
 
 export const pTimeout = (ms) => new Promise((res) => setTimeout(res, ms));
 
+export const rand = (min, max) => Math.floor(Math.random() * (max - min)) + min;
+
 export function defer() {
   const p = {};
   let promise = new Promise(function (resolve, reject) {
@@ -14,6 +16,7 @@ export function defer() {
 export function displayMessage(gI, el, msg, p) {
   if (!p) {
     p = defer();
+    Audio.getIns().playTypingSound(gI);
   }
   if (msg.length) {
     const c = msg.shift();

@@ -30,7 +30,7 @@ function keyDown(event) {
     }
   }
   if (key === 'e') {
-    if (gI.currentAvailableAction && !gI.currentLines) {
+    if (gI.currAvailAct && !gI.currentLines) {
       gI.xOffset = 0;
       toggleAction();
     } else if (gI.currentLines && !gI.isInAction) {

@@ -78,20 +78,20 @@
     {
       "l": [
         "Here rest Deave, he will be missed:tb_deave",
-        "I… I miss you friend… I truly miss you…:puddle",
+        "I... I miss you friend... I truly miss you...:puddle",
         "Things have not been the same since you’ve been gone, not as fun as it was",
-        "I really wish I could have spent more time with you…::0",
+        "I really wish I could have spent more time with you...::0",
         "Oh crap ! This guy wasn’t joking with the whole “getting you out of here”:deave",
         "Puddle ? Is this you ? What are you doing here ?",
-        "Dea … Dea … Deave ? Is this you ? I must be dreaming, is this really you ?:puddle",
-        "Yeah it’s me buddy ! I don’t really know I got here though …:deave",
+        "Dea ... Dea ... Deave ? Is this you ? I must be dreaming, is this really you ?:puddle",
+        "Yeah it’s me buddy ! I don’t really know I got here though ...:deave",
         "I’ve met some weird dude in the Death World and my head must be unpleasant so much so that he kick me right up to the world of the living",
         "*looks at himself *\nOooh ! I see why you didn’t recognise me, weird, must be a side effect of what he did to me",
         "Are you ok bud ?",
-        "I don’t know, my dead best friend just came out of nowhere, grayed out and …:puddle",
+        "I don’t know, my dead best friend just came out of nowhere, grayed out and ...:puddle",
         "I’ve missed you Deave",
         "I’ve missed you Puddle. *hugs Puddle* But you have to move on you can’t hold to dead people for ever:deave",
-        "I guess … all the time with you is always extra anyway:puddle",
+        "I guess ... all the time with you is always extra anyway:puddle",
         "Thanks a lot dude, I guess you could start asking that snail over there he might have seen them.:deave:1"
       ],
       "actions": ["show:deave", "give:tmp_start"]
@@ -141,10 +141,10 @@
         "Please, I really need those, it’s really important to me.:puddle",
         "Alright, listen dude I have one of them...:mouse1",
         "Ha! See I told you he was the stealing type !:mouse2",
-        "… but I’m not going to give them to you unless I get the keys to the shop that my brother refuses to give to me.:mouse1",
+        "... but I’m not going to give them to you unless I get the keys to the shop that my brother refuses to give to me.:mouse1",
         "It’s not that I don’t want to, it's that I don’t have them you do !:mouse2",
         "Well you see the issue here, good luck on convincing this butthead:mouse1",
-        "But I don't know where your keys are…:puddle"
+        "But I don't know where your keys are...:puddle"
       ]
     },
     {
@@ -153,8 +153,8 @@
         "There we go, I told you I didn’t have them !:mouse2",
         "You always think I’m a liar anyway whatever I do",
         "Well for once it was not you !:mouse1",
-        "You know you guys should not be fighting like this…:puddle",
-        "I just lost my best friend… and… let’s just say it was really hard",
+        "You know you guys should not be fighting like this...:puddle",
+        "I just lost my best friend... and... let’s just say it was really hard",
         "I regret not cherishing the moment with him more",
         "Don’t be like me, don’t regret not being close to one another, because when Death’s come, apologies won’t be enough",
         "I’m sorry about your friend and I guess you’re right, I was too hard on you Mouse 2:mouse1",

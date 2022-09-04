@@ -1,6 +1,6 @@
 import Game from './game';
 import { displayMessage } from './utils';
-import * as sprites from './sprites';
+import sprites from './sprites.json';
 import { renderSprite } from './sprite';
 import { launchEndCinematic } from './index';
 import { pTimeout, defer } from './utils';
@@ -47,7 +47,7 @@ async function handleEndAction(gI) {
 
 export async function displayNextActionMessage() {
   const gI = Game.getIns();
-  document.querySelector('#bubble')?.remove();
+  $('#bubble')?.remove();
   clearTimeout(gI.textTimeout);
   if (gI.extraAction) {
     await handleEndAction(gI);
@@ -93,9 +93,9 @@ function cond(gI, action) {
     diag = gI.diag[action[item]];
     delete action[item];
     if (!Object.keys(action).filter((c) => c.startsWith('c_')).length) {
-      gI.scene[gI.currentAvailableAction].actions.shift();
+      gI.scene[gI.currAvailAct].actions.shift();
     }
-    gI.currentAvailableAction = undefined;
+    gI.currAvailAct = undefined;
   } else {
     diag = gI.diag[action.bad];
   }
@@ -106,7 +106,7 @@ function cond(gI, action) {
 
 export function toggleAction() {
   const gI = Game.getIns();
-  const o = gI.scene[gI.currentAvailableAction];
+  const o = gI.scene[gI.currAvailAct];
   if (o.currAction >= o.actions.length - 1) {
     gI.actionButton.hidden = true;
   }
@@ -121,7 +121,7 @@ export function toggleAction() {
       const diag = gI.diag[action.diag];
       gI.currentLines = [...diag.l];
       gI.currentDiag = diag;
-      gI.currentAvailableAction = undefined;
+      gI.currAvailAct = undefined;
       return displayNextActionMessage();
   }
 }

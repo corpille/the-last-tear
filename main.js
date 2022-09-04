@@ -1,11 +1,9 @@
 import './style/style.css';
 import { startGame, Player } from './src';
-import { deave } from './src/sprites';
+import sprites from './src/sprites.json';
 import { renderSprite } from './src/sprite';
 
-window.audio = new AudioContext();
-
-const startBtn = document.querySelector('#start-btn');
+const startBtn = $('#start-btn');
 const home = document.querySelector('#home-page');
 
 const el = document.createElement('div');
@@ -16,7 +14,7 @@ home.append(el);
 
 const Deave = {
   id: 'deave',
-  ...deave,
+  ...sprites.deave,
 };
 const el2 = document.createElement('div');
 el2.id = Deave.id;
@@ -25,4 +23,3 @@ home.append(el2);
 renderSprite(Deave, Deave.sprite);
 
 startBtn.addEventListener('click', startGame);
-startGame();

@@ -40,9 +40,9 @@ export function renderScene() {
           object.x + object.width + HITBOX_RADIUS &&
         canMakeAction(gI, object)
       ) {
-        gI.currentAvailableAction = object.id;
-      } else if (gI.currentAvailableAction === object.id) {
-        gI.currentAvailableAction = undefined;
+        gI.currAvailAct = object.id;
+      } else if (gI.currAvailAct === object.id) {
+        gI.currAvailAct = undefined;
       }
     }
 
@@ -60,12 +60,12 @@ export function renderScene() {
   });
 
   // Display action button
-  if (gI.currentAvailableAction) {
-    const object = gI.scene[gI.currentAvailableAction];
+  if (gI.currAvailAct) {
+    const object = gI.scene[gI.currAvailAct];
     gI.actionButton.hidden = false;
     gI.actionButton.x = object.x - gI.actionButton.width;
     gI.actionButton.y = object.y + object.height;
-    gI.currentAvailableAction = object.id;
+    gI.currAvailAct = object.id;
   } else {
     gI.actionButton.hidden = true;
   }
