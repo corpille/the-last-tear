@@ -20,6 +20,8 @@ const el2 = document.createElement('div');
 el2.id = Deave.id;
 Deave.el = el2;
 home.append(el2);
+
 renderSprite(Deave, Deave.sprite);
 
 startBtn.addEventListener('click', startGame);
+startGame();

@@ -43,8 +43,7 @@ function renderObject(gI, id, o, sprite) {
     sprite.s
   };background-color:${sprite.bg};left:${o.x}px;bottom:${o.y}px;box-shadow:${
     sprite.bs
-  };
-      `;
+  };`;
   if (o.flipped) {
     o.el.classList.add('flipped');
   }
@@ -122,11 +121,43 @@ export function drawBackground(gI, backgroundElements, levelWidth) {
   });
 }
 
+function initColliders(gI) {
+  gI.colliders = [
+    {
+      x: -10,
+      y: gI.canH,
+      h: 0,
+      w: gI.levW + 10,
+    },
+    {
+      x: -10,
+      y: 0,
+      h: gI.canH,
+      w: 10,
+    },
+    {
+      x: gI.levW,
+      y: 0,
+      h: gI.canH,
+      w: 10,
+    },
+    ...Object.values(gI.scene)
+      .filter((o) => o.solid)
+      .map(({ x, y, height: h, width: w }) => ({
+        x,
+        y: y + gI.canH - h,
+        h,
+        w,
+      })),
+  ];
+}
+
 export function loadLevel() {
   const gI = Game.getIns();
   gI.levEl.innerHTML = '';
   gI.levEl.style.width = `${level.width}px`;
-  gI.delta = gI.levEl.offsetWidth - gI.canEl.offsetWidth;
+  gI.levW = level.width;
+  gI.delta = gI.levW - gI.canW;
   gI.diag = level.diag;
   drawBackground(
     gI,
@@ -147,4 +178,5 @@ export function loadLevel() {
       gI
     )
   );
+  initColliders(gI);
 }

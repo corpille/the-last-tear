@@ -279,6 +279,18 @@
       "flipped": true
     },
     {
+      "id": "egg",
+      "s": "egg",
+      "x": 1200,
+      "solid": true
+    },
+    {
+      "id": "egg2",
+      "s": "egg",
+      "x": 1400,
+      "solid": true
+    },
+    {
       "id": "chicken",
       "s": "chicken",
       "x": 6800,

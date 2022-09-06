@@ -1,8 +1,7 @@
 import { renderScene, renderInventory } from './render';
-import { handleMovement, jump } from './movement';
+import { updatePlayer } from './move';
 import { bindCommands } from './input';
 import { loadLevel, createObject } from './level';
-import { TICK_PER_CYCLE } from './config';
 import Game from './game';
 import sprites from './sprites.json';
 import Audio from './audio';
@@ -16,8 +15,10 @@ const endText =
 
 export const Player = {
   id: 'puddle',
-  y: 0,
   ...sprites.puddle,
+  y: 0,
+  vx: 0,
+  vy: 0,
   movS: [sprites.puddle.sprite, ...sprites.puddle.movS, sprites.puddle.sprite],
 };
 
@@ -34,12 +35,12 @@ function init() {
   bindCommands();
   loadLevel();
   gI.actionButton = createObject(ActionButton, gI);
-  Player.x = -gI.levElPos - 10;
+  Player.x = -gI.levElPos;
   gI.player = createObject(Player, gI);
   gI.player.el.classList.add('player');
-  gI.xOffset = 3;
-  gI.autoMove = 500;
-  Audio.getIns().playBgMusic(gI);
+  // gI.xOffset = 200;
+  // gI.autoMove = 500;
+  // Audio.getIns().playBgMusic(gI);
   return gI;
 }
 
@@ -52,7 +53,7 @@ export async function launchEndCinematic() {
   gI.scene['deave'].hidden = true;
   await pTimeout(2000);
   gI.player.el.classList.add('flipped');
-  gI.xOffset = -3;
+  gI.xOffset = -200;
   gI.autoMove = -120;
   const el = $('.fs');
   el.style.cssText = 'visibility: visible; z-index: 3';
@@ -78,21 +79,28 @@ async function launchStartCinematic() {
       }
     });
     await displayMessage(gI, startTxt, startText.split(''));
-    c.style.visibility = 'visible';
+    c.style.display = 'visible';
   });
+}
+var lastFrame = performance.now();
+
+function gameLoop(timestamp) {
+  window.requestAnimationFrame(gameLoop);
+  if (timestamp < lastFrame + 1000 / 60) {
+    return;
+  }
+
+  var dt = (timestamp - lastFrame) / 1000;
+  lastFrame = timestamp;
+  const gI = Game.getIns();
+  updatePlayer(gI, dt);
+  renderScene();
+  renderInventory();
 }
 
 export async function startGame() {
   $('#home-page').style.display = 'none';
-  await launchStartCinematic();
+  // await launchStartCinematic();
   const gI = await init();
-  setInterval(() => {
-    if (gI.jump !== 0) {
-      jump();
-    }
-    handleMovement();
-    renderScene();
-    renderInventory();
-    gI.tick = gI.tick === TICK_PER_CYCLE ? 0 : gI.tick + 1;
-  }, 1000 / 60);
+  window.requestAnimationFrame(gameLoop);
 }

@@ -1,12 +1,12 @@
 import Game from './game';
 import { displayNextActionMessage, toggleAction } from './action';
-import { STEP } from './config';
+import { MOVE_SPEED } from './config';
 
 function keyUp(event) {
   const gI = Game.getIns();
   const key = event.key;
+  gI.keys[key] = false;
   if (!gI.autoMove && (key === 'ArrowLeft' || key === 'ArrowRight')) {
-    gI.xOffset = 0;
     gI.player.el.classList.remove(`key-${gI.player.currKF}`);
     gI.player.currKF = 0;
   }
@@ -19,14 +19,11 @@ function keyDown(event) {
     return;
   }
   if (!gI.currentLines) {
+    gI.keys[key] = true;
     if (key === 'ArrowLeft') {
       gI.player.el.classList.add('flipped');
-      gI.xOffset = -STEP;
     } else if (key === 'ArrowRight') {
       gI.player.el.classList.remove('flipped');
-      gI.xOffset = STEP;
-    } else if (key === ' ' && gI.jump === 0) {
-      gI.jump = 1;
     }
   }
   if (key === 'e') {

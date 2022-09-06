@@ -1,5 +1,5 @@
 import Game from './game';
-import { HITBOX_RADIUS } from './config';
+import { HITBOX_RADIUS, STEP } from './config';
 import { generateSprite } from './sprite';
 
 function canMakeAction(gI, object) {
@@ -46,15 +46,16 @@ export function renderScene() {
       }
     }
 
+    const y = (object.id === 'puddle' ? -1 : 1) * object.y;
     if (
       !object.hidden &&
       (object.el.style.left !== `${object.x}px` ||
-        object.el.style.bottom !== `${object.y}px` ||
+        object.el.style.bottom !== `${y}px` ||
         object.id === 'actionButton')
     ) {
       object.el.style.opacity = '1';
       object.el.style.left = `${object.x}px`;
-      object.el.style.bottom = `${object.y}px`;
+      object.el.style.bottom = `${y}px`;
     } else if (object.hidden && object.el.style.opacity !== '0') {
       object.el.style.opacity = '0';
     }
@@ -69,6 +70,15 @@ export function renderScene() {
   } else {
     gI.actionButton.hidden = true;
   }
+
+  gI.levElPos = gI.player.x - gI.canW / 2 + gI.player.width / 2;
+  if (gI.levElPos < 0) {
+    gI.levElPos = 0;
+  }
+  if (gI.levElPos > gI.levW - gI.canW) {
+    gI.levElPos = gI.levW - gI.canW;
+  }
+  gI.levEl.style.transform = `translate3d(${-gI.levElPos}px,0, 0)`;
 }
 
 export function renderInventory() {

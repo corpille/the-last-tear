@@ -17,6 +17,9 @@
       "----------|----------|----CC----|---CEFC---|---CEAC---|--CAEAAC--|--CAFEAC--|---CFAC---|---CAFC---|CCCCEFC---"
     ]
   },
+  "egg": {
+    "sprite": "--CC--|-CHHC-|CGHHHC|CG9HHC|CGHHHC|CGH9HC|CGGHHC|-CGGC-"
+  },
   "chicken": {
     "sprite": "--------CC---|-------C33C--|------C3333C-|------C3HH3C-|------CHCHHC-|CC----CHHH11C|CGC---CHH33C-|CGHCCCHHGHHC-|CGHHHHGGFHHHC|CGGGHFFFHHHHC|-CGGGGGGGGHC-|--CCCCCCCCC--"
   },

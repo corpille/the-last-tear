@@ -60,7 +60,7 @@ export async function displayNextActionMessage() {
     const o = gI.scene[gI.currentAuthor];
     const bEl = document.createElement('div');
     bEl.id = 'bubble';
-    let posX = gI.levElPos + o.x + o.width / 2 + (o.bubbleShift ?? 0);
+    let posX = -gI.levElPos + o.x + o.width / 2 + (o.bubbleShift ?? 0);
     if (posX + 300 > window.innerWidth) {
       bEl.classList.add('reverse');
       posX -= 300;
