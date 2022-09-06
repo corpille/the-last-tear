@@ -30,13 +30,13 @@
     {
       "id": "r1",
       "s": "rocks",
-      "x": 2030,
+      "x": 4390,
       "flipped": true
     },
     {
       "id": "r2",
       "s": "rocks",
-      "x": 1500
+      "x": 3860
     },
     {
       "id": "r3",
@@ -64,7 +64,7 @@
     {
       "id": "house",
       "s": "house",
-      "x": 4050
+      "x": 1700
     },
     { "id": "tb1", "s": "tombstone", "x": 25, "mod": ["A:D"] },
     { "id": "tb2", "s": "tombstone", "x": 150, "mod": ["B:D", "A:B"] },
@@ -98,24 +98,23 @@
     },
     {
       "l": [
-        "Hi, I’m Puddle, my friend over there is kind of trapped here he is in a pickle:puddle",
+        "Hi, I’m Puddle, my friend over there is kind of trapped here:puddle",
         "I’m looking for his colors so I can help him cross over to the Death World",
         "Did you see anything weird lately ?",
-        "Oh hi there, I’m Snail ! That’s seems quite a story you got here:snail:0",
+        "Oh hi there, I’m Snail ! That’s seems quite a story you got here:snail",
         "Well I’ve seen some colorful shards fall down the sky around the time your friend arrived that might be it",
         "Oh really?\n That must be it ! Did you see where they fell ?:puddle",
-        "I think I saw one fall near the well. You should check it out.:snail",
-        "Thank you so much Snail, I will check it out !:puddle:1"
+        "Yes near the well over there. You should check it out.:snail",
+        "Thank you so much Snail, I will check it out !:puddle:0"
       ],
-      "actions": ["play", "give:tmp_snail"]
+      "actions": ["give:tmp_snail"]
     },
     {
       "l": [
         "You look around the well and see a small crater, probably where the colors fell.:well",
-        "Besides the hole, two set of footstep can be seen",
-        "One has some cheese crumbs scattered on them",
-        "One is covered with bloody feathers"
-      ]
+        "Besides the hole, a set of what looks like mouse footstep can be seen::0"
+      ],
+      "actions": ["give:tmp_well"]
     },
     {
       "l": [
@@ -169,7 +168,7 @@
       "l": ["Did you find our key?:mouse1"]
     },
     {
-      "l": ["You look under the chicken and find an old key:chicken:0"],
+      "l": ["Hi here is the key for debug purpose:0"],
       "actions": ["give:key"]
     },
     {
@@ -178,11 +177,21 @@
       ]
     },
     {
-      "l": ["Oh man! I'm in big trouble! Oh man!:fox"]
+      "l": ["Oh man! I'm in trouble! Oh man!:fox"]
     },
     {
-      "l": ["Here is the last color:fox:0"],
-      "actions": ["give:color2"]
+      "l": [
+        "Please can you help me ?:fox",
+        "Yes but I'm in a hurry I'm looking for some colors for my friend so he can go back to the Death World ?:puddle",
+        "Oh I found one earlier if you help me write a small poem for my dear Suzy I'll give it to you!:fox",
+        "Ok, what should I write about?:puddle",
+        "Well I made a big mistake and I want to apologize do you think you can find something in these line?:fox",
+        "Let me try!:puddle:0",
+        "Is this ok?:puddle",
+        "That's perfect! Thank you so much, I hope she can forgive me! Here's your color:fox:1",
+        "Tnanks! Bye!:puddle"
+      ],
+      "actions": ["play", "give:color2"]
     },
     {
       "l": [
@@ -203,7 +212,7 @@
     {
       "id": "snail",
       "s": "snail",
-      "x": 1640,
+      "x": 4000,
       "actions": [
         {
           "type": "msg",
@@ -257,11 +266,11 @@
     {
       "id": "mouse1",
       "s": "mouse",
-      "x": 4200,
+      "x": 1850,
       "actions": [
         {
           "type": "cond",
-          "c_tmp_snail": 5,
+          "c_tmp_well": 5,
           "bad": 9
         },
         {
@@ -274,26 +283,26 @@
     {
       "id": "mouse2",
       "s": "mouse",
-      "x": 4400,
+      "x": 2100,
       "mod": ["0:3"],
       "flipped": true
     },
     {
       "id": "egg",
       "s": "egg",
-      "x": 1200,
+      "x": 5400,
       "solid": true
     },
     {
       "id": "egg2",
       "s": "egg",
-      "x": 1400,
+      "x": 5800,
       "solid": true
     },
     {
-      "id": "chicken",
-      "s": "chicken",
-      "x": 6800,
+      "id": "lama",
+      "s": "lama",
+      "x": 5000,
       "actions": [
         {
           "type": "msg",
@@ -303,14 +312,9 @@
       ]
     },
     {
-      "id": "lama",
-      "s": "lama",
-      "x": 6000
-    },
-    {
       "id": "fox",
       "s": "fox",
-      "x": 5800,
+      "x": 2650,
       "actions": [
         {
           "type": "cond",

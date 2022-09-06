@@ -79,9 +79,6 @@ function raycast(ray) {
   var col = Game.getIns()
     .colliders.map((aabb) => {
       const inter = intersect(ray, aabb);
-      if (ray.direction == RIGHT && aabb.x === 1200) {
-        // console.log(ray.origin, ray.origin.y, aabb.y, aabb.y - aabb.h, inter);
-      }
       return {
         collider: aabb,
         i: inter,

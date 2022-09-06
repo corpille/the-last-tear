@@ -1,6 +1,5 @@
 import Game from './game';
 import { displayNextActionMessage, toggleAction } from './action';
-import { MOVE_SPEED } from './config';
 
 function keyUp(event) {
   const gI = Game.getIns();
@@ -28,7 +27,6 @@ function keyDown(event) {
   }
   if (key === 'e') {
     if (gI.currAvailAct && !gI.currentLines) {
-      gI.xOffset = 0;
       toggleAction();
     } else if (gI.currentLines && !gI.isInAction) {
       clearTimeout(0);

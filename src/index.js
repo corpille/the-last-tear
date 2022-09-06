@@ -13,6 +13,7 @@ const startText =
 const endText =
   "After their last encounter Puddle never went to his friend grave.\nHe followed his friend's advice and try to lived his life to the fullest.\nEven though he made some new friend along the way, he never forgot Deave, the friend that reminded him who he was.\n\nThe End";
 
+var lastFrame;
 export const Player = {
   id: 'puddle',
   ...sprites.puddle,
@@ -29,19 +30,21 @@ const ActionButton = {
   ...sprites.actionButton,
 };
 
-function init() {
+async function init() {
+  await launchStartCinematic();
   $('#canvas').style.display = 'flex';
   const gI = Game.getIns();
+  gI.canW = gI.canEl.offsetWidth;
+  gI.canH = gI.canEl.offsetHeight;
   bindCommands();
   loadLevel();
   gI.actionButton = createObject(ActionButton, gI);
-  Player.x = -gI.levElPos;
   gI.player = createObject(Player, gI);
+  gI.player.x = -gI.player.width;
   gI.player.el.classList.add('player');
-  // gI.xOffset = 200;
-  // gI.autoMove = 500;
-  // Audio.getIns().playBgMusic(gI);
-  return gI;
+  gI.xOffset = 100;
+  gI.autoMove = 500;
+  Audio.getIns().playBgMusic(gI);
 }
 
 export async function launchEndCinematic() {
@@ -53,7 +56,7 @@ export async function launchEndCinematic() {
   gI.scene['deave'].hidden = true;
   await pTimeout(2000);
   gI.player.el.classList.add('flipped');
-  gI.xOffset = -200;
+  gI.xOffset = -100;
   gI.autoMove = -120;
   const el = $('.fs');
   el.style.cssText = 'visibility: visible; z-index: 3';
@@ -82,14 +85,13 @@ async function launchStartCinematic() {
     c.style.display = 'visible';
   });
 }
-var lastFrame = performance.now();
 
 function gameLoop(timestamp) {
   window.requestAnimationFrame(gameLoop);
+
   if (timestamp < lastFrame + 1000 / 60) {
     return;
   }
-
   var dt = (timestamp - lastFrame) / 1000;
   lastFrame = timestamp;
   const gI = Game.getIns();
@@ -100,7 +102,7 @@ function gameLoop(timestamp) {
 
 export async function startGame() {
   $('#home-page').style.display = 'none';
-  // await launchStartCinematic();
-  const gI = await init();
+  await init();
+  lastFrame = performance.now();
   window.requestAnimationFrame(gameLoop);
 }

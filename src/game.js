@@ -6,9 +6,6 @@ export default class Game {
   invEl = $('#inventory');
   canEl = $('#canvas');
   levEl = $('#level');
-  levW = this.levEl.offsetWidth;
-  canW = this.canEl.offsetWidth;
-  canH = this.canEl.offsetHeight;
   levElPos = 0;
   xOffset = 0;
   keys = {};
