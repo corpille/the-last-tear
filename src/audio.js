@@ -32,28 +32,28 @@ export default class Audio {
   i = 0;
 
   playTypingSound(gI) {
-    this.playNote(gI, gI.audioCtx.currentTime, notes.D5, 0.1, 0.1);
+    this.playNote(gI, gI.aCtx.currentTime, notes.D5, 0.1, 0.1);
   }
 
   playNote(gI, time, frequency, duration, volume = MAIN_VOLUME) {
-    const osc = new OscillatorNode(gI.audioCtx, {
+    const osc = new OscillatorNode(gI.aCtx, {
       frequency,
       type: 'sine',
     });
-    let filter1 = new BiquadFilterNode(gI.audioCtx, {
+    let filter1 = new BiquadFilterNode(gI.aCtx, {
       type: 'highpass',
       frequency: 190,
     });
-    let filter2 = new BiquadFilterNode(gI.audioCtx, {
+    let filter2 = new BiquadFilterNode(gI.aCtx, {
       type: 'notch',
       frequency: 1223,
     });
-    let filter3 = new BiquadFilterNode(gI.audioCtx, {
+    let filter3 = new BiquadFilterNode(gI.aCtx, {
       type: 'lowshelf',
       frequency: 1870,
       gain: -10.5,
     });
-    const g = gI.audioCtx.createGain();
+    const g = gI.aCtx.createGain();
     g.gain.cancelScheduledValues(time);
     g.gain.setValueAtTime(0, time);
     g.gain.linearRampToValueAtTime(volume, time + 0.008);
@@ -62,7 +62,7 @@ export default class Audio {
     g.connect(filter1);
     filter1.connect(filter2);
     filter2.connect(filter3);
-    filter3.connect(gI.audioCtx.destination);
+    filter3.connect(gI.aCtx.destination);
     osc.start(time);
     osc.stop(time + duration);
     return osc;
@@ -76,7 +76,7 @@ export default class Audio {
       const [n, duration, delay = 0] = note.split(':');
       this.playNote(
         gI,
-        gI.audioCtx.currentTime + (delay * 60) / BPM,
+        gI.aCtx.currentTime + (delay * 60) / BPM,
         notes[n],
         (duration * 60) / BPM
       );

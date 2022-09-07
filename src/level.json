@@ -94,7 +94,7 @@
         "I guess ... all the time with you is always extra anyway:puddle",
         "Thanks a lot dude, I guess you could start asking that snail over there he might have seen them.:deave:1"
       ],
-      "actions": ["show:deave", "give:tmp_start"]
+      "actions": ["show:deave", "give:t_start"]
     },
     {
       "l": [
@@ -107,14 +107,14 @@
         "Yes near the well over there. You should check it out.:snail",
         "Thank you so much Snail, I will check it out !:puddle:0"
       ],
-      "actions": ["give:tmp_snail"]
+      "actions": ["give:t_snail"]
     },
     {
       "l": [
         "You look around the well and see a small crater, probably where the colors fell.:well",
         "Besides the hole, a set of what looks like mouse footstep can be seen::0"
       ],
-      "actions": ["give:tmp_well"]
+      "actions": ["give:t_well"]
     },
     {
       "l": [
@@ -231,7 +231,7 @@
       "actions": [
         {
           "type": "msg",
-          "condd": "tmp_start",
+          "condd": "t_start",
           "diag": 1
         }
       ]
@@ -274,7 +274,7 @@
         {
           "type": "msg",
           "diag": 2,
-          "cond": "tmp_snail"
+          "cond": "t_snail"
         }
       ]
     },
@@ -285,7 +285,7 @@
       "actions": [
         {
           "type": "cond",
-          "c_tmp_well": 5,
+          "c_t_well": 5,
           "bad": 9
         },
         {
@@ -322,7 +322,7 @@
       "actions": [
         {
           "type": "cond",
-          "c_tmp_snail": 14,
+          "c_t_snail": 14,
           "bad": 8
         }
       ]
@@ -334,7 +334,7 @@
       "actions": [
         {
           "type": "cond",
-          "c_tmp_snail": 11,
+          "c_t_snail": 11,
           "bad": 10
         }
       ]

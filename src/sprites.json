@@ -18,7 +18,7 @@
     ]
   },
   "egg": {
-    "sprite": "--CC--|-CHHC-|CGHHHC|CG9HHC|CGHHHC|CGH9HC|CGGHHC|-CGGC-"
+    "sprite": "--CC--|-CHHC-|CG9HHC|CGHHHC|CGH9HC|CGGHHC|-CGGC-"
   },
   "cloud": {
     "sprite": "-------BBBB-----|------BGGHHB----|---BBBFHHHHHB---|--BHGGBFHHHHB---|-BHHHHGBHHHFBB--|-BHHHHHHHHGBHFB-|BGHHHHHHHHHHHHFB|BFGGGHHHHHHHHGGB|-BFFGGGGGGGGGGB-|--BBBBBBBBBBBB--"
@@ -54,7 +54,7 @@
     "movAn": {
       "nbKeyframes": 4,
       "currKF": 0,
-      "tickPerFrame": 5
+      "tPF": 5
     },
     "bubbleShift": 10,
     "sprite": "----CCCC--|---CGHHHC-|---CGHHHC-|---CCH211C|---CGH211C|---CGHHHC-|---CGHHHC-|--CFGHHHC-|--CFHGFHC-|CCEFFFHHC-|CEEFHHHHC-|-CCFHHHC--|--CCCCC---|--C---C---",

@@ -30,7 +30,7 @@ const ActionButton = {
 };
 
 async function init() {
-  // await launchStartCinematic();
+  await launchStartCinematic();
   $('#canvas').style.display = 'flex';
   const gI = Game.getIns();
   gI.canW = gI.canEl.offsetWidth;
@@ -38,25 +38,25 @@ async function init() {
   bindCommands();
   loadLevel();
   gI.actionButton = createObject(ActionButton, gI);
-  gI.player = createObject(Player, gI);
-  gI.player.x = -gI.player.width;
-  gI.player.el.classList.add('player');
+  gI.p = createObject(Player, gI);
+  gI.p.x = 0;
+  gI.p.el.classList.add('p');
   gI.xOffset = 100;
-  gI.autoMove = 500;
-  // Audio.getIns().playBgMusic(gI);
+  gI.autoX = 500;
+  Audio.getIns().playBgMusic(gI);
 }
 
 export async function launchEndCinematic() {
   const gI = Game.getIns();
   const startTxt = $('.fs-txt');
   startTxt.innerHTML = '';
-  const deave = gI.scene['deave'];
+  const deave = gI.scene.deave;
   deave.el.style.transition = 'opacity 2s';
-  gI.scene.deave.hidden = true;
+  deave.hidden = true;
   await pTimeout(2000);
-  gI.player.el.classList.add('flipped');
+  gI.p.el.classList.add('flipped');
   gI.xOffset = -100;
-  gI.autoMove = -120;
+  gI.autoX = -120;
   const el = $('.fs');
   el.style.cssText = 'visibility: visible; z-index: 3';
   await pTimeout(3000);
@@ -81,7 +81,7 @@ async function launchStartCinematic() {
       }
     });
     await displayMessage(gI, startTxt, startText.split(''));
-    c.style.display = 'visible';
+    c.style.visibility = 'visible';
   });
 }
 
@@ -93,14 +93,13 @@ function gameLoop(timestamp) {
   }
   var dt = (timestamp - lastFrame) / 1000;
   lastFrame = timestamp;
-  const gI = Game.getIns();
-  updatePlayer(gI, dt);
+  updatePlayer(dt);
   renderScene();
   renderInventory();
 }
 
 export async function startGame() {
-  $('#home-page').style.display = 'none';
+  $('#home').style.display = 'none';
   await init();
   lastFrame = performance.now();
   window.requestAnimationFrame(gameLoop);

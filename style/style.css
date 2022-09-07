@@ -1,12 +1,5 @@
-@import url('./home-page.css');
+@import url('./home.css');
 @import url('./game.css');
-
-:root {
-  --dark: #111;
-  --primary: #363c3d;
-  --clear: #ebe8e2;
-  --action: #204d85;
-}
 
 *,
 *:before,
@@ -21,8 +14,8 @@ body {
   width: 100%;
   margin: 0;
   padding: 0;
-  background: var(--dark);
-  color: var(--clear);
+  background: #111;
+  color: #ebe8e2;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -48,7 +41,7 @@ body {
   height: 100%;
   width: 100%;
   overflow: hidden;
-  color: var(--primary);
+  color: #363c3d;
 }
 
 .fs {
@@ -62,9 +55,9 @@ body {
   justify-content: center;
   align-items: center;
   visibility: hidden;
-  background: var(--dark);
+  background: #111;
   padding: 0 15%;
-  color: var(--clear);
+  color: #ebe8e2;
   font-size: 30px;
   transition: opacity 2s;
   opacity: 0;
@@ -83,7 +76,7 @@ body {
   margin-top: 50px;
 }
 
-#inventory {
+#inv {
   position: absolute;
   top: 0;
   right: 0;
@@ -91,28 +84,28 @@ body {
   display: flex;
 }
 
-#inventory .slot {
+#inv .slot {
   position: relative;
-  border: 5px solid var(--primary);
+  border: 5px solid #363c3d;
   height: 50px;
   width: 50px;
-  background-color: var(--clear);
+  background-color: #ebe8e2;
   margin-right: 20px;
 }
 
-#inventory .slot * {
+#inv .slot * {
   position: absolute;
   bottom: 0;
 }
 
-#inventory .slot #color1,
-#inventory .slot #color2 {
+#inv .slot #color1,
+#inv .slot #color2 {
   transform: scale(0.3);
   bottom: 2px;
   left: 5px;
 }
 
-#inventory .slot #key {
+#inv .slot #key {
   transform: scale(0.17) rotate(90deg) translateX(-155px);
   bottom: 5px;
   left: 9px;
@@ -151,7 +144,7 @@ body {
   position: absolute;
   z-index: 999;
   padding: 20px 20px 25px 20px;
-  background: var(--clear);
+  background: #ebe8e2;
   border: 5px solid #343a40;
   color: #343a40;
   border-radius: 5px;
@@ -180,15 +173,15 @@ body {
   right: 5px;
   bottom: 5px;
   font-size: 12px;
-  color: var(--action);
+  color: #204d85;
   font-weight: bold;
 }
 
-.player.right {
+.p.right {
   transform: none;
 }
 
-.player.left #bubble {
+.p.left #bubble {
   transform: rotateY(180deg);
 }
 #bubble.reverse,
@@ -197,11 +190,11 @@ body {
   transform: rotateY(180deg);
 }
 
-.player.left #bubble:before {
+.p.left #bubble:before {
   left: auto;
   right: 0;
 
-  border-top: 15px solid var(--primary);
+  border-top: 15px solid #363c3d;
   border-left: 15px solid transparent;
   border-right: none;
 }
@@ -217,6 +210,6 @@ body {
 .mouse2.flipped {
   /* transform-origin: 45px; */
 }
-.player.flipped {
+.p.flipped {
   transform: rotate3d(0, 1, 0, 180deg) translate3d(-90px, 0, 0);
 }

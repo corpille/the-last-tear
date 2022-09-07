@@ -1,6 +1,7 @@
 import Game from './game';
 import { HITBOX_RADIUS, STEP } from './config';
 import { generateSprite } from './sprite';
+import { css } from './utils';
 
 function canMakeAction(gI, object) {
   const nextAction = object.actions[object.currAction + 1];
@@ -10,11 +11,11 @@ function canMakeAction(gI, object) {
   if (
     nextAction.type === 'msg' &&
     nextAction.cond &&
-    !gI.inventory[nextAction.cond]
+    !gI.inv[nextAction.cond]
   ) {
     return false;
   }
-  const inv = Object.keys(gI.inventory);
+  const inv = Object.keys(gI.inv);
   const cond = Object.keys(nextAction).filter((c) => c.startsWith('c_'));
   const item = cond.find((c) => inv.includes(c.slice(2, c.length)));
   if (nextAction.type === 'cond') {
@@ -35,9 +36,8 @@ export function renderScene() {
       object.currAction < object.actions.length - 1
     ) {
       if (
-        gI.player.x + gI.player.width > object.x - HITBOX_RADIUS &&
-        gI.player.x + gI.player.width <
-          object.x + object.width + HITBOX_RADIUS &&
+        gI.p.x + gI.p.width > object.x - HITBOX_RADIUS &&
+        gI.p.x + gI.p.width < object.x + object.width + HITBOX_RADIUS &&
         canMakeAction(gI, object)
       ) {
         gI.currAvailAct = object.id;
@@ -71,31 +71,31 @@ export function renderScene() {
     gI.actionButton.hidden = true;
   }
 
-  gI.levElPos = gI.player.x - gI.canW / 2 + gI.player.width / 2;
-  if (gI.levElPos < 0) {
-    gI.levElPos = 0;
+  gI.levPos = gI.p.x - gI.canW / 2 + gI.p.width / 2;
+  if (gI.levPos < 0) {
+    gI.levPos = 0;
   }
-  if (gI.levElPos > gI.levW - gI.canW) {
-    gI.levElPos = gI.levW - gI.canW;
+  if (gI.levPos > gI.levW - gI.canW) {
+    gI.levPos = gI.levW - gI.canW;
   }
-  gI.levEl.style.transform = `translate3d(${-gI.levElPos}px,0, 0)`;
+  gI.lev.style.transform = `translate3d(${-gI.levPos}px,0, 0)`;
 }
 
 export function renderInventory() {
   const gI = Game.getIns();
-  if (gI.inventoryChanged) {
-    gI.inventoryChanged = false;
+  if (gI.invMod) {
+    gI.invMod = false;
     gI.invEl.innerHTML = '';
-    Object.keys(gI.inventory)
-      .filter((id) => !id.startsWith('tmp_'))
+    Object.keys(gI.inv)
+      .filter((id) => !id.startsWith('t_'))
       .forEach((id) => {
-        const o = gI.inventory[id];
-        const slot = document.createElement('div');
+        const o = gI.inv[id];
+        const slot = $$('div');
         slot.classList.add('slot');
-        const item = document.createElement('div');
+        const item = $$('div');
         item.id = o.id;
         const { bs, bg, s } = generateSprite(o.sprite, o.scale);
-        item.style.cssText = `height:${s};width:${s};box-shadow:${bs};background:${bg}`;
+        item.style.cssText = css({ bs, bg, s });
         slot.appendChild(item);
         gI.invEl.appendChild(slot);
       });

@@ -36,7 +36,7 @@ function keyListener(event) {
 }
 
 function createdkey(key, i) {
-  const el = document.createElement('div');
+  const el = $$('div');
   el.classList.add('key', `key-${i}`);
   el.innerText = key;
   letters.appendChild(el);
@@ -86,7 +86,7 @@ function endgame() {
   bindCommands();
   const gI = Game.getIns();
   game.style.display = 'none';
-  gI.levEl.classList.remove('bg');
+  gI.lev.classList.remove('bg');
   document.removeEventListener('keydown', keyListener);
   go.removeEventListener('click', endgame);
   endPromise.resolve();
@@ -110,5 +110,5 @@ export function playLetterGame(gI, p) {
   unBindCommands();
   document.addEventListener('keydown', keyListener);
   game.style.display = 'flex';
-  gI.levEl.classList.add('bg');
+  gI.lev.classList.add('bg');
 }

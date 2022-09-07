@@ -1,4 +1,4 @@
-#home-page {
+#home {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -7,10 +7,10 @@
   height: 100%;
   width: 100%;
   padding: 5%;
-  background-color: var(--dark);
+  background-color: #111;
 }
-#home-page:before,
-#home-page:after {
+#home:before,
+#home:after {
   content: '';
   position: absolute;
   left: 0;
@@ -21,7 +21,7 @@
   border-top-right-radius: 500px;
 }
 
-#home-page:after {
+#home:after {
   right: 0;
   left: auto;
   border-top-left-radius: 500px;
@@ -29,23 +29,23 @@
   background-color: #d4b8b2;
 }
 
-#home-page h1 {
+#home h1 {
   font-size: 80px;
   margin-bottom: 0;
 }
 
-#home-page h3 {
+#home h3 {
   font-size: 20px;
   margin-bottom: 50px;
 }
 
-#home-page #puddle {
+#home #puddle {
   position: absolute;
   left: 50px;
   bottom: 50px;
   transform: scale(3);
 }
-#home-page #deave {
+#home #deave {
   position: absolute;
   z-index: 2;
   right: 350px;
@@ -53,21 +53,21 @@
   transform: scale(3);
 }
 
-#home-page menu {
+#home menu {
   display: flex;
   flex-direction: column;
   width: 300px;
   padding: 0;
 }
 
-#home-page button {
+#home button {
   height: 70px;
   display: flex;
   justify-content: center;
   align-items: center;
   background: none;
-  border: 3px solid var(--clear);
-  color: var(--clear);
+  border: 3px solid #ebe8e2;
+  color: #ebe8e2;
   border-radius: 5px;
   margin-bottom: 40px;
   transition: background-color 0.3s, color 0.3s;
@@ -76,9 +76,9 @@
   line-height: 25px;
 }
 
-#home-page button:hover {
-  background-color: var(--clear);
-  color: var(--action);
+#home button:hover {
+  background-color: #ebe8e2;
+  color: #204d85;
   cursor: pointer;
 }
 
@@ -93,7 +93,7 @@
 
 .commands > label {
   padding: 10px;
-  border-bottom: 1px solid var(--clear);
+  border-bottom: 1px solid #ebe8e2;
 }
 
 .guide {
@@ -115,7 +115,7 @@
 }
 
 .arrows {
-  border-right: 1px solid var(--clear);
+  border-right: 1px solid #ebe8e2;
   padding-right: 40px;
   margin-right: 40px;
 }
@@ -130,7 +130,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid var(--clear);
+  border: 2px solid #ebe8e2;
   height: 50px;
   width: 50px;
   margin: 12px;

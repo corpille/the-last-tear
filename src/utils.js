@@ -4,6 +4,13 @@ export const pTimeout = (ms) => new Promise((res) => setTimeout(res, ms));
 
 export const rand = (min, max) => Math.floor(Math.random() * (max - min)) + min;
 
+export function parse(sprite, cb = (c) => c) {
+  return sprite.split('|').map((line) => line.split('').map(cb));
+}
+
+export const css = ({ bs, bg, s }) =>
+  `height:${s};width:${s};box-shadow:${bs};background:${bg}`;
+
 export function defer() {
   const p = {};
   let promise = new Promise(function (resolve, reject) {
@@ -32,5 +39,5 @@ export function displayMessage(gI, el, msg, p) {
     Audio.getIns().playTypingSound(gI);
     p.resolve();
   }
-  return p?.promise;
+  return p?.p;
 }

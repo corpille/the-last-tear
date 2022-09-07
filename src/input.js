@@ -5,24 +5,24 @@ function keyUp(event) {
   const gI = Game.getIns();
   const key = event.key;
   gI.keys[key] = false;
-  if (!gI.autoMove && (key === 'ArrowLeft' || key === 'ArrowRight')) {
-    gI.player.el.classList.remove(`key-${gI.player.currKF}`);
-    gI.player.currKF = 0;
+  if (!gI.autoX && (key === 'ArrowLeft' || key === 'ArrowRight')) {
+    gI.p.el.classList.remove(`key-${gI.p.currKF}`);
+    gI.p.currKF = 0;
   }
 }
 
 function keyDown(event) {
   const gI = Game.getIns();
   const key = event.key;
-  if (gI.autoMove) {
+  if (gI.autoX) {
     return;
   }
   if (!gI.currentLines) {
     gI.keys[key] = true;
     if (key === 'ArrowLeft') {
-      gI.player.el.classList.add('flipped');
+      gI.p.el.classList.add('flipped');
     } else if (key === 'ArrowRight') {
-      gI.player.el.classList.remove('flipped');
+      gI.p.el.classList.remove('flipped');
     }
   }
   if (key === 'e') {

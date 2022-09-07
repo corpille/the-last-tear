@@ -3,15 +3,15 @@ export default class Game {
   scene = [];
   jump = 0;
   tick = 0;
-  invEl = $('#inventory');
+  invEl = $('#inv');
   canEl = $('#canvas');
-  levEl = $('#level');
-  levElPos = 0;
+  lev = $('#level');
+  levPos = 0;
   xOffset = 0;
   keys = {};
-  colliders = [];
-  inventory = {};
-  audioCtx = new AudioContext();
+  col = [];
+  inv = {};
+  aCtx = new AudioContext();
 
   static getIns() {
     if (instance == null) {

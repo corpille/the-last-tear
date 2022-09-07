@@ -6,10 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script>
       window.$ = (...a) => document.querySelector(...a);
+      window.$$ = (...a) => document.createElement(...a);
     </script>
   </head>
   <body>
-    <div id="home-page">
+    <div id="home">
       <h1>The last tear</h1>
       <h3>a shot story by Corentin Pillet</h3>
       <menu> <button id="start-btn">Start</button> </menu>
@@ -42,7 +43,7 @@
     </div>
     <div id="canvas">
       <div id="level"></div>
-      <div id="inventory"></div>
+      <div id="inv"></div>
     </div>
   </body>
   <script type="module" src="/main.js"></script>

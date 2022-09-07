@@ -19,8 +19,8 @@ async function handleEndAction(gI) {
         id: gI.extraAction.p,
         ...sprites[gI.extraAction.p],
       };
-      gI.inventory[object.id] = object;
-      gI.inventoryChanged = true;
+      gI.inv[object.id] = object;
+      gI.invMod = true;
       break;
     case 'end':
       launchEndCinematic();
@@ -58,19 +58,19 @@ export async function displayNextActionMessage() {
       gI.currentAuthor = author;
     }
     const o = gI.scene[gI.currentAuthor];
-    const bEl = document.createElement('div');
+    const bEl = $$('div');
     bEl.id = 'bubble';
-    let posX = -gI.levElPos + o.x + o.width / 2 + (o.bubbleShift ?? 0);
+    let posX = -gI.levPos + o.x + o.width / 2 + (o.bubbleShift ?? 0);
     if (posX + 300 > window.innerWidth) {
       bEl.classList.add('reverse');
       posX -= 300;
     }
     bEl.style.cssText = `bottom: ${o.y + o.height + 25}px; left: ${posX}px;`;
-    const txt = document.createElement('div');
+    const txt = $$('div');
     bEl.appendChild(txt);
     gI.canEl.appendChild(bEl);
     if (action) {
-      const [type, p] = gI.currentDiag.actions[parseInt(action)].split(':');
+      const [type, p] = gI.currentDiag.actions[+action].split(':');
       gI.extraAction = { type, p };
     }
     await displayMessage(gI, txt, message.split(''));
@@ -81,14 +81,14 @@ export async function displayNextActionMessage() {
 }
 
 function cond(gI, action) {
-  const inv = Object.keys(gI.inventory);
+  const inv = Object.keys(gI.inv);
   const cond = Object.keys(action).filter((c) => c.startsWith('c_'));
   const item = cond.find((c) => inv.includes(c.slice(2, c.length)));
   let diag;
   if (item) {
-    if (!item.slice(2, item.length).startsWith('tmp_')) {
-      delete gI.inventory[item.slice(2, item.length)];
-      gI.inventoryChanged = true;
+    if (!item.slice(2, item.length).startsWith('t_')) {
+      delete gI.inv[item.slice(2, item.length)];
+      gI.invMod = true;
     }
     diag = gI.diag[action[item]];
     delete action[item];
