@@ -171,8 +171,8 @@ export function loadLevel() {
   level.objects.forEach((o) =>
     createObject(
       {
-        ...o,
         ...sprites[o.s],
+        ...o,
         y: o.y || 0,
       },
       gI

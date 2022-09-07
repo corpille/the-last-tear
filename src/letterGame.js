@@ -11,7 +11,6 @@ const phrase =
 let word;
 let p;
 
-const duration = 0.7;
 let endPromise;
 let i = 0;
 let timeout;
@@ -51,7 +50,7 @@ function playWord() {
   el?.classList.add('active');
   timeout = setTimeout(() => {
     p.reject();
-  }, duration * 1000);
+  }, 700);
 }
 
 async function playSequence(words) {

@@ -9,11 +9,10 @@ import { displayMessage, pTimeout } from './utils';
 
 const startText =
   "Puddle has been through a tough time these days.\nHe just lost his best friend Deave in a flight accident.\nAfter a few days of crying and mourning, he comes to his friend's grave to say goodbye to him one last time...";
-
 const endText =
   "After their last encounter Puddle never went to his friend grave.\nHe followed his friend's advice and try to lived his life to the fullest.\nEven though he made some new friend along the way, he never forgot Deave, the friend that reminded him who he was.\n\nThe End";
+let lastFrame;
 
-var lastFrame;
 export const Player = {
   id: 'puddle',
   ...sprites.puddle,
@@ -31,7 +30,7 @@ const ActionButton = {
 };
 
 async function init() {
-  await launchStartCinematic();
+  // await launchStartCinematic();
   $('#canvas').style.display = 'flex';
   const gI = Game.getIns();
   gI.canW = gI.canEl.offsetWidth;
@@ -44,7 +43,7 @@ async function init() {
   gI.player.el.classList.add('player');
   gI.xOffset = 100;
   gI.autoMove = 500;
-  Audio.getIns().playBgMusic(gI);
+  // Audio.getIns().playBgMusic(gI);
 }
 
 export async function launchEndCinematic() {
@@ -53,7 +52,7 @@ export async function launchEndCinematic() {
   startTxt.innerHTML = '';
   const deave = gI.scene['deave'];
   deave.el.style.transition = 'opacity 2s';
-  gI.scene['deave'].hidden = true;
+  gI.scene.deave.hidden = true;
   await pTimeout(2000);
   gI.player.el.classList.add('flipped');
   gI.xOffset = -100;

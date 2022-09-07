@@ -168,12 +168,12 @@
       "l": ["Did you find our key?:mouse1"]
     },
     {
-      "l": ["Hi here is the key for debug purpose:0"],
-      "actions": ["give:key"]
+      "l": ["Sorry I can’t talk right now!:lama"]
     },
     {
       "l": [
-        "Grr ... I can't talk to you right now !\n My brother pissed me off !:mouse1"
+        "Grr ... I'm gonna kill him!:mouse1",
+        "I'd like to see that!:mouse2"
       ]
     },
     {
@@ -206,6 +206,21 @@
         "Perfect! It looks great"
       ],
       "actions": ["color:color2"]
+    },
+    {
+      "l": [
+        "Hey did you find a color shard around here?:puddle",
+        "A what?\nNo but since you’re here I need your help with something:lama",
+        "Train? For what?:puddle",
+        "The race obviously! I think I’m the fastest but Fox over there is doubting me.:lama",
+        "Would you mind trying out if you can beat my time?",
+        "Well I’m in a rush maybe later:puddle",
+        "Oh come on it only take 20s, at least for me.\nPlus if you beat me I’ll give you something interesting:lama",
+        "Ok... Let me try it:puddle:0",
+        "Wow you’re fast!\nWell I guess I should get back to training.\nHere's your price.:lama:1",
+        "Thanks:puddle"
+      ],
+      "actions": ["race", "give:key"]
     }
   ],
   "objects": [
@@ -285,7 +300,8 @@
       "s": "mouse",
       "x": 2100,
       "mod": ["0:3"],
-      "flipped": true
+      "flipped": true,
+      "bubbleShift": -90
     },
     {
       "id": "egg",
@@ -305,9 +321,9 @@
       "x": 5000,
       "actions": [
         {
-          "type": "msg",
-          "diag": 8,
-          "cond": "tmp_snail"
+          "type": "cond",
+          "c_tmp_snail": 14,
+          "bad": 8
         }
       ]
     },
