@@ -118,8 +118,17 @@
     },
     {
       "l": [
-        "Oh you find the last color of mine !:deave",
-        "Thank you so much I need to go now bye friend !::0"
+        "Well I guess this is it...:deave",
+        "I guess so...:puddle",
+        "Listen it’s not because I’m gone that you need to be miserable:deave",
+        "You’ve met some new people helping me I’m sure you guys can be friend",
+        "So don’t let my death ruin your life ok?",
+        "Yeah... You’re right, I’m gonna try:puddle",
+        "You promise?:deave",
+        "I do!:puddle",
+        "Alright! I have to go now, thank you so much Puddle, I’ll never forget it!:deave",
+        "Bye buddy! See you soon but not too soon!",
+        "Bye my friend!:puddle:0"
       ],
       "actions": ["end"]
     },
