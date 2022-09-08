@@ -39,7 +39,7 @@ async function init() {
   loadLevel();
   gI.actionButton = createObject(ActionButton, gI);
   gI.p = createObject(Player, gI);
-  gI.p.x = 0;
+  gI.p.x = 4800;
   gI.p.el.classList.add('p');
   gI.xOffset = 100;
   gI.autoX = 500;

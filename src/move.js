@@ -1,6 +1,7 @@
 import { renderSprite } from './sprite';
 import Game from './game';
-import { GRAVITY, JUMP_SPEED, MOVE_SPEED } from './config';
+import { GRAVITY, JUMP_SPEED, MOVE_SPEED, RACE_WIN } from './config';
+import { endRace } from './raceGame';
 
 const Ray = (x, y, dir) => ({
   o: { x, y },
@@ -57,6 +58,7 @@ function raycast(ray) {
     .col.map((aabb) => {
       const inter = intersect(ray.dir, ray.o, aabb);
       return {
+        id: aabb.id,
         i: inter,
         ray: ray,
         dist: inter && dist(ray.o, inter),
@@ -69,18 +71,26 @@ function raycast(ray) {
 }
 
 function updatePlayercol(p) {
+  const left = raycast(Ray(p.x, p.y - 1, 'left'));
+  const right = raycast(Ray(p.x + p.w, p.y - 1, 'right'));
   const bottomDist = [
     Ray(p.x + 1, p.y, 'down'), // bottom left
+    Ray(p.x + p.w / 2, p.y, 'down'), // bottom middle
     Ray(p.x + p.w - 1, p.y, 'down'), // bottom right
   ]
     .map(raycast)
-    .filter(Boolean)
-    .map((x) => x.dist);
+    .filter(Boolean);
+
+  const col = [left, right, ...bottomDist];
+
+  if (col.find((e) => e?.id?.startsWith('egg') && e?.dist < 1)) {
+    return endRace(false);
+  }
 
   return {
-    left: raycast(Ray(p.x, p.y - 1, 'left')).dist,
-    right: raycast(Ray(p.x + p.w, p.y - 1, 'right')).dist,
-    bottom: Math.min(...bottomDist),
+    left: left?.dist,
+    right: right?.dist,
+    bottom: Math.min(...bottomDist.map((x) => x.dist)),
   };
 }
 
@@ -100,10 +110,13 @@ function animate(gI) {
 export function updatePlayer(dt) {
   const gI = Game.getIns();
   const dist = updatePlayercol({
-    x: gI.p.x,
-    w: gI.p.width,
+    x: gI.p.x + (gI.p.flipped ? -10 : 0),
+    w: gI.p.width + (gI.p.flipped ? 0 : -10),
     y: gI.p.y + gI.canH,
   });
+  if (!dist) {
+    return;
+  }
   gI.p.vx = gI.xOffset;
   gI.p.vy += GRAVITY * dt;
 
@@ -137,7 +150,10 @@ export function updatePlayer(dt) {
     animate(gI);
   }
   gI.p.x += horizontalMoveBy;
-  gI.p.y += verticalMoveBy;
+  gI.p.y += Math.round(verticalMoveBy);
+  if (gI.p.x >= gI.levW + RACE_WIN) {
+    endRace(true);
+  }
   if (gI.p.x >= gI.autoX) {
     gI.xOffset = 0;
     gI.autoX = false;

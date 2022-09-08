@@ -10,7 +10,9 @@ export default class Game {
   xOffset = 0;
   keys = {};
   col = [];
-  inv = {};
+  inv = {
+    t_snail: true,
+  };
   aCtx = new AudioContext();
 
   static getIns() {

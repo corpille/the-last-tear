@@ -42,6 +42,7 @@ body {
   width: 100%;
   overflow: hidden;
   color: #363c3d;
+  transition: opacity 0.3s;
 }
 
 .fs {

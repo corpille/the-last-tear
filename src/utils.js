@@ -39,5 +39,5 @@ export function displayMessage(gI, el, msg, p) {
     Audio.getIns().playTypingSound(gI);
     p.resolve();
   }
-  return p?.p;
+  return p.promise;
 }

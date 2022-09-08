@@ -5,19 +5,21 @@ import { renderSprite } from './sprite';
 import { launchEndCinematic } from './index';
 import { pTimeout, defer } from './utils';
 import { playLetterGame } from './letterGame';
+import { playRaceGame } from './raceGame';
 
 async function handleEndAction(gI) {
   if (!gI.extraAction) return;
   gI.isInAction = true;
+  const id = gI.extraAction.p;
   switch (gI.extraAction.type) {
     case 'show':
-      gI.scene[gI.extraAction.p].hidden = false;
+      gI.scene[id].hidden = false;
       await pTimeout(3000);
       break;
     case 'give':
       const object = {
-        id: gI.extraAction.p,
-        ...sprites[gI.extraAction.p],
+        id,
+        ...sprites[id],
       };
       gI.inv[object.id] = object;
       gI.invMod = true;
@@ -27,7 +29,11 @@ async function handleEndAction(gI) {
       break;
     case 'play':
       const p = defer();
-      playLetterGame(gI, p);
+      if (id === 'letter') {
+        playLetterGame(gI, p);
+      } else if (id === 'race') {
+        await playRaceGame(gI, p);
+      }
       await p.promise;
       break;
     case 'color':
@@ -106,6 +112,7 @@ function cond(gI, action) {
 
 export function toggleAction() {
   const gI = Game.getIns();
+  gI.keys = {};
   const o = gI.scene[gI.currAvailAct];
   if (o.currAction >= o.actions.length - 1) {
     gI.actionButton.hidden = true;

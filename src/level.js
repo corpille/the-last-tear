@@ -1,5 +1,5 @@
 import Game from './game';
-import { DEFAULT_PIXEL_SIZE } from './config';
+import { DEFAULT_PIXEL_SIZE, RACE_WIDTH } from './config';
 import { generateSprite } from './sprite';
 import level from './level.json';
 import sprites from './sprites.json';
@@ -120,10 +120,10 @@ export function drawBackground(gI, backgroundElements, levelWidth) {
 function initColliders(gI) {
   gI.col = [
     {
-      x: -10,
+      x: 0,
       y: gI.canH,
       h: 0,
-      w: gI.levW + 10,
+      w: gI.levW + RACE_WIDTH,
     },
     {
       x: -10,
@@ -139,11 +139,12 @@ function initColliders(gI) {
     },
     ...Object.values(gI.scene)
       .filter((o) => o.solid)
-      .map(({ x, y, height: h, width: w }) => ({
+      .map(({ id, x, y, height: h, width: w }) => ({
         x,
         y: y + gI.canH - h,
         h,
         w,
+        id,
       })),
   ];
 }
@@ -151,9 +152,8 @@ function initColliders(gI) {
 export function loadLevel() {
   const gI = Game.getIns();
   gI.lev.innerHTML = '';
-  gI.lev.style.width = `${level.width}px`;
+  gI.lev.style.width = `${level.width + RACE_WIDTH}px`;
   gI.levW = level.width;
-  gI.delta = gI.levW - gI.canW;
   gI.diag = level.diag;
   drawBackground(
     gI,
@@ -162,7 +162,7 @@ export function loadLevel() {
       ...sprites[o.s],
       y: o.y || 0,
     })),
-    level.width
+    level.width + RACE_WIDTH
   );
   level.objects.forEach((o) =>
     createObject(

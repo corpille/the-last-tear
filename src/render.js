@@ -1,5 +1,5 @@
 import Game from './game';
-import { HITBOX_RADIUS, STEP } from './config';
+import { HITBOX_RADIUS, RACE_WIDTH } from './config';
 import { generateSprite } from './sprite';
 import { css } from './utils';
 
@@ -24,6 +24,17 @@ function canMakeAction(gI, object) {
     }
   }
   return true;
+}
+
+export function calcLevPos(gI) {
+  gI.levPos = gI.p.x - gI.canW / 2 + gI.p.width / 2;
+  if (gI.levPos < 0 + gI.lOff) {
+    gI.levPos = 0 + gI.lOff;
+  }
+  const lLimit = gI.levW - gI.canW + (gI.lOff ? RACE_WIDTH : 0);
+  if (gI.levPos > lLimit) {
+    gI.levPos = lLimit;
+  }
 }
 
 export function renderScene() {
@@ -71,13 +82,7 @@ export function renderScene() {
     gI.actionButton.hidden = true;
   }
 
-  gI.levPos = gI.p.x - gI.canW / 2 + gI.p.width / 2;
-  if (gI.levPos < 0) {
-    gI.levPos = 0;
-  }
-  if (gI.levPos > gI.levW - gI.canW) {
-    gI.levPos = gI.levW - gI.canW;
-  }
+  calcLevPos(gI);
   gI.lev.style.transform = `translate3d(${-gI.levPos}px,0, 0)`;
 }
 

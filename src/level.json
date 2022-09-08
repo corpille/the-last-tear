@@ -1,5 +1,5 @@
 {
-  "width": 7000,
+  "width": 5500,
   "bg": [
     {
       "id": "cloud",
@@ -191,7 +191,7 @@
         "That's perfect! Thank you so much, I hope she can forgive me! Here's your color:fox:1",
         "Tnanks! Bye!:puddle"
       ],
-      "actions": ["play", "give:color2"]
+      "actions": ["play:letter", "give:color2"]
     },
     {
       "l": [
@@ -212,15 +212,15 @@
         "Hey did you find a color shard around here?:puddle",
         "A what?\nNo but since you’re here I need your help with something:lama",
         "Train? For what?:puddle",
-        "The race obviously! I think I’m the fastest but Fox over there is doubting me.:lama",
-        "Would you mind trying out if you can beat my time?",
+        "The race obviously! I think I’m the most agile that exists but Fox over there is doubting me.:lama",
+        "Would you mind trying it out, you simply have to avoid crushing the eggs ?",
         "Well I’m in a rush maybe later:puddle",
         "Oh come on it only take 20s, at least for me.\nPlus if you beat me I’ll give you something interesting:lama",
         "Ok... Let me try it:puddle:0",
-        "Wow you’re fast!\nWell I guess I should get back to training.\nHere's your price.:lama:1",
+        "Wow you’re good!\nWell I guess I should get back to training.\nHere's your prize.:lama:1",
         "Thanks:puddle"
       ],
-      "actions": ["race", "give:key"]
+      "actions": ["play:race", "give:key"]
     }
   ],
   "objects": [
@@ -306,13 +306,13 @@
     {
       "id": "egg",
       "s": "egg",
-      "x": 5400,
+      "x": 6000,
       "solid": true
     },
     {
       "id": "egg2",
       "s": "egg",
-      "x": 5800,
+      "x": 6600,
       "solid": true
     },
     {

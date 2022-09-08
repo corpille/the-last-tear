@@ -17,12 +17,11 @@ function keyDown(event) {
   if (gI.autoX) {
     return;
   }
-  if (!gI.currentLines) {
+  if (!gI.currentLines || gI.override) {
     gI.keys[key] = true;
-    if (key === 'ArrowLeft') {
-      gI.p.el.classList.add('flipped');
-    } else if (key === 'ArrowRight') {
-      gI.p.el.classList.remove('flipped');
+    if (['ArrowLeft', 'ArrowRight'].includes(key)) {
+      gI.p.flipped = key === 'ArrowLeft';
+      gI.p.el.classList.toggle('flipped', gI.p.flipped);
     }
   }
   if (key === 'e') {
