@@ -8,9 +8,9 @@ import Audio from './audio';
 import { displayMessage, pTimeout } from './utils';
 
 const startText =
-  "Puddle has been through a tough time these days.\nHe just lost his best friend Deave in a flight accident.\nAfter a few days of crying and mourning, he comes to his friend's grave to say goodbye to him one last time...";
+  "Puddle has been through a tough time these days.\nHe has recently lost his best friend Deave in a flight accident.\nAfter a few days of crying and mourning, he goes to his friend's grave to say goodbye to him one last time…";
 const endText =
-  "After their last encounter Puddle never went to his friend grave.\nHe followed his friend's advice and try to lived his life to the fullest.\nEven though he made some new friend along the way, he never forgot Deave, the friend that reminded him who he was.\n\nThe End";
+  "After their last encounter Puddle never went to his friend's grave.\nHe followed his friend's advice and tried to live his life to the fullest.\nEven though he made some new friends along the way, he never forgot Deave, the friend that reminded him who he was.\n\nThe End";
 let lastFrame;
 
 export const Player = {
