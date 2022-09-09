@@ -114,34 +114,34 @@
       "l": [
         "In loving memory of Deave, he will be missed.:tb_deave",
         "I... I miss you my friend... I truly miss you...:puddle",
-        "Things haven’t been the same without you. It’s not as fun as it used to be.",
-        "I really wish I could’ve spent more time with you...::0",
-        "Oh wow! This guy wasn’t joking with the whole ‘getting you out of here’!:deave",
+        "Things haven't been the same without you. It's not as fun as it used to be.",
+        "I really wish I could've spent more time with you...::0",
+        "Oh wow! This guy wasn't joking with the whole 'getting you out of here'!:deave",
         "Puddle? Is that you? What are you doing here?",
-        "Dea... Dea... Deave? Is this you? I must be dreaming! Is this really you?:puddle",
-        "Yeah, it’s me buddy! I’m not really sure how I got here though.:deave",
-        "I met some weird dude on the other side. I don’t think he likes me much. We were talking and suddenly he kicked me right up to the world of the living!",
+        "Dea... Deave? Is this you? Is this really you?:puddle",
+        "Yeah, it's me buddy! I'm not really sure how I got here though.:deave",
+        "I met some weird dude on the other side. I don't think he likes me much. We were talking and suddenly he kicked me right up to the world of the living!",
         "You're looking kind of gray. Is that normal?:puddle",
-        "Oooh! I see why you didn’t recognise me! Weird. Maybe he did something to me.:deave",
+        "Oooh! I see why you didn't recognise me! Weird. Maybe he did something to me.:deave",
         "Are you ok bud?",
-        "I don’t know, my dead best friend just came out of nowhere, grayed out and, well...:puddle",
-        "I’ve really missed you Deave.",
-        "I’ve missed you too, Puddle. I wish I could hug you, but not like this. I think it best if you move on. I can’t stay here long.:deave",
-        "I know... I’m happy to see you now, at least.:puddle",
-        "Thanks a lot dude. Can I ask you to help me move on? I need my colors and I’m getting a feeling one of them is near that snail. Can you ask him if he’s seen them?:deave:1"
+        "I don't know, my dead best friend just came out of nowhere, grayed out and, well...:puddle",
+        "I've really missed you Deave.",
+        "I've missed you too, Puddle. I wish I could hug you, but not like this. I think it best if you move on. I can't stay here long.:deave",
+        "I know... I'm happy to see you now, at least.:puddle",
+        "Thanks a lot dude. Can I ask you to help me move on? I need my colors and I'm getting a feeling one of them is near that snail. Can you ask him if he's seen them?:deave:1"
       ],
       "a": ["show:deave", "give:t_start"]
     },
     {
       "l": [
-        "Hi, I’m Puddle, my friend over there is kind of trapped here.:puddle",
-        "I’m looking for his colors so I can help him cross over to the Death World",
+        "Hi, I'm Puddle, my friend over there is kind of trapped here.:puddle",
+        "I'm looking for his colors so I can help him cross over to the Death World",
         "Did you see anything weird lately?",
-        "Oh hi there! I’m Snail! That’s seems quite a story you got there!:snail",
-        "Well I’ve seen some colorful shards fall down from the sky around the time your friend arrived. That might be it?",
+        "Oh hi there! I'm Lola! That's seems quite a story you got there!:snail",
+        "Well I've seen some colorful shards fall down from the sky around the time your friend arrived. That might be it?",
         "Oh really?\n That must be it! Did you see where they fell?:puddle",
         "Yes!-- Near the well over there. You should check it out.:snail",
-        "Thank you so much Snail!:puddle:0"
+        "Thank you so much Lola!:puddle:0"
       ],
       "a": ["give:t_snail"]
     },
@@ -156,14 +156,14 @@
       "l": [
         "Well I guess this is it...:deave",
         "I guess so...:puddle",
-        "Listen, just because I’m gone, doesn’t mean you have to be miserable.:deave",
-        "You’ve met some new people helping me. I’m sure you guys can be friends.",
-        "Don’t let my death ruin your life, ok?",
-        "Yeah... You’re right, I’m gonna try, for you.:puddle",
+        "Listen, just because I'm gone, doesn't mean you have to be miserable.:deave",
+        "You've met some new people helping me. I'm sure you guys can be friends.",
+        "Don't let my death ruin your life, ok?",
+        "Yeah... You're right, I'm gonna try, for you.:puddle",
         "Promise?:deave",
         "Promise.:puddle",
-        "Brilliant! I have to go now.Thank you so much Puddle, I’ll never forget it!:deave",
-        "Bye Puddle! See you soon - but not too soon!",
+        "Brilliant! I have to go now.Thank you so much Puddle, I'll never forget it!:deave",
+        "Bye Puddle! See you soon but not too soon!",
         "Bye my friend!:puddle:0"
       ],
       "a": ["end"]
@@ -176,47 +176,47 @@
     {
       "l": [
         "Um, hello?:puddle",
-        "I can’t! I'm going to kill him, I swear I’m going to kill him!:mouse1",
-        "Not with your small arms.:mouse2",
-        "Ummh! I’m sorry to bother you, but I’m looking for some color shards.:puddle",
+        "I can't! I'm going to kill him, I swear I'm going to kill him!:m1",
+        "Not with your small arms.:m2",
+        "Ummh! I'm sorry to bother you, but I'm looking for some color shards.:puddle",
         "I followed some footsteps from the well and it led me to you. Did you see them? I really need them to help a friend.",
-        "I’m sure Mouse 1 found them. He likes ‘taking’ colorful things.:mouse2",
-        "Oh don’t you dare!I don’t care about your coloured things!:mouse1",
+        "I'm sure John found them. He likes 'taking' colorful things.:m2",
+        "Oh don't you dare!I don't care about your coloured things!:m1",
         "Please, I really need them. It's really important to me.:puddle",
-        "Alright, look, I actually do have one of them.:mouse1",
-        "Ha! I knew you weren’t ‘borrowing’ anything.:mouse2",
-        " - but I’m not going to give them to you unless I get the keys to the shop from my brother.:mouse1",
-        "It’s not that I don’t want to, it's that I don’t have them you do!:mouse2",
-        "Well, you see the issue here. Good luck on convincing this butthead.:mouse1",
+        "Alright, look, I actually do have one of them.:m1",
+        "Ha! I knew you weren't 'borrowing' anything.:m2",
+        "but I'm not going to give them to you unless I get the keys to the shop from my brother.:m1",
+        "It's not that I don't want to, it's that I don't have them you do!:m2",
+        "Well, you see the issue here. Good luck on convincing this butthead.:m1",
         "But I don't know where your keys are...:puddle"
       ]
     },
     {
       "l": [
         "Are these yours?:puddle",
-        "There we go, I told you I didn’t have them!:mouse2",
-        "You always think I’m a liar anyway so it doesn’t matter.",
-        "Well for once it wasn’t you!:mouse1",
+        "There we go, I told you I didn't have them!:m2",
+        "You always think I'm a liar anyway so it doesn't matter.",
+        "Well for once it wasn't you!:m1",
         "You know, you guys should not be fighting like this.:puddle",
-        "I just lost my best friend. It’s been very difficult.",
+        "I just lost my best friend. It's been very difficult.",
         "I regret not cherishing his life with me.",
-        "Don’t be like me. Enjoy the time you have together, because when Death comes, apologies won’t be enough.",
-        "I’m sorry about your friend and I guess you’re right, I was too hard on you Mouse 2:mouse1",
-        "I’m sorry.",
-        "It’s alright. *Hugs Mouse 1* Just try to not lose the keys next time.:mouse2",
-        "Haha, very funny.\nAnyway, here is your shard. Thank you for your help.:mouse1",
+        "Don't be like me. Enjoy the time you have together, because when Death comes, apologies won't be enough.",
+        "I'm sorry about your friend and I guess you're right, I was too hard on you Doe:m1",
+        "I'm sorry.",
+        "It's alright. *Hugs John* Just try to not lose the keys next time.:m2",
+        "Haha, very funny.\nAnyway, here is your shard. Thank you for your help.:m1",
         "Thank you, I'll go give it to him!:puddle:0"
       ],
       "a": ["give:color1"]
     },
     {
-      "l": ["Did you find our key?:mouse1"]
+      "l": ["Did you find our key?:m1"]
     },
     {
-      "l": ["Sorry I can’t talk right now!:lama"]
+      "l": ["Sorry I can't talk right now!:lama"]
     },
     {
-      "l": ["Grr... I'm gonna kill him!:mouse1", "I'd like to see that!:mouse2"]
+      "l": ["Grr... I'm gonna kill him!:m1", "I'd like to see that!:m2"]
     },
     {
       "l": ["Oh man! I'm in so much trouble!:fox"]
@@ -227,7 +227,7 @@
         "Yes, but I'm in a hurry. I'm looking for some color shards for my friend.:puddle",
         "Oh! I found one of those earlier. If you help me write a small poem for my dear Suzy, I'll give it to you!:fox",
         "Ok, what do you want to write about?:puddle",
-        "Well, I made a big mistake and I want to apologize, but I don’t know how.:fox",
+        "Well, I made a big mistake and I want to apologize, but I don't know how.:fox",
         "Let me help with that!:puddle:0",
         "Is this ok?:puddle",
         "That's perfect! Thank you so much! I hope she can forgive me! Here's your color, my friend.:fox:1",
@@ -237,14 +237,14 @@
     },
     {
       "l": [
-        "Oh great, you found my beak’s color! Let me try it on!:deave:0",
+        "Oh great, you found my beak's color! Let me try it on!:deave:0",
         "Perfect! It looks great!"
       ],
       "a": ["color:color1"]
     },
     {
       "l": [
-        "Oh great, you found my feather color! Let me try it on!:deave:0",
+        "Oh great, you found my feather's color! Let me try it on!:deave:0",
         "Perfect! It looks great!"
       ],
       "a": ["color:color2"]
@@ -252,14 +252,14 @@
     {
       "l": [
         "Hey, did you find a color shard around here?:puddle",
-        "A what?\nNo, but since you’re here, I need your help with something.:lama",
+        "A what?\nNo, but since you're here, I need your help with something.:lama",
         "For what?:puddle",
-        "The race, obviously! I think I’m the best but Fox over there is doubting me!:lama",
+        "The race, obviously! I think I'm the best but the fox over there is doubting me!:lama",
         "Would you mind trying it out? You just have to avoid crushing the eggs.",
-        "Well I’m in a rush, so maybe later.:puddle",
-        "Oh, come on, it only takes 20s, at least for me.\nPlus if you beat me I’ll give you something interesting.:lama",
+        "Well I'm in a rush, so maybe later.:puddle",
+        "Oh, come on, it only takes 20s, at least for me.\nPlus if you beat me I'll give you something interesting.:lama",
         "Ok... Let me try it.:puddle:0",
-        "Wow you’re good!\nWell, I guess I should get back to training.\nHere's your prize!:lama:1",
+        "Wow you're good!\nWell, I guess I should get back to training.\nHere's your prize!:lama:1",
         "Thanks!:puddle"
       ],
       "a": ["play:race", "give:key"]
@@ -321,7 +321,7 @@
       ]
     },
     {
-      "id": "mouse1",
+      "id": "m1",
       "s": "mouse",
       "x": 1850,
       "a": [
@@ -338,7 +338,7 @@
       ]
     },
     {
-      "id": "mouse2",
+      "id": "m2",
       "s": "mouse",
       "x": 2100,
       "mod": ["0:3"],

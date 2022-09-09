@@ -23,7 +23,7 @@ export function defer() {
 export function displayMessage(gI, el, msg, p) {
   if (!p) {
     p = defer();
-    Audio.getIns().playTypingSound(gI);
+    Audio.getIns().playTS(gI);
   }
   if (msg.length) {
     const c = msg.shift();
@@ -31,12 +31,12 @@ export function displayMessage(gI, el, msg, p) {
     gI.textTimeout = setTimeout(() => {
       clearTimeout(gI.textTimeout);
       if ([' ', '\n'].includes(c)) {
-        Audio.getIns().playTypingSound(gI);
+        Audio.getIns().playTS(gI);
       }
       displayMessage(gI, el, msg, p);
     }, 25 + (c === '\n' ? 100 : 0));
   } else {
-    Audio.getIns().playTypingSound(gI);
+    Audio.getIns().playTS(gI);
     p.resolve();
   }
   return p.promise;

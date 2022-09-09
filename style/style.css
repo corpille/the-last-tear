@@ -208,7 +208,7 @@ body {
 .flipped {
   transform: rotate3d(0, 1, 0, 180deg);
 }
-.mouse2.flipped {
+.m2.flipped {
   /* transform-origin: 45px; */
 }
 .p.flipped {

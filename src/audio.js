@@ -31,7 +31,7 @@ let audioInst = null;
 export default class Audio {
   i = 0;
 
-  playTypingSound(gI) {
+  playTS(gI) {
     this.playNote(gI, gI.aCtx.currentTime, notes.D5, 0.1, 0.1);
   }
 

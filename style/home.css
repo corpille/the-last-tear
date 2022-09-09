@@ -100,8 +100,6 @@
   align-items: flex-start;
   margin-top: 20px;
   padding: 20px;
-  background-color: var(--secondary);
-  border: 2px solid var(--light);
   border-radius: 3px;
 }
 
@@ -135,7 +133,6 @@
   width: 50px;
   margin: 12px;
   text-align: center;
-  letter-spacing: 0;
   font-size: 20px;
   line-height: 44px;
   border-radius: 5px;
