@@ -66,13 +66,48 @@
       "s": "house",
       "x": 1700
     },
-    { "id": "tb1", "s": "tombstone", "x": 25, "mod": ["A:D"] },
-    { "id": "tb2", "s": "tombstone", "x": 150, "mod": ["B:D", "A:B"] },
-    { "id": "tb3", "s": "tombstone", "x": 290, "mod": ["B:D"] },
-    { "id": "tb4", "s": "tombstone", "x": 425, "mod": ["B:D"] },
-    { "id": "tb5", "s": "tombstone", "x": 540, "mod": ["A:D"] },
-    { "id": "tb6", "s": "tombstone", "x": 800, "mod": ["B:D"] },
-    { "id": "tb7", "s": "tombstone", "x": 930, "mod": ["B:D", "A:B"] }
+    {
+      "id": "tb1",
+      "s": "tombstone",
+      "x": 25,
+      "mod": ["A:D"]
+    },
+    {
+      "id": "tb2",
+      "s": "tombstone",
+      "x": 150,
+      "mod": ["B:D", "A:B"]
+    },
+    {
+      "id": "tb3",
+      "s": "tombstone",
+      "x": 290,
+      "mod": ["B:D"]
+    },
+    {
+      "id": "tb4",
+      "s": "tombstone",
+      "x": 425,
+      "mod": ["B:D"]
+    },
+    {
+      "id": "tb5",
+      "s": "tombstone",
+      "x": 540,
+      "mod": ["A:D"]
+    },
+    {
+      "id": "tb6",
+      "s": "tombstone",
+      "x": 800,
+      "mod": ["B:D"]
+    },
+    {
+      "id": "tb7",
+      "s": "tombstone",
+      "x": 930,
+      "mod": ["B:D", "A:B"]
+    }
   ],
   "diag": [
     {
@@ -95,7 +130,7 @@
         "I know… I’m happy to see you now, at least.:puddle",
         "Thanks a lot dude. Can I ask you to help me move on? I need my colors and I’m getting a feeling one of them is near that snail. Can you ask him if he’s seen them?:deave:1"
       ],
-      "actions": ["show:deave", "give:t_start"]
+      "a": ["show:deave", "give:t_start"]
     },
     {
       "l": [
@@ -108,14 +143,14 @@
         "Yes!-- Near the well over there. You should check it out.:snail",
         "Thank you so much Snail!:puddle:0"
       ],
-      "actions": ["give:t_snail"]
+      "a": ["give:t_snail"]
     },
     {
       "l": [
         "You look around the well and see a small crater.:well",
         "Beside the hole, a set of tiny footprints could be seen. They looked very mouselike.::0"
       ],
-      "actions": ["give:t_well"]
+      "a": ["give:t_well"]
     },
     {
       "l": [
@@ -131,7 +166,7 @@
         "Bye Puddle! See you soon - but not too soon!",
         "Bye my friend!:puddle:0"
       ],
-      "actions": ["end"]
+      "a": ["end"]
     },
     {
       "l": [
@@ -172,7 +207,7 @@
         "Haha, very funny.\nAnyway, here is your shard. Thank you for your help.:mouse1",
         "Thank you, I'll go give it to him!:puddle:0"
       ],
-      "actions": ["give:color1"]
+      "a": ["give:color1"]
     },
     {
       "l": ["Did you find our key?:mouse1"]
@@ -201,21 +236,21 @@
         "That's perfect! Thank you so much! I hope she can forgive me! Here's your color, my friend.:fox:1",
         "Thanks and good luck! :puddle"
       ],
-      "actions": ["play:letter", "give:color2"]
+      "a": ["play:letter", "give:color2"]
     },
     {
       "l": [
         "Oh great, you found my beak’s color! Let me try it on!:deave:0",
         "Perfect! It looks great!"
       ],
-      "actions": ["color:color1"]
+      "a": ["color:color1"]
     },
     {
       "l": [
         "Oh great, you found my feather color! Let me try it on!:deave:0",
         "Perfect! It looks great!"
       ],
-      "actions": ["color:color2"]
+      "a": ["color:color2"]
     },
     {
       "l": [
@@ -229,7 +264,7 @@
         "That's perfect! Thank you so much! I hope she can forgive me! Here's your color, my friend.:fox:1",
         "Thanks and good luck! :puddle"
       ],
-      "actions": ["play:race", "give:key"]
+      "a": ["play:race", "give:key"]
     }
   ],
   "objects": [
@@ -237,7 +272,7 @@
       "id": "snail",
       "s": "snail",
       "x": 4000,
-      "actions": [
+      "a": [
         {
           "type": "msg",
           "condd": "t_start",
@@ -249,7 +284,7 @@
       "id": "tb_deave",
       "s": "tombstone",
       "x": 670,
-      "actions": [
+      "a": [
         {
           "type": "msg",
           "diag": 0
@@ -262,7 +297,7 @@
       "x": 800,
       "y": 20,
       "hidden": true,
-      "actions": [
+      "a": [
         {
           "type": "cond",
           "c_color1": 12,
@@ -279,7 +314,7 @@
       "id": "well",
       "s": "well",
       "x": 2800,
-      "actions": [
+      "a": [
         {
           "type": "msg",
           "diag": 2,
@@ -291,7 +326,7 @@
       "id": "mouse1",
       "s": "mouse",
       "x": 1850,
-      "actions": [
+      "a": [
         {
           "type": "cond",
           "c_t_well": 5,
@@ -310,7 +345,7 @@
       "x": 2100,
       "mod": ["0:3"],
       "flipped": true,
-      "bubbleShift": -90
+      "bShift": -90
     },
     {
       "id": "egg",
@@ -328,7 +363,7 @@
       "id": "lama",
       "s": "lama",
       "x": 5000,
-      "actions": [
+      "a": [
         {
           "type": "cond",
           "c_t_snail": 14,
@@ -340,7 +375,7 @@
       "id": "fox",
       "s": "fox",
       "x": 2650,
-      "actions": [
+      "a": [
         {
           "type": "cond",
           "c_t_snail": 11,

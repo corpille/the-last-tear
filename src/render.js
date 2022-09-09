@@ -4,7 +4,7 @@ import { generateSprite } from './sprite';
 import { css } from './utils';
 
 function canMakeAction(gI, object) {
-  const nextAction = object.actions[object.currAction + 1];
+  const nextAction = object.a[object.currAction + 1];
   if (!nextAction || gI.currentLines) {
     return false;
   }
@@ -42,9 +42,9 @@ export function renderScene() {
   Object.values(gI.scene).forEach((object) => {
     if (
       !object.hidden &&
-      object.actions &&
-      object.actions.length > 0 &&
-      object.currAction < object.actions.length - 1
+      object.a &&
+      object.a.length > 0 &&
+      object.currAction < object.a.length - 1
     ) {
       if (
         gI.p.x + gI.p.width > object.x - HITBOX_RADIUS &&

@@ -66,7 +66,7 @@ export async function displayNextActionMessage() {
     const o = gI.scene[gI.currentAuthor];
     const bEl = $$('div');
     bEl.id = 'bubble';
-    let posX = -gI.levPos + o.x + o.width / 2 + (o.bubbleShift ?? 0);
+    let posX = -gI.levPos + o.x + o.width / 2 + (o.bShift ?? 0);
     if (posX + 300 > window.innerWidth) {
       bEl.classList.add('reverse');
       posX -= 300;
@@ -76,7 +76,7 @@ export async function displayNextActionMessage() {
     bEl.appendChild(txt);
     gI.canEl.appendChild(bEl);
     if (action) {
-      const [type, p] = gI.currentDiag.actions[+action].split(':');
+      const [type, p] = gI.currentDiag.a[+action].split(':');
       gI.extraAction = { type, p };
     }
     await displayMessage(gI, txt, message.split(''));
@@ -99,7 +99,7 @@ function cond(gI, action) {
     diag = gI.diag[action[item]];
     delete action[item];
     if (!Object.keys(action).filter((c) => c.startsWith('c_')).length) {
-      gI.scene[gI.currAvailAct].actions.shift();
+      gI.scene[gI.currAvailAct].a.shift();
     }
     gI.currAvailAct = undefined;
   } else {
@@ -114,10 +114,10 @@ export function toggleAction() {
   const gI = Game.getIns();
   gI.keys = {};
   const o = gI.scene[gI.currAvailAct];
-  if (o.currAction >= o.actions.length - 1) {
+  if (o.currAction >= o.a.length - 1) {
     gI.actionButton.hidden = true;
   }
-  let action = o.actions[o.currAction + 1];
+  let action = o.a[o.currAction + 1];
   switch (action.type) {
     case 'cond':
       return cond(gI, action);

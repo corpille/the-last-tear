@@ -1,18 +1,15 @@
 let instance = null;
 export default class Game {
   scene = [];
-  jump = 0;
-  tick = 0;
   invEl = $('#inv');
   canEl = $('#canvas');
   lev = $('#level');
+  lOff = 0;
   levPos = 0;
   xOffset = 0;
   keys = {};
   col = [];
-  inv = {
-    t_snail: true,
-  };
+  inv = {};
   aCtx = new AudioContext();
 
   static getIns() {

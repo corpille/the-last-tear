@@ -31,7 +31,7 @@
   },
   "deave": {
     "sprite": "CC--CC---|CBCCCBC--|CBBBBBAC-|CBBBBBAC-|CFFEBBAC-|CFFEBCAC-|CGGGBBAC-|CGGGBBACC|CGGGBBABC|CGGCBBAC-|-CC-CCC--",
-    "bubbleShift": -10
+    "bShift": -10
   },
   "fox": {
     "sprite": "CC---CC--------|C1C--C1C-------|C1C--C1C-------|C22CCC2C---CC--|CC22222C--CHC--|-C2C2C22C-CHHC-|-C2C2CH2C-C21C-|C2CHHHHC--C221C|CGHHHH1C---C21C|-CGHH112C--C21C|--CGHH122C-C21C|--C616C222C21C-|--CBCBC22221C--|-CBCBC22222C---|-CCCCCCCCCC----"
@@ -48,7 +48,7 @@
   },
   "mouse": {
     "sprite": "--CC-CC----|-CQC-CQC---|-CCC-CCC---|---CCC-----|--CEEEC----|-CEECEEC---|CQEEEEEC---|--C0000C---|--C0000C---|-CFFFFFC---|-CFFFFFC---|-CFFFEEC---|-CFEEEEC---|--CCCCC-C--|--C---C--CC",
-    "bubbleShift": -10
+    "bShift": -10
   },
   "puddle": {
     "movAn": {
@@ -56,7 +56,7 @@
       "currKF": 0,
       "tPF": 5
     },
-    "bubbleShift": 10,
+    "bShift": 10,
     "sprite": "----CCCC--|---CGHHHC-|---CGHHHC-|---CCH211C|---CGH211C|---CGHHHC-|---CGHHHC-|--CFGHHHC-|--CFHGFHC-|CCEFFFHHC-|CEEFHHHHC-|-CCFHHHC--|--CCCCC---|--C---C---",
     "movS": [
       "----------|----CCCC--|---CGHHHC-|---CGHHHC-|---CCH211C|---CGH211C|---CGHHHC-|--CFGHHHC-|--CFHGFHC-|CCEFFFHHC-|CEEFHHHHC-|-CCFHHHC--|--CCCCC---|--C----C--",
