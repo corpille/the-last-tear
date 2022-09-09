@@ -164,6 +164,14 @@ export function loadLevel() {
     })),
     level.width + RACE_WIDTH
   );
+  level.objects.push(
+    ...[6000, 6600, 7000, 7600, 8200].map((x, i) => ({
+      id: 'egg' + i,
+      s: 'egg',
+      x,
+      solid: true,
+    }))
+  );
   level.objects.forEach((o) =>
     createObject(
       {

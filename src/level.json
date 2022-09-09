@@ -113,9 +113,9 @@
     {
       "l": [
         "In loving memory of Deave, he will be missed.:tb_deave",
-        "I... I miss you my friend... I truly miss you…:puddle",
+        "I... I miss you my friend... I truly miss you...:puddle",
         "Things haven’t been the same without you. It’s not as fun as it used to be.",
-        "I really wish I could’ve spent more time with you…::0",
+        "I really wish I could’ve spent more time with you...::0",
         "Oh wow! This guy wasn’t joking with the whole ‘getting you out of here’!:deave",
         "Puddle? Is that you? What are you doing here?",
         "Dea... Dea... Deave? Is this you? I must be dreaming! Is this really you?:puddle",
@@ -124,10 +124,10 @@
         "You're looking kind of gray. Is that normal?:puddle",
         "Oooh! I see why you didn’t recognise me! Weird. Maybe he did something to me.:deave",
         "Are you ok bud?",
-        "I don’t know, my dead best friend just came out of nowhere, grayed out and, well…:puddle",
+        "I don’t know, my dead best friend just came out of nowhere, grayed out and, well...:puddle",
         "I’ve really missed you Deave.",
         "I’ve missed you too, Puddle. I wish I could hug you, but not like this. I think it best if you move on. I can’t stay here long.:deave",
-        "I know… I’m happy to see you now, at least.:puddle",
+        "I know... I’m happy to see you now, at least.:puddle",
         "Thanks a lot dude. Can I ask you to help me move on? I need my colors and I’m getting a feeling one of them is near that snail. Can you ask him if he’s seen them?:deave:1"
       ],
       "a": ["show:deave", "give:t_start"]
@@ -154,8 +154,8 @@
     },
     {
       "l": [
-        "Well I guess this is it…:deave",
-        "I guess so…:puddle",
+        "Well I guess this is it...:deave",
+        "I guess so...:puddle",
         "Listen, just because I’m gone, doesn’t mean you have to be miserable.:deave",
         "You’ve met some new people helping me. I’m sure you guys can be friends.",
         "Don’t let my death ruin your life, ok?",
@@ -216,10 +216,7 @@
       "l": ["Sorry I can’t talk right now!:lama"]
     },
     {
-      "l": [
-        "Grr ... I'm gonna kill him!:mouse1",
-        "I'd like to see that!:mouse2"
-      ]
+      "l": ["Grr... I'm gonna kill him!:mouse1", "I'd like to see that!:mouse2"]
     },
     {
       "l": ["Oh man! I'm in so much trouble!:fox"]
@@ -254,15 +251,16 @@
     },
     {
       "l": [
-        "Please, can you help me?:fox",
-        "Yes, but I'm in a hurry. I'm looking for some color shards for my friend.:puddle",
-        "Oh! I found one of those earlier. If you help me write a small poem for my dear Suzy, I'll give it to you!:fox",
-        "Ok, what do you want to write about?:puddle",
-        "Well, I made a big mistake and I want to apologize, but I don’t know how.:fox",
-        "Let me help with that!:puddle:0",
-        "Is this ok?:puddle",
-        "That's perfect! Thank you so much! I hope she can forgive me! Here's your color, my friend.:fox:1",
-        "Thanks and good luck! :puddle"
+        "Hey, did you find a color shard around here?:puddle",
+        "A what?\nNo, but since you’re here, I need your help with something.:lama",
+        "For what?:puddle",
+        "The race, obviously! I think I’m the best but Fox over there is doubting me!:lama",
+        "Would you mind trying it out? You just have to avoid crushing the eggs.",
+        "Well I’m in a rush, so maybe later.:puddle",
+        "Oh, come on, it only takes 20s, at least for me.\nPlus if you beat me I’ll give you something interesting.:lama",
+        "Ok... Let me try it.:puddle:0",
+        "Wow you’re good!\nWell, I guess I should get back to training.\nHere's your prize!:lama:1",
+        "Thanks!:puddle"
       ],
       "a": ["play:race", "give:key"]
     }
@@ -346,18 +344,6 @@
       "mod": ["0:3"],
       "flipped": true,
       "bShift": -90
-    },
-    {
-      "id": "egg",
-      "s": "egg",
-      "x": 6000,
-      "solid": true
-    },
-    {
-      "id": "egg2",
-      "s": "egg",
-      "x": 6600,
-      "solid": true
     },
     {
       "id": "lama",

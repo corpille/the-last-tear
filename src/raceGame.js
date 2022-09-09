@@ -7,16 +7,17 @@ let endRacePromise;
 
 async function fadeIn(gI) {
   gI.canEl.style.opacity = 0;
-  await pTimeout(1000);
+  await pTimeout(300);
   gI.canEl.style.opacity = 1;
 }
 
 export async function endRace(success) {
   const gI = Game.getIns();
-  gI.p.vy = 0;
-  gI.p.y = 0;
+  gI.keys = {};
   if (success) {
-    gI.keys = {};
+    gI.p.vy = 0;
+    gI.p.vx = 0;
+    gI.p.y = -1;
     gI.override = false;
     gI.xOffset = 100;
     gI.autoX = gI.levW + RACE_WIDTH + 100;
@@ -29,6 +30,10 @@ export async function endRace(success) {
     calcLevPos(gI);
     endRacePromise.resolve();
   } else {
+    await fadeIn(gI);
+    gI.p.vy = 0;
+    gI.p.vx = 0;
+    gI.p.y = -1;
     gI.p.x = 5600;
   }
 }
