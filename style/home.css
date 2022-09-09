@@ -13,19 +13,17 @@
 #home:after {
   content: '';
   position: absolute;
-  left: 0;
-  bottom: 0;
-  height: 600px;
-  width: 600px;
+  left: 70px;
+  bottom: 20px;
+  height: 350px;
+  width: 350px;
   background-color: #81906c;
-  border-top-right-radius: 500px;
+  border-radius: 500px;
 }
 
 #home:after {
-  right: 0;
+  right: 70px;
   left: auto;
-  border-top-left-radius: 500px;
-  border-top-right-radius: 0;
   background-color: #d4b8b2;
 }
 
@@ -41,16 +39,16 @@
 
 #home #puddle {
   position: absolute;
-  left: 50px;
-  bottom: 50px;
-  transform: scale(3);
+  left: 150px;
+  bottom: 70px;
+  transform: scale(1.8);
 }
 #home #deave {
   position: absolute;
   z-index: 2;
-  right: 350px;
-  bottom: 50px;
-  transform: scale(3);
+  right: 310px;
+  bottom: 80px;
+  transform: scale(2);
 }
 
 #home menu {
