@@ -6,7 +6,8 @@ const letters = $('#letters');
 const game = $('#game');
 const go = $('#play');
 
-const phrase = 'My'; // dear Suzy I know we had our differences but I love you please forgive me';
+const phrase =
+  'My dear Suzy I know we had our differences but I love you please forgive me';
 let word;
 let p;
 
