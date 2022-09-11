@@ -6,8 +6,7 @@ const letters = $('#letters');
 const game = $('#game');
 const go = $('#play');
 
-const phrase =
-  'My dear Suzy I know we had our differences but I love you please forgive me';
+const phrase = 'My'; // dear Suzy I know we had our differences but I love you please forgive me';
 let word;
 let p;
 
@@ -15,15 +14,16 @@ let endPromise;
 let i = 0;
 let timeout;
 let isPlaying = false;
+let isGood = false;
 
 function keyListener(event) {
   const key = event.key;
   if (isPlaying === false) {
     if (key === 'Enter') {
-      return countdown();
+      return isGood ? endgame() : countdown();
     }
   } else {
-    if (key === word[i]) {
+    if (word && key === word[i]) {
       if (timeout) {
         clearTimeout(timeout);
       }
@@ -54,7 +54,7 @@ function playWord() {
 }
 
 async function playSequence(words) {
-  let isGood = true;
+  isGood = true;
   while (isGood && words.length) {
     letters.innerHTML = '';
     word = words.shift();
@@ -74,11 +74,10 @@ async function playSequence(words) {
     go.innerText = 'Press enter to try again';
     go.style.display = 'block';
   } else {
+    isPlaying = false;
     letters.innerText = 'Well done !';
     go.innerText = 'Press enter go back';
     go.style.display = 'block';
-    go.removeEventListener('click', countdown);
-    go.addEventListener('click', endgame);
   }
 }
 
@@ -88,7 +87,6 @@ function endgame() {
   game.style.display = 'none';
   gI.lev.classList.remove('bg');
   document.removeEventListener('keydown', keyListener);
-  go.removeEventListener('click', endgame);
   endPromise.resolve();
   isPlaying = false;
 }

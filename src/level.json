@@ -273,7 +273,7 @@
       "a": [
         {
           "type": "msg",
-          "condd": "t_start",
+          "cond": "t_start",
           "diag": 1
         }
       ]

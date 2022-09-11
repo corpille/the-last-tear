@@ -1,47 +1,17 @@
-# Puddle the Seagull
+# The last tear
 
-## Requirements
+## Synopsis
 
-Install [nvm](https://github.com/nvm-sh/nvm) with these commands :
+Puddle has been through a tough time these days.
 
-```sh
-sudo apt install curl
-curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
-source ~/.bashrc
-```
+He has recently lost his best friend Deave in a flight accident.
 
-Then install Node 16 using this commande
+After a few days of crying and mourning, he goes to his friend's grave to say goodbye to him one last time...
 
-```sh
-nvm install 16
-```
+## Controls
 
-Finally install [yarn](https://yarnpkg.com/) using this command :
+To move use the arrow keys, to interact use the E key, to jump use SPACE.
 
-```sh
-npm install -g yarn
-```
+## Development
 
-## Install
-
-To install the dependencies of the project use this command:
-
-```sh
-yarn install
-```
-
-## Dev
-
-Launch the live server using this command :
-
-```sh
-yarn dev
-```
-
-## Build
-
-Builmd the app using this command, the result will be in the `dist` folder :
-
-```sh
-yarn build
-```
+Read the INSTALL.md
