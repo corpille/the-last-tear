@@ -5,13 +5,14 @@ import { loadLevel, createObject } from './level';
 import Game from './game';
 import sprites from './sprites.json';
 import Audio from './audio';
-import { displayMessage, pTimeout } from './utils';
+import { displayMessage, pTimeout, defer } from './utils';
 
 const startText =
   "Puddle has been through a tough time these days.\nHe has recently lost his best friend Deave in a flight accident.\nAfter a few days of crying and mourning, he goes to his friend's grave to say goodbye to him one last time...";
 const endText =
   "After their last encounter Puddle never went to his friend's grave.\nHe followed his friend's advice and tried to live his life to the fullest.\nEven though he made some new friends along the way, he never forgot Deave, the friend that reminded him who he was.\n\nThe End";
 let lastFrame;
+let startDeferer;
 
 export const Player = {
   id: 'puddle',
@@ -21,6 +22,8 @@ export const Player = {
   vy: 0,
   movS: [sprites.puddle.sprite, ...sprites.puddle.movS, sprites.puddle.sprite],
 };
+const start = $('.fs');
+const c = $('#continue');
 
 const ActionButton = {
   id: 'actionButton',
@@ -67,24 +70,27 @@ export async function launchEndCinematic() {
   await displayMessage(gI, startTxt, endText.split(''));
 }
 
-async function launchStartCinematic() {
-  return new Promise(async (resolve) => {
+function firstListener(event) {
+  if (event.key === 'e') {
     const gI = Game.getIns();
-    const start = $('.fs');
-    const c = $('#continue');
-    start.style.cssText = 'visibility: visible; transition: none; opacity: 1';
-    const startTxt = $('.fs-txt');
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'e') {
-        clearTimeout(gI.textTimeout);
-        start.style.opacity = 0;
-        c.style.visibility = 'hidden';
-        resolve();
-      }
-    });
-    await displayMessage(gI, startTxt, startText.split(''));
-    c.style.visibility = 'visible';
-  });
+    document.removeEventListener('keydown', firstListener);
+    clearTimeout(gI.textTimeout);
+    start.style.opacity = 0;
+    c.style.visibility = 'hidden';
+    startDeferer.resolve();
+  }
+}
+
+function launchStartCinematic() {
+  startDeferer = defer();
+  const gI = Game.getIns();
+  start.style.cssText = 'visibility: visible; transition: none; opacity: 1';
+  const startTxt = $('.fs-txt');
+  document.addEventListener('keydown', firstListener);
+  displayMessage(gI, startTxt, startText.split('')).then(
+    () => (c.style.visibility = 'visible')
+  );
+  return startDeferer.promise;
 }
 
 function gameLoop(timestamp) {
