@@ -140,7 +140,7 @@
         "Oh hi there! I'm Lola! That's seems quite a story you got there!:snail",
         "Well I've seen some colorful shards fall down from the sky around the time your friend arrived. That might be it?",
         "Oh really?\n That must be it! Did you see where they fell?:puddle",
-        "Yes!-- Near the well over there. You should check it out.:snail",
+        "Yes! Near the well over there. You should check it out.:snail",
         "Thank you so much Lola!:puddle:0"
       ],
       "a": ["give:t_snail"]
@@ -163,7 +163,7 @@
         "Promise?:deave",
         "Promise.:puddle",
         "Brilliant! I have to go now.Thank you so much Puddle, I'll never forget it!:deave",
-        "Bye Puddle! See you soon but not too soon!",
+        "Bye bud! See you soon - but not too soon!",
         "Bye my friend!:puddle:0"
       ],
       "a": ["end"]
@@ -253,7 +253,7 @@
       "l": [
         "Hey, did you find a color shard around here?:puddle",
         "A what?\nNo, but since you're here, I need your help with something.:lama",
-        "For what?:puddle",
+        "To do what?:puddle",
         "The race, obviously! I think I'm the best but the fox over there is doubting me!:lama",
         "Would you mind trying it out? You just have to avoid crushing the eggs.",
         "Well I'm in a rush, so maybe later.:puddle",

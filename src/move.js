@@ -154,7 +154,10 @@ export function updatePlayer(dt) {
   if (gI.p.x >= gI.levW + RACE_WIN) {
     endRace(true);
   }
-  if (gI.p.x >= gI.autoX) {
+  if (
+    (gI.xOffset > 0 && gI.p.x >= gI.autoX) ||
+    (gI.xOffset < 0 && gI.p.x < gI.autoX)
+  ) {
     gI.xOffset = 0;
     gI.autoX = false;
   }

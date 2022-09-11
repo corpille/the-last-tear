@@ -1,6 +1,6 @@
 import { renderScene, renderInventory } from './render';
 import { updatePlayer } from './move';
-import { bindCommands } from './input';
+import { bindCommands, unBindCommands } from './input';
 import { loadLevel, createObject } from './level';
 import Game from './game';
 import sprites from './sprites.json';
@@ -47,6 +47,8 @@ async function init() {
 }
 
 export async function launchEndCinematic() {
+  unBindCommands();
+  Audio.getIns().stopBgMusic();
   const gI = Game.getIns();
   const startTxt = $('.fs-txt');
   startTxt.innerHTML = '';

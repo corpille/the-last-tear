@@ -28,6 +28,7 @@ const melody = [
 
 const MAIN_VOLUME = 0.05;
 let audioInst = null;
+let interval;
 export default class Audio {
   i = 0;
 
@@ -86,7 +87,13 @@ export default class Audio {
 
   playBgMusic(gI) {
     this.playMelody(gI);
-    setInterval(() => this.playMelody(gI), (4 * 60000) / BPM);
+    interval = setInterval(() => this.playMelody(gI), (4 * 60000) / BPM);
+  }
+
+  stopBgMusic() {
+    if (interval) {
+      clearInterval(interval);
+    }
   }
 
   static getIns() {
