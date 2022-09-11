@@ -15,9 +15,6 @@ export async function endRace(success) {
   const gI = Game.getIns();
   gI.keys = {};
   if (success) {
-    gI.p.vy = 0;
-    gI.p.vx = 0;
-    gI.p.y = -1;
     gI.override = false;
     gI.xOffset = 100;
     gI.autoX = gI.levW + RACE_WIDTH + 100;
@@ -26,13 +23,12 @@ export async function endRace(success) {
     gI.xOffset = 0;
     gI.autoX = 0;
     gI.lOff = 0;
+    gI.p.y = -1;
     gI.p.x = 4800;
     calcLevPos(gI);
     endRacePromise.resolve();
   } else {
     await fadeIn(gI);
-    gI.p.vy = 0;
-    gI.p.vx = 0;
     gI.p.y = -1;
     gI.p.x = 5600;
   }

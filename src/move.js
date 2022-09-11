@@ -151,7 +151,7 @@ export function updatePlayer(dt) {
   }
   gI.p.x += horizontalMoveBy;
   gI.p.y += Math.round(verticalMoveBy);
-  if (gI.p.x >= gI.levW + RACE_WIN) {
+  if (gI.p.x >= gI.levW + RACE_WIN && gI.override) {
     endRace(true);
   }
   if (
