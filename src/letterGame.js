@@ -51,7 +51,7 @@ function playWord() {
   el?.classList.add('active');
   timeout = setTimeout(() => {
     p.reject();
-  }, 700);
+  }, 1000);
 }
 
 async function playSequence(words) {
